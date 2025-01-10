@@ -1,0 +1,9 @@
+{
+    "name": "nikola/janjic",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "App\\": "App/"
+        }
+    }
+}
