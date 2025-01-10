@@ -1,2 +1,2 @@
-cd to public
-start php server from there (php -S localhost:(port Number))
+cd to public - 
+start php server (php -S localhost:(port Number))
