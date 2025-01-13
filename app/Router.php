@@ -4,9 +4,9 @@ namespace App;
 
 class Router 
 {
-    private static array $handlers;
-    private Request $request;
-    private Response $response;
+    private static $handlers;
+    private $request;
+    private $response;
     private const METHOD_GET = 'GET';
     private const METHOD_POST = 'POST';
     private const METHOD_DELETE = 'DELETE';

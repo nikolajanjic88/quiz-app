@@ -42,8 +42,11 @@ class RegisterUser extends User
     {
       $this->errors[$this->password] = 'Password required';
     }   
-
-    if($data[$this->password] != $data['rpassword'])
+    else if(!preg_match("/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/", $data[$this->password]))
+    {
+      $this->errors[$this->password] = 'Minimum eight characters, at least one letter, one number and one special character';
+    }
+    else if($data[$this->password] != $data['rpassword'])
     {
       $this->errors[$this->password] = 'Passwords do not match';
     }   

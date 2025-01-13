@@ -3,7 +3,8 @@
 namespace App;
 use PDO;
 
-class Database {
+class Database 
+{
     private $conn;
     private $stmt;
 
