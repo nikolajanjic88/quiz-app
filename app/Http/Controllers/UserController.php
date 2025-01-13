@@ -12,9 +12,9 @@ class UserController
 {
   use Guard;
 
-  private $request;
-  private $loginUser;
-  private $registerUser;
+  private Request $request;
+  private LoginUser $loginUser;
+  private RegisterUser $registerUser;
 
   public function __construct()
   {

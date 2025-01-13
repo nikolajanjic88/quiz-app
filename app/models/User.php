@@ -6,12 +6,12 @@ use App\Database;
 
 abstract class User
 {
-  public $errors = [];
-  protected $table = 'users';
-  protected $db;
-  protected $email = 'email';
-  protected $password = 'password';
-  protected $username = 'username';
+  protected array $errors = [];
+  protected string $table = 'users';
+  protected Database $db;
+  protected string $email = 'email';
+  protected string $password = 'password';
+  protected string $username = 'username';
 
   public function __construct()
   {

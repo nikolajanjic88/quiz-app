@@ -7,8 +7,8 @@ use App\Session;
 
 class Game extends Model
 {
-  private $table = 'questions';
-  private $scoresTable = 'scores';
+  private string $table = 'questions';
+  private string $scoresTable = 'scores';
 
   public function getQuestions()
   {

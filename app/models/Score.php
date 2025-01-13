@@ -6,8 +6,8 @@ use App\Model;
 
 class Score extends Model
 {
-  private $table = 'scores';
-  private $joinTable = 'users';
+  private string $table = 'scores';
+  private string $joinTable = 'users';
 
   public function getScores()
   {

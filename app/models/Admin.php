@@ -6,13 +6,13 @@ use App\Model;
 
 class Admin extends Model
 {
-  private $errors = [];
-  private $question = 'question';
-  private $correct_answer = 'correct_answer';
-  private $incorrect_answers = 'incorrect_answers';
-  private $questionsTable = 'questions';
-  private $usersTable = 'users';
-  private $scoresTable = 'scores';
+  private array $errors = [];
+  private string $question = 'question';
+  private string $correct_answer = 'correct_answer';
+  private string $incorrect_answers = 'incorrect_answers';
+  private string $questionsTable = 'questions';
+  private string $usersTable = 'users';
+  private string $scoresTable = 'scores';
 
   public function all()
   {

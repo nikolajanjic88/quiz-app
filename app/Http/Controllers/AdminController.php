@@ -11,8 +11,8 @@ class AdminController
 {
   use Guard;
 
-  private $adminModel;
-  private $request;
+  private Admin $adminModel;
+  private Request $request;
 
   public function __construct()
   {

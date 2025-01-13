@@ -4,7 +4,7 @@ namespace App;
 
 abstract class Model 
 {
-  protected $db;
+  protected Database $db;
 
   public function __construct()
   {
