@@ -32,17 +32,8 @@ class Database
 
     public function findOrFail() {
         $result = $this->find();
-        if(!$result) 
-        {
-            abort();
-        } 
-        else 
-        {
-            return $result;
-        }
-    }
 
-    public function lastID() {
-        return $this->conn->lastInsertId();
+        if(!$result) abort();      
+        else return $result;        
     }
 }

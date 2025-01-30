@@ -18,12 +18,17 @@ class Admin extends Model
   {
     if(isset($_GET['search']))
     {
-      $sql = "SELECT * FROM $this->questionsTable WHERE question LIKE CONCAT('%',?,'%') ORDER BY id DESC";
+      $sql = "SELECT * FROM $this->questionsTable 
+              WHERE question LIKE CONCAT('%',?,'%') 
+              ORDER BY id DESC";
+
       $questions = $this->db->query($sql, [$_GET['search']])->get();
     }
     else
     {
-      $sql = "SELECT * FROM $this->questionsTable ORDER BY id DESC"; 
+      $sql = "SELECT * FROM $this->questionsTable 
+              ORDER BY id DESC"; 
+
       $questions = $this->db->query($sql)->get(); 
     } 
        
@@ -40,7 +45,8 @@ class Admin extends Model
   
   public function getUserCount()
   {
-    $sql = "SELECT count(*) as total FROM $this->usersTable WHERE is_admin = 0";
+    $sql = "SELECT count(*) as total FROM $this->usersTable 
+            WHERE is_admin = 0";
     $res = $this->db->query($sql);
     $userCount = $res->find();
 
@@ -67,7 +73,8 @@ class Admin extends Model
 
   public function recentAddedQuestions()
   {
-    $sql = "SELECT question FROM $this->questionsTable ORDER BY id DESC LIMIT 5";
+    $sql = "SELECT question FROM $this->questionsTable 
+            ORDER BY id DESC LIMIT 5";
     $res = $this->db->query($sql);
     $recentQuestions = $res->get();
 
