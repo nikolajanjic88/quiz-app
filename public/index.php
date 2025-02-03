@@ -1,8 +1,8 @@
 <?php
 
-use App\Session;
-
 session_start();
+
+use App\Session;
 
 const BASE_PATH = __DIR__ . '/../';
 
