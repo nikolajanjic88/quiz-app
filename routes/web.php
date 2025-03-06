@@ -5,12 +5,16 @@ use App\Http\Controllers\AdminController;
 use App\Router;
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LoreController;
 use App\Http\Controllers\UserController;
 
 $app = new App();
 
 Router::get('/', [new HomeController(), 'index']);
 Router::get('/menu', [new HomeController(), 'menu']);
+
+Router::get('/lore', [new LoreController(), 'index']);
+Router::get('/lore/character', [new LoreController(), 'show']);
 
 Router::get('/highscores', [new GameController(), 'highscores']);
 Router::get('/game', [new GameController(), 'game']);

@@ -1,5 +1,5 @@
 <?php include_once 'inc/head.php' ?>
-<body class="login-register-body">
+<body class="body">
   <div class="wrapper">
     <div class="form-box register">
       <h2>Registration</h2>

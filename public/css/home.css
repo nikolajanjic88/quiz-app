@@ -70,8 +70,7 @@
   transition: .5s;
 }
 
-/* login and register */
-.login-register-body {
+.body {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -134,7 +133,7 @@
   line-height: 57px;
 }
 
-.btn {
+.form-box .btn {
   width: 100%;
   height: 4.5rem;
   background: #162938;
@@ -145,6 +144,11 @@
   font-size: 1.5rem;
   color: #fff;
   font-weight: 500;
+}
+
+.form-box .btn:hover {
+  background: #050d13;
+  transition: ease-in .3s;
 }
 
 .login-register {
@@ -182,7 +186,8 @@
 }
 
 .logoutForm {
-  width: 80%;
+  width: 50%;
+  text-align: right;
 }
 
 .logoutForm button {
@@ -195,6 +200,7 @@
   cursor: pointer;
 }
 
+
 /* Menu Page */
 section {
   margin: auto;
@@ -203,6 +209,12 @@ section {
   display: flex;
   align-items: center;
   justify-content: center;  
+}
+
+.menu-header {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
 }
 
 .links {
@@ -214,7 +226,11 @@ section {
 }
 
 .links:hover, .logoutForm button:hover {
-  background: rgba(0, 0, 0, .2);
+  background: rgba(227, 0, 0, 0.56);
   transition: .5s;
   font-weight: 600;
+}
+
+.links:hover {
+  background: rgba(34, 35, 56, 0.781);
 }

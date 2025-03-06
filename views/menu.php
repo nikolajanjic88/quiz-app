@@ -1,9 +1,12 @@
 <?php include_once 'inc/head.php' ?>
-<body class="login-register-body">
+<body class="body">
   <div class="wrapper">
     <div class="list">
-      <div>
-        <h1>Hello, <?= $username ?></h1>
+      <div class="menu-header">
+        <form class="logoutForm" action="/logout" method="POST">
+          <input type="hidden" name="_method" value="DELETE">
+          <button>Logout</button>
+        </form>
       </div>
       <?php if($_SESSION['user']['is_admin'] == 1): ?>
       <a href="/dashboard" class="links">
@@ -17,15 +20,16 @@
           Play Quiz
         </section>
       </a>
+      <a href="/lore" class="links">
+        <section>
+          Lore
+        </section>
+      </a>
       <a href="/highscores" class="links">
         <section>
           Scoreboard
         </section>
-      </a>      
-      <form class="logoutForm" action="/logout" method="POST">
-        <input type="hidden" name="_method" value="DELETE">
-        <button>Logout</button>
-      </form>      
+      </a>            
     </div> 
   </div>
 <?php include_once 'inc/footer.php' ?>
