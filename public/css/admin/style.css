@@ -347,7 +347,7 @@ header {
   text-align: center;
 }
 
-textarea{
+textarea {
   display: block;
   resize: none;
   width: 500px;
@@ -355,7 +355,15 @@ textarea{
   margin-top: 20px;
 }
 
-.save-button{
+input {
+  display: block;
+  width: 500px;
+  height: 30px;
+  padding: 3px;
+  margin-top: 20px;
+}
+
+.save-button {
   cursor: pointer;
   background-color: #3f0097;
   border: none;

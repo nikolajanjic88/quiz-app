@@ -24,6 +24,14 @@
         <h3>Add New Question</h3>
       </div>
     </a>
+    <a href="/add-lore" style="text-decoration: none;">
+      <div class="nav-option <?= urlIs('/add-lore') ? 'option1' : '' ?>">
+        <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183323/10.png"
+              class="nav-img" 
+              alt="blog">
+        <h3>Add New Lore</h3>
+      </div>
+    </a>
     <form action="/logout" method="POST">
       <input type="hidden" name="_method" value="DELETE">
       <button>

@@ -34,3 +34,5 @@ Router::put('/question', [new AdminController(), 'update']);
 Router::delete('/all-questions', [new AdminController(), 'destroy']);
 Router::get('/add-question', [new AdminController(), 'create']);
 Router::post('/add-question', [new AdminController(), 'store']);
+Router::get('/add-lore', [new AdminController(), 'createLore']);
+Router::post('/add-lore', [new AdminController(), 'storeLore']);

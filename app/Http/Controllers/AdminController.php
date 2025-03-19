@@ -3,20 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\Guard;
-use App\Session;
-use App\Models\Admin;
 use App\Request;
+use App\Session;
+use App\Models\Lore;
+use App\Models\Admin;
 
 class AdminController 
 {
   use Guard;
 
   private Admin $adminModel;
+  private Lore $loreModel;
   private Request $request;
 
   public function __construct()
   {
     $this->adminModel = new Admin();
+    $this->loreModel = new Lore();
     $this->request = new Request();
   }
   
@@ -27,12 +30,14 @@ class AdminController
     $questionCount = $this->adminModel->getQuestionCount();
     $scoreCount = $this->adminModel->getScoreCount();
     $recentQuestions = $this->adminModel->recentAddedQuestions();
+    $recentLore = $this->loreModel->recentAddedLore();
 
     return view('admin/dashboard', [
       'userCount' => $userCount,
       'questionCount' => $questionCount,
       'scoreCount' => $scoreCount,
-      'recentQuestions' => $recentQuestions
+      'recentQuestions' => $recentQuestions,
+      'recentLore' => $recentLore
     ]);
   }
 
@@ -133,5 +138,39 @@ class AdminController
     Session::put('message', 'Question deleted successfully');
 
     return redirect('/all-questions');
+  }
+
+  public function createLore()
+  {
+    $this->admin();
+    return view('admin/addLore');
+  }
+
+  public function storeLore()
+  {
+    $this->admin();
+    $request = $this->request->getBody();
+    $title = $request['title'];
+    $text = $request['text'];
+    $image = $_FILES['image'];
+
+    if(!$this->loreModel->validate($request) || !$this->loreModel->validateImage($image))
+    {
+      Session::flash('errors', $this->loreModel->errors());
+      Session::flash('old', [
+          'title' => $title,
+          'text' => $text,
+          'image' => $image
+      ]);
+      
+      return view('admin/addLore', [
+        'errors' => Session::get('errors')
+      ]);
+    }
+
+    $this->loreModel->insert($title, $text, $image);
+    Session::put('message', 'Lore added successfully');
+
+    return redirect('/dashboard');
   }
 }

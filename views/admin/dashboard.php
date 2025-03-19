@@ -58,6 +58,26 @@
           </div>
         </div>
       </div>
+      <div class="report-container">
+        <div class="report-header">
+            <h1 class="recent-Articles">Recent Added Lore</h1>
+            <a href="/all-questions"><button class="view">View All</button></a>
+        </div>
+        <div class="report-body">
+          <div class="report-topic-heading">
+              <h3 class="t-op">Character</h3>
+              <h3 class="t-op">Status</h3>
+          </div>
+          <div class="items">
+            <?php foreach($recentLore as $lore): ?>
+              <div class="item1">
+                <h3 class="t-op-nextlvl"><?= $lore['title'] ?></h3>
+                <h3 class="t-op-nextlvl label-tag">Published</h3>
+              </div>
+            <?php endforeach ?>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 <?php include_once 'inc/footer.php' ?> 

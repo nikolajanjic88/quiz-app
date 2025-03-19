@@ -36,3 +36,28 @@ function abort($code = 404)
   require_once BASE_PATH . "views/$code.php";
   die();
 }
+
+function is_image($path) 
+{
+    $a = getimagesize($path);
+    if($a) 
+    {
+        $image_type = $a[2];
+        if(in_array($image_type, [IMAGETYPE_GIF, IMAGETYPE_JPEG, IMAGETYPE_PNG, IMAGETYPE_BMP, IMAGETYPE_WEBP]))
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+
+function validImageDimensions($image, $width, $height)
+{
+    if(!empty($image) && (getimagesize($image)[0] > $width || getimagesize($image)[1] > $height))
+    {
+        return false;
+    }
+
+    return true;
+}

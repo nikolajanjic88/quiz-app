@@ -37,4 +37,5 @@ class LoreController
       'data' => $data
     ]);
   }
+  
 }
