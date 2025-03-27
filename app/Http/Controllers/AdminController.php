@@ -45,9 +45,11 @@ class AdminController
   {
     $this->admin();
     $questions = $this->adminModel->all();
- 
+    $pages = $this->adminModel->pages();
+  
     return view('admin/questions', [
-      'questions' => $questions
+      'questions' => $questions,
+      'pages' => $pages
     ]);
   }
 
@@ -140,6 +142,19 @@ class AdminController
     return redirect('/all-questions');
   }
 
+  public function lore()
+  {
+    $this->admin();
+
+    $pages = $this->loreModel->pages();
+    $data = $this->loreModel->all();
+   
+    return view('admin/lore', [
+      'data' => $data,
+      'pages' => $pages
+    ]);
+  }
+
   public function createLore()
   {
     $this->admin();
@@ -171,6 +186,6 @@ class AdminController
     $this->loreModel->insert($title, $text, $image);
     Session::put('message', 'Lore added successfully');
 
-    return redirect('/dashboard');
+    return redirect('/all-lore');
   }
 }

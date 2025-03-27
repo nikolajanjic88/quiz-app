@@ -11,24 +11,28 @@
     <a href="/all-questions" style="text-decoration: none;">
       <div class="nav-option <?= urlIs('/all-questions') ? 'option1' : '' ?>">
         <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183322/9.png"
-              class="nav-img" 
-              alt="articles">
+              class="nav-img">
         <h3>Questions</h3>
       </div>
     </a>
     <a href="/add-question" style="text-decoration: none;">
       <div class="nav-option <?= urlIs('/add-question') ? 'option1' : '' ?>">
         <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183323/10.png"
-              class="nav-img" 
-              alt="blog">
+              class="nav-img">
         <h3>Add New Question</h3>
+      </div>
+    </a>
+    <a href="/all-lore" style="text-decoration: none;">
+      <div class="nav-option <?= urlIs('/all-lore') ? 'option1' : '' ?>">
+        <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183322/9.png"
+              class="nav-img">
+        <h3>Character's Lore</h3>
       </div>
     </a>
     <a href="/add-lore" style="text-decoration: none;">
       <div class="nav-option <?= urlIs('/add-lore') ? 'option1' : '' ?>">
         <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183323/10.png"
-              class="nav-img" 
-              alt="blog">
+              class="nav-img">
         <h3>Add New Lore</h3>
       </div>
     </a>

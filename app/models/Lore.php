@@ -3,28 +3,37 @@
 namespace App\Models;
 
 use App\Model;
+use App\Pagination;
 
 class Lore extends Model
 {
-  private $table = 'lore';
+  use Pagination;
+
+  private string $table = 'lore';
   private array $errors = [];
   private string $title = 'title';
   private string $text = 'text';
 
   public function all()
-  {
-    if(isset($_GET['search-character']))
+  { 
+    if(isset($_GET['page']))
+    {
+      $page = $_GET['page'] - 1;
+      $this->start = $page * $this->rows_per_page;
+    }
+
+    if($_SERVER['REQUEST_METHOD'] === 'POST' && trim($_POST['search-character']) != '')
     {
       $sql = "SELECT * FROM $this->table 
               WHERE title LIKE CONCAT('%',?,'%') 
               ORDER BY id DESC";
 
-      $data = $this->db->query($sql, [$_GET['search-character']])->get();
+      $data = $this->db->query($sql, [$_POST['search-character']])->get();
     }
     else
     {
       $sql = "SELECT * FROM $this->table 
-      ORDER BY id DESC"; 
+      ORDER BY id DESC LIMIT $this->start, $this->rows_per_page"; 
 
       $data = $this->db->query($sql)->get();
     }

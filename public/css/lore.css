@@ -11,9 +11,8 @@
 }
 .tilesWrap li {
 	display: inline-block;
-	width: 20%;
-	min-width: 200px;
-	max-width: 230px;
+	min-width: 300px;
+	max-width: 330px;
 	padding: 80px 20px 40px;
 	position: relative;
 	vertical-align: top;
@@ -195,6 +194,9 @@ background: linear-gradient(to right, #0ABFBC, #FC354C);
   overflow: hidden;
   padding: 8px;
   width: 450px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .form-wrapper #search {
@@ -208,9 +210,10 @@ background: linear-gradient(to right, #0ABFBC, #FC354C);
   color: #999;
   float: left;
   font: 16px Lucida Sans, Trebuchet MS, Tahoma, sans-serif;
-  height: 20px;
+  height: 30px;
   padding: 10px;
   width: 320px;
+  margin-right: 5px;
 }
 
 .form-wrapper #search:focus {
@@ -274,4 +277,32 @@ background: linear-gradient(to right, #0ABFBC, #FC354C);
 
 .form-wrapper #submit::-moz-focus-inner {
   border: 0;
+}
+
+.pagination {
+  position: relative;
+  height: 60px;
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(3px);
+  border-radius: 2px;
+}
+.pagination li {
+  list-style-type: none;
+  display: inline-block;
+}
+.pagination li a {
+  position: relative;
+  padding: 20px 25px;
+  text-decoration: none;
+  color: #b7b7b7;
+  font-weight: 500;
+  font-size: 20px;
+}
+.pagination li a:hover,
+.pagination li.active a {
+  background: rgba(74, 119, 242, 0.2);
 }

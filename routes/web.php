@@ -14,6 +14,7 @@ Router::get('/', [new HomeController(), 'index']);
 Router::get('/menu', [new HomeController(), 'menu']);
 
 Router::get('/lore', [new LoreController(), 'index']);
+Router::post('/lore', [new LoreController(), 'index']);
 Router::get('/lore/character', [new LoreController(), 'show']);
 
 Router::get('/highscores', [new GameController(), 'highscores']);
@@ -29,10 +30,13 @@ Router::delete('/logout', [new UserController(), 'logout']);
 
 Router::get('/dashboard', [new AdminController(), 'index']);
 Router::get('/all-questions', [new AdminController(), 'allQuestions']);
+Router::post('/all-questions', [new AdminController(), 'allQuestions']);
 Router::get('/question', [new AdminController(), 'edit']);
 Router::put('/question', [new AdminController(), 'update']);
 Router::delete('/all-questions', [new AdminController(), 'destroy']);
 Router::get('/add-question', [new AdminController(), 'create']);
 Router::post('/add-question', [new AdminController(), 'store']);
+Router::get('/all-lore', [new AdminController(), 'lore']);
+Router::post('/all-lore', [new AdminController(), 'lore']);
 Router::get('/add-lore', [new AdminController(), 'createLore']);
 Router::post('/add-lore', [new AdminController(), 'storeLore']);

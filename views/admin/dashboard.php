@@ -61,7 +61,7 @@
       <div class="report-container">
         <div class="report-header">
             <h1 class="recent-Articles">Recent Added Lore</h1>
-            <a href="/all-questions"><button class="view">View All</button></a>
+            <a href="/all-lore"><button class="view">View All</button></a>
         </div>
         <div class="report-body">
           <div class="report-topic-heading">

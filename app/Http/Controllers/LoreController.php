@@ -4,10 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Guard;
 use App\Models\Lore;
+use App\Pagination;
 
 class LoreController 
 {
-  use Guard;
+  use Guard, Pagination;
 
   private Lore $loreModel;
 
@@ -21,9 +22,11 @@ class LoreController
     $this->user();
 
     $data = $this->loreModel->all();
+    $pages = $this->loreModel->pages();
    
     return view('lore', [
-      'data' => $data
+      'data' => $data,
+      'pages' => $pages
     ]);
   }
 

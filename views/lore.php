@@ -2,9 +2,9 @@
 <body style="background: #262a2b">
   <div class="items">
     <a href="/menu" class="back-button">Back To Menu</a>
-    <form class="form-wrapper">
+    <form class="form-wrapper" method="POST">
       <input type="text" name="search-character" id="search" placeholder="Search Character...">
-      <input type="submit" value="go" id="submit">
+      <input type="submit" value="Search" id="submit">
     </form>
     <ul class="tilesWrap">
       <?php foreach($data as $item):
@@ -33,5 +33,37 @@
       <?php endforeach ?>
     </ul>
     </div>
+    <?php if(!isset($_POST['search-character']) || trim($_POST['search-character']) == ''): ?>
+    <ul class="pagination">
+      <?php if(isset($_GET['page']) && $_GET['page'] > 1): ?>
+        <li>       
+          <a href="/lore?page=1">First</a>        
+        </li>
+        <li>       
+          <a href="/lore?page=<?= $_GET['page'] - 1 ?>">Previous</a>        
+        </li>
+      <?php endif ?>
+      <li class="<?= !isset($_SERVER['QUERY_STRING']) || $_SERVER['QUERY_STRING'] == 'page=1' ? 'active' : '' ?>">
+        <a href="/lore?page=1">1</a>
+      </li>
+      <?php for($i = 2; $i <= $pages; $i++): ?>
+      <li class="<?= isset($_SERVER['QUERY_STRING']) && $_SERVER['QUERY_STRING'] == 'page=' . $i ? 'active' : '' ?>">
+        <a href="/lore?page=<?= $i ?>"><?= $i ?></a>
+      </li>
+      <?php endfor ?>
+      <?php if(!isset($_GET['page'])): ?>
+        <li>
+          <a href="/lore?page=2">Next</a>
+        </li>
+      <?php elseif($_GET['page'] < $pages): ?>
+        <li>
+          <a href="/lore?page=<?= $_GET['page'] + 1 ?>">Next</a>
+        </li>
+        <li>
+          <a href="/lore?page=<?= $pages ?>">Last</a>
+        </li>
+      <?php endif ?>
+    </ul>
+    <?php endif ?>
 </body>
 </html>

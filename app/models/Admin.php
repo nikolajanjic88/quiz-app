@@ -3,31 +3,40 @@
 namespace App\Models;
 
 use App\Model;
+use App\Pagination;
 
 class Admin extends Model
 {
+  use Pagination;
+
   private array $errors = [];
   private string $question = 'question';
   private string $correct_answer = 'correct_answer';
   private string $incorrect_answers = 'incorrect_answers';
-  private string $questionsTable = 'questions';
+  private string $table = 'questions';
   private string $usersTable = 'users';
   private string $scoresTable = 'scores';
 
   public function all()
   {
-    if(isset($_GET['search']))
+    if(isset($_GET['page']))
     {
-      $sql = "SELECT * FROM $this->questionsTable 
+      $page = $_GET['page'] - 1;
+      $this->start = $page * $this->rows_per_page;
+    }
+
+    if($_SERVER['REQUEST_METHOD'] === 'POST' && trim($_POST['search']) != '')
+    {
+      $sql = "SELECT * FROM $this->table 
               WHERE question LIKE CONCAT('%',?,'%') 
               ORDER BY id DESC";
 
-      $questions = $this->db->query($sql, [$_GET['search']])->get();
+      $questions = $this->db->query($sql, [$_POST['search']])->get();
     }
     else
     {
-      $sql = "SELECT * FROM $this->questionsTable 
-              ORDER BY id DESC"; 
+      $sql = "SELECT * FROM $this->table 
+              ORDER BY id DESC LIMIT $this->start, $this->rows_per_page"; 
 
       $questions = $this->db->query($sql)->get(); 
     } 
@@ -37,7 +46,7 @@ class Admin extends Model
 
   public function find($id)
   {
-    $sql = "SELECT * FROM $this->questionsTable WHERE id = ?";
+    $sql = "SELECT * FROM $this->table WHERE id = ?";
     $question = $this->db->query($sql, [$id])->findOrFail();
     
     return $question;
@@ -55,7 +64,7 @@ class Admin extends Model
 
   public function getQuestionCount()
   {
-    $sql = "SELECT count(*) as total FROM $this->questionsTable";
+    $sql = "SELECT count(*) as total FROM $this->table";
     $res = $this->db->query($sql);
     $questionCount = $res->find();
 
@@ -73,7 +82,7 @@ class Admin extends Model
 
   public function recentAddedQuestions()
   {
-    $sql = "SELECT question FROM $this->questionsTable 
+    $sql = "SELECT question FROM $this->table 
             ORDER BY id DESC LIMIT 5";
     $res = $this->db->query($sql);
     $recentQuestions = $res->get();
@@ -83,7 +92,7 @@ class Admin extends Model
 
   public function insert($question, $incorrect_answers, $correct_answer)
   {
-    $sql = "INSERT INTO $this->questionsTable (question, incorrect_answers, correct_answer)
+    $sql = "INSERT INTO $this->table (question, incorrect_answers, correct_answer)
                                       VALUES (:question, :inccorect_answers, :correct_answer)";
     $this->db->query($sql, [
       'question' => $question,
@@ -94,7 +103,7 @@ class Admin extends Model
 
   public function update($question, $incorrect_answers, $correct_answer, $id)
   {
-    $sql = "UPDATE $this->questionsTable SET
+    $sql = "UPDATE $this->table SET
                           question = :question,
                           incorrect_answers = :incorrect_answers,
                           correct_answer = :correct_answer
@@ -110,7 +119,7 @@ class Admin extends Model
 
   public function delete($id)
   {
-    $sql = "DELETE FROM $this->questionsTable WHERE id = ?";
+    $sql = "DELETE FROM $this->table WHERE id = ?";
     $this->db->query($sql, [$id]);
   }
 
