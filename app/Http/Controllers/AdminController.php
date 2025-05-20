@@ -188,4 +188,16 @@ class AdminController
 
     return redirect('/all-lore');
   }
+
+  public function destroyLore()
+  {
+    $this->admin();
+    $request = $this->request->getBody();
+    $id = $request['id'];
+
+    $this->loreModel->delete($id);
+    Session::put('message', 'Character deleted successfully');
+
+    return redirect('/all-lore');
+  }
 }

@@ -1,4 +1,5 @@
 <?php include_once 'inc/head.php' ?>
+
 <body style="background: #262a2b">
   <section class="h-100 gradient-custom-2">
     <div class="container py-5 h-100">
@@ -22,7 +23,18 @@
                   <p class="font-italic mb-1"><?= $data['text'] ?></p>
                 </div>
               </div>
-              <a href="/lore" type="button" class="btn btn-info w-25">Go Back</a>
+              <?php if($_SESSION['user']['is_admin'] === 1): ?>
+                <a href="/all-lore" type="button" class="btn btn-info w-25">Go Back</a>
+              <?php else: ?>
+                <a href="/lore" type="button" class="btn btn-info w-25">Go Back</a>
+              <?php endif ?>
+              <?php if($_SESSION['user']['is_admin'] === 1): ?>
+                <form class="mt-2" action="" method="POST">
+                  <input type="hidden" name="_method" value="DELETE">
+                  <input type="hidden" name="id" value="<?= $data['id'] ?>">
+                  <button class="btn btn-danger w-25" onclick="return confirm('Are you sure?')">Delete</button>
+                </form>
+              <?php endif ?>
             </div>
           </div>
         </div>

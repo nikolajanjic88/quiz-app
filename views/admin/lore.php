@@ -10,7 +10,7 @@
       <div class="content">
         <ul class="team">
           <?php foreach($data as $item): ?>
-          <a href="">
+          <a href="/lore/character?id=<?= $item['id'] ?>">
             <li class="member">
               <div class="thumb"><img src="<?= $item['image'] ?>"></div>
               <div class="description">

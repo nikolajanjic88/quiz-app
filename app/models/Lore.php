@@ -78,6 +78,12 @@ class Lore extends Model
     ]);
   }
 
+  public function delete($id)
+  {
+    $sql = "DELETE FROM $this->table WHERE id = ?";
+    $this->db->query($sql, [$id]);
+  }
+
   public function validate($data) 
   {
     if(trim($data[$this->title]) === '') 
