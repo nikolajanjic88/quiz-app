@@ -23,12 +23,12 @@
                   <p class="font-italic mb-1"><?= $data['text'] ?></p>
                 </div>
               </div>
-              <?php if($_SESSION['user']['is_admin'] === 1): ?>
+              <?php if($_SESSION['user']['is_admin'] == 1): ?>
                 <a href="/all-lore" type="button" class="btn btn-info w-25">Go Back</a>
               <?php else: ?>
                 <a href="/lore" type="button" class="btn btn-info w-25">Go Back</a>
               <?php endif ?>
-              <?php if($_SESSION['user']['is_admin'] === 1): ?>
+              <?php if($_SESSION['user']['is_admin'] == 1): ?>
                 <form class="mt-2" action="" method="POST">
                   <input type="hidden" name="_method" value="DELETE">
                   <input type="hidden" name="id" value="<?= $data['id'] ?>">
