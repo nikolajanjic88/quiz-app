@@ -34,6 +34,7 @@
                   <input type="hidden" name="id" value="<?= $data['id'] ?>">
                   <button class="btn btn-danger w-25" onclick="return confirm('Are you sure?')">Delete</button>
                 </form>
+                <a href="/edit-character?id=<?= $data['id'] ?>" type="button" class="btn btn-success w-25 mt-1">Edit</a>
               <?php endif ?>
             </div>
           </div>

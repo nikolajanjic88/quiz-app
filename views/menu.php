@@ -2,12 +2,6 @@
 <body class="body">
   <div class="wrapper">
     <div class="list">
-      <div class="menu-header">
-        <form class="logoutForm" action="/logout" method="POST">
-          <input type="hidden" name="_method" value="DELETE">
-          <button>Logout</button>
-        </form>
-      </div>
       <?php if($_SESSION['user']['is_admin'] == 1): ?>
       <a href="/dashboard" class="links">
         <section>
@@ -29,7 +23,13 @@
         <section>
           Scoreboard
         </section>
-      </a>            
+      </a>  
+      <div class="menu-header">
+        <form class="logoutForm" action="/logout" method="POST">
+          <input type="hidden" name="_method" value="DELETE">
+          <button>Logout</button>
+        </form>
+      </div>          
     </div> 
   </div>
 <?php include_once 'inc/footer.php' ?>

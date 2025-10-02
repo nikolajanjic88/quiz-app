@@ -40,4 +40,6 @@ Router::get('/all-lore', [new AdminController(), 'lore']);
 Router::post('/all-lore', [new AdminController(), 'lore']);
 Router::get('/add-lore', [new AdminController(), 'createLore']);
 Router::post('/add-lore', [new AdminController(), 'storeLore']);
+Router::get('/edit-character', [new AdminController(), 'editLore']);
+Router::put('/edit-character', [new AdminController(), 'updateLore']);
 Router::delete('/lore/character', [new AdminController(), 'destroyLore']);

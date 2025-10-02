@@ -189,6 +189,46 @@ class AdminController
     return redirect('/all-lore');
   }
 
+  public function editLore()
+  {
+    $this->admin();
+    $lore = $this->loreModel->find($_GET['id']);
+    
+    return view('admin/editLore', [
+      'lore' => $lore
+    ]);
+  }
+  
+  public function updateLore()
+  {
+    $this->admin();
+    $request = $this->request->getBody();
+    $title = $request['title'];
+    $text = $request['text'];
+  
+    if(!$this->loreModel->validate($request))
+    {
+      Session::flash('errors', $this->loreModel->errors());
+      Session::flash('old', [
+          'title' => $title,
+          'text' => $text
+      ]);
+      $lore = $this->loreModel->find($_GET['id']);
+
+      return view('admin/editLore', [
+        'errors' => Session::get('errors'),
+        'lore' => $lore,
+        'title' => $title,
+        'text' => $text
+      ]);
+    }
+    
+    $this->loreModel->update($title, $text, $_GET['id']);
+    Session::put('message', 'Lore updated successfully');
+
+    return redirect('/all-lore');
+  }
+
   public function destroyLore()
   {
     $this->admin();

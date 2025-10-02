@@ -78,6 +78,20 @@ class Lore extends Model
     ]);
   }
 
+  public function update($title, $text, $id)
+  {
+    $sql = "UPDATE $this->table SET
+                          title = :title,
+                          text = :text
+                          WHERE id = :id";
+
+    $this->db->query($sql, [
+      'title' => $title,
+      'text' => $text,
+      'id' => $id
+    ]);
+  }
+
   public function delete($id)
   {
     $sql = "DELETE FROM $this->table WHERE id = ?";
