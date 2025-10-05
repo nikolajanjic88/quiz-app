@@ -1,78 +1,128 @@
-:root {
-  font-size: 62.5%;
+* {
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
-body { 
-  font-family: 'Space Mono', monospace; 
-  background: url(../images/home.jpg);
-  background-size: cover;
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: url('../images/background2.jpg') no-repeat center center/cover;
+    color: #fff;
+    padding: 50px 20px;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
 }
 
 .container {
+  width: 600px;
+  max-width: 90vw;
+  margin: auto;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1.5px solid rgba(0, 255, 255, 0.2);
+  border-radius: 2rem;
+  backdrop-filter: blur(20px);
+  padding: 3rem 2rem;
+  box-shadow: 0 0 40px rgba(0, 255, 255, 0.15);
+  animation: pulseGlow 3s infinite;
   display: flex;
   flex-direction: column;
-  max-width: 42rem;
-  padding: 3.2rem;
-  margin: 60px auto;
-  border: 1px solid #eee;
-  box-shadow: 0px 1.2rem 2.4rem rgba(0, 0, 0, 0.06);
-  background: rgba(0, 0, 0, 0.6);
-}
-
-.score-header {
-  display: flex;
-  justify-content: space-between;
   align-items: center;
+  text-align: center;
 }
 
-.score-header a {
-  text-decoration: none;
-  display: block;
-  color: #171717;
-  font-size: 1.6rem;
-  padding: .4rem 2rem;
-  background: #faf6f5;
-  border-radius: 1rem;
-}
-
-.score-header a:hover {
-  background: #171717;
-  color: #faf6f5;
-  transition: .5s;
-}
-
-h1 {
-  font-size: 3rem;
-}
-
-ol { 
-  padding-left: 5rem; 
-}
-
-li { 
-  padding-left: 1.6rem;
-  margin-top: 4rem;
-  position: relative;
-  font-size: 1.8rem;
-  line-height: 2.1rem;
-  
-  
-  &:before {
-    content: '';
-    display: block;
-    height: 42px;
-    width: 42px;
-    border-radius: 50%;
-    border: 2px solid #ddd;
-    position: absolute;
-    top: -12px;
-    left: -46px;
+/* Glow animation (reused) */
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 10px #00ffe0, 0 0 20px #00ffe0;
+  }
+  50% {
+    box-shadow: 0 0 30px #00ffe0, 0 0 50px #00ffe0;
   }
 }
 
-strong, h1, li { color: #faf6f5; }
+/* Header styling */
+.score-header {
+  margin-bottom: 2rem;
+}
 
-li:first-child:before { border-color: #ffd700; }
-li:nth-child(2):before { border-color: #c0c0c0; }
-li:nth-child(3):before { border-color: #cd7f32; }
-li:not(:first-child):not(:nth-child(2)):not(:nth-child(3)):before { border-color: #171717; }
+.score-header h1 {
+  font-size: 2rem;
+  color: #00ffe0;
+  text-shadow: 0 0 10px #00ffe0;
+  margin-bottom: 1rem;
+}
+
+/* Back link styled as button */
+.score-header a {
+  display: inline-block;
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 2rem;
+  border: 2px solid #00ffe0;
+  color: #00ffe0;
+  background: transparent;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px rgba(0, 255, 224, 0.3);
+}
+
+.score-header a:hover {
+  background-color: rgba(0, 255, 224, 0.1);
+  box-shadow: 0 0 20px #00ffe0;
+  transform: translateY(-2px);
+}
+
+/* Leaderboard list */
+.alternating-colors {
+  list-style: none;
+  padding: 0;
+  width: 100%;
+}
+
+.alternating-colors li {
+  padding: 1rem 1.5rem;
+  margin-bottom: 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(0, 255, 255, 0.2);
+  border-radius: 1rem;
+  font-size: 1.2rem;
+  color: #f5f6f6;
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.05);
+  transition: transform 0.2s ease;
+}
+
+.alternating-colors li:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+}
+
+/* Optional: Alternate background shades */
+.alternating-colors li:nth-child(odd) {
+  background-color: rgba(0, 255, 255, 0.05);
+}
+
+/* Highlight top 3 places */
+.alternating-colors li:nth-child(1) {
+  border: 2px solid #ffd700;
+  background-color: rgba(255, 215, 0, 0.1);
+  color: #ffd700;
+  text-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
+}
+
+.alternating-colors li:nth-child(2) {
+  border: 2px solid #c0c0c0;
+  background-color: rgba(192, 192, 192, 0.1);
+  color: #c0c0c0;
+  text-shadow: 0 0 8px rgba(192, 192, 192, 0.4);
+}
+
+.alternating-colors li:nth-child(3) {
+  border: 2px solid #cd7f32;
+  background-color: rgba(205, 127, 50, 0.1);
+  color: #cd7f32;
+  text-shadow: 0 0 8px rgba(205, 127, 50, 0.4);
+}

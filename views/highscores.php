@@ -6,7 +6,7 @@
   <title>Silmarilion</title>
   <link rel="stylesheet" href="css/highscore.css" />
 </head>
-<body>
+<body class="body">
   <div class="container">
     <div class="score-header">
       <h1>Top Results</h1>
