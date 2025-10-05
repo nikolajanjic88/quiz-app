@@ -10,6 +10,8 @@ class Game extends Model
   private string $table = 'questions';
   private string $scoresTable = 'scores';
 
+  private string $loreTable = 'lore';
+
   public function getQuestions()
   {
     $sql = "SELECT question, incorrect_answers, correct_answer FROM $this->table";
@@ -20,6 +22,23 @@ class Game extends Model
     
     while ($row = $stmt->find()) {
         $row['incorrect_answers'] = json_decode($row['incorrect_answers']);
+        $data[] = $row;
+    }
+
+    header('Content-Type: application/json');
+
+    echo json_encode($data);
+  }
+
+  public function getLore()
+  {
+    $sql = "SELECT title, image FROM $this->loreTable";
+
+    $stmt = $this->db->query($sql);
+
+    $data = [];
+    
+    while ($row = $stmt->find()) {
         $data[] = $row;
     }
 

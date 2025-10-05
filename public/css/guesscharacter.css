@@ -1,0 +1,217 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: url('../images/background2.jpg') no-repeat center center/cover;
+    color: #fff;
+    padding: 50px 20px;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+
+/* WRAPPER — centers content */
+.game-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+/* GAME CONTAINER */
+.game-container {
+  width: min(90%, 40rem);
+  background: rgba(0, 0, 0, 0.6);
+  border: 1.5px solid rgba(0, 255, 255, 0.2);
+  border-radius: 2rem;
+  backdrop-filter: blur(25px);
+  box-shadow: 0 0 40px rgba(0, 255, 255, 0.1);
+  padding: 3rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: pulseGlow 3s infinite;
+  text-align: center;
+}
+
+/* PULSE GLOW */
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 10px #00ffe0, 0 0 20px #00ffe0, 0 0 30px #00ffe0;
+  }
+  50% {
+    box-shadow: 0 0 20px #00ffe0, 0 0 40px #00ffe0, 0 0 60px #00ffe0;
+  }
+}
+
+/* BACK LINK */
+.back-button {
+  align-self: flex-start;
+  color: #00ffe0;
+  font-weight: bold;
+  text-decoration: none;
+  border: 2px solid #00ffe0;
+  padding: 0.5rem 1rem;
+  border-radius: 2rem;
+  box-shadow: 0 0 15px rgba(0, 255, 224, 0.4);
+  transition: all 0.3s ease;
+  margin-bottom: 2rem;
+}
+
+.back-button:hover {
+  background-color: rgba(0, 255, 224, 0.1);
+  box-shadow: 0 0 30px #00ffe0;
+  transform: translateY(-2px);
+}
+
+/* TITLE */
+.game-container h1 {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  text-shadow: 0 0 10px #00ffe0;
+}
+
+/* IMAGE */
+#characterImage {
+  border: 2px solid #00ffe0;
+  border-radius: 1rem;
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
+  margin-bottom: 2rem;
+  max-width: 100%;
+}
+
+/* INPUT */
+#guess-input {
+  width: 80%;
+  padding: 1rem 1.5rem;
+  border-radius: 1.2rem;
+  border: 2px solid #00ffe0;
+  background: rgba(0, 0, 0, 0.7);
+  color: #00ffe0;
+  font-size: 1.2rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+  outline: none;
+  box-shadow: 0 0 10px rgba(0, 255, 224, 0.4);
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+#guess-input::placeholder {
+  color: #00ffe0aa;
+}
+
+/* BUTTON GROUP */
+.button-group {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* SHARED BUTTON STYLES */
+.btn {
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+  border-radius: 2rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* PRIMARY GLOWING BUTTON */
+.neon {
+  background-color: #00ffe0;
+  color: #000;
+  border: none;
+  box-shadow: 0 0 20px rgba(0, 255, 224, 0.7);
+  margin-bottom: 5px;
+}
+
+.neon:hover {
+  background-color: #00ccae;
+  box-shadow: 0 0 30px #00ccae;
+  transform: translateY(-2px);
+}
+
+/* OUTLINE GLOWING BUTTON */
+.neon-outline {
+  background-color: transparent;
+  color: #00ffe0;
+  border: 2px solid #00ffe0;
+  box-shadow: 0 0 15px rgba(0, 255, 224, 0.3);
+}
+
+.neon-outline:hover {
+  background-color: rgba(0, 255, 224, 0.1);
+  box-shadow: 0 0 25px #00ffe0;
+  transform: translateY(-2px);
+}
+
+/* RESULT TEXT */
+#result {
+  font-size: 1.4rem;
+  font-weight: bold;
+  text-shadow: 0 0 10px #00ffe0;
+}
+
+/* === Correct Answer Animation === */
+.correct {
+  animation: correctGlow 1s ease forwards;
+}
+
+@keyframes correctGlow {
+  0% {
+    box-shadow: 0 0 0px rgba(0, 255, 100, 0.0);
+    color: #00ffae;
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(0, 255, 100, 0.8);
+    color: #00ffae;
+  }
+  100% {
+    box-shadow: 0 0 10px rgba(0, 255, 100, 0.5);
+    color: #00ffae;
+  }
+}
+
+/* === Wrong Answer Shake Animation === */
+.wrong {
+  animation: shake 0.5s ease;
+  color: #ff4d4d;
+  border-color: #ff4d4d !important;
+}
+
+@keyframes shake {
+  0% { transform: translateX(0); }
+  20% { transform: translateX(-8px); }
+  40% { transform: translateX(8px); }
+  60% { transform: translateX(-6px); }
+  80% { transform: translateX(6px); }
+  100% { transform: translateX(0); }
+}
+
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+  .game-container {
+    padding: 2rem 1.2rem;
+  }
+
+  #guess-input {
+    width: 100%;
+  }
+
+  .button-group {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .btn {
+    width: 100%;
+  }
+}

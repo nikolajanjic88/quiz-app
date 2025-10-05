@@ -19,8 +19,10 @@ Router::get('/lore/character', [new LoreController(), 'show']);
 
 Router::get('/highscores', [new GameController(), 'highscores']);
 Router::get('/game', [new GameController(), 'game']);
+Router::get('/guessgame', [new GameController(), 'guessgame']);
 Router::post('/silmarilion-quiz-app-questions/get', [new GameController(), 'save']);
 Router::get('/silmarilion-quiz-app-questions/get', [new GameController(), 'questions']);
+Router::get('/silmarilion-quiz-app-lore/get', [new GameController(), 'lore']);
 
 Router::get('/login', [new UserController(), 'loginForm']);
 Router::post('/login', [new UserController(), 'login']);

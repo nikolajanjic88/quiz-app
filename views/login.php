@@ -22,7 +22,7 @@
             <p class="error"><?= $errors['password'] ?></p>
           <?php endif ?>
         </div>
-        <button id="btnSuccess" class="btn">Login</button>
+        <button id="btnSuccess" class="formbtn">Login</button>
         <div class="login-register">
           <p><a href="/register" class="register-link">Not a member? Register here</a></a></p>
         </div>

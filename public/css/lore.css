@@ -2,6 +2,7 @@
 .items {
 	width: 80%;
 	margin: 20px auto;
+  padding: 30px;
 }
 .tilesWrap {
 	padding: 0;
@@ -129,7 +130,6 @@ background: -webkit-linear-gradient(to right, #0ABFBC, #FC354C);
 background: linear-gradient(to right, #0ABFBC, #FC354C);
 }
 
-
 .back-button {
   appearance: none;
   background-color: #FFFFFF;
@@ -144,7 +144,7 @@ background: linear-gradient(to right, #0ABFBC, #FC354C);
   font-size: 1.2rem;
   font-weight: 700;
   letter-spacing: -.24px;
-  margin: 10px 0 0 10px;
+  margin: 10px 0 0 100px;
   outline: none;
   padding: 1rem 1.3rem;
   quotes: auto;

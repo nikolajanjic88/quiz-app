@@ -14,6 +14,11 @@
           Play Quiz
         </section>
       </a>
+      <a href="/guessgame" class="links">
+        <section>
+          Guess the Character
+        </section>
+      </a>
       <a href="/lore" class="links">
         <section>
           Lore
@@ -24,7 +29,7 @@
           Scoreboard
         </section>
       </a>  
-      <div class="menu-header">
+      <div class="menu-logout">
         <form class="logoutForm" action="/logout" method="POST">
           <input type="hidden" name="_method" value="DELETE">
           <button>Logout</button>

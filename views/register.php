@@ -37,7 +37,7 @@
           </span>
           <input type="password" name="rpassword" placeholder="Confirm password">
         </div>
-        <button class="btn">Register</button>
+        <button class="formbtn">Register</button>
         <div class="login-register">
           <p><a href="/login" class="register-link">Alredy registered? Login here</a></a></p>
         </div>

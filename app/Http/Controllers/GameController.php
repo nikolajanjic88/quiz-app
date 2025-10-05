@@ -28,6 +28,12 @@ class GameController
     return view('game');
   }
 
+  public function guessgame()
+  {
+    $this->user();
+    return view('guess');
+  }
+
   public function save()
   {
     $this->user();
@@ -42,5 +48,12 @@ class GameController
     $questions = new Game();
     
     return $questions->getQuestions();
+  }
+
+  public function lore()
+  {  
+    $lore = new Game();
+    
+    return $lore->getLore();
   }
 }
