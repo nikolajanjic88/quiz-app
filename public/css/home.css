@@ -198,7 +198,6 @@ section {
   transform: translateY(-2px);
 }
 
-/* Typography upgrades */
 h2, p, a {
   font-family: 'Orbitron', sans-serif;
 }

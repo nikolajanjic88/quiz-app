@@ -10,8 +10,6 @@ body {
     min-height: 100vh;
 }
 
-
-/* WRAPPER — centers content */
 .game-wrapper {
   width: 100%;
   display: flex;
@@ -20,7 +18,6 @@ body {
   padding: 2rem;
 }
 
-/* GAME CONTAINER */
 .game-container {
   width: min(90%, 40rem);
   background: rgba(0, 0, 0, 0.6);
@@ -36,7 +33,6 @@ body {
   text-align: center;
 }
 
-/* PULSE GLOW */
 @keyframes pulseGlow {
   0%, 100% {
     box-shadow: 0 0 10px #00ffe0, 0 0 20px #00ffe0, 0 0 30px #00ffe0;
@@ -46,7 +42,6 @@ body {
   }
 }
 
-/* BACK LINK */
 .back-button {
   align-self: flex-start;
   color: #00ffe0;
@@ -66,14 +61,12 @@ body {
   transform: translateY(-2px);
 }
 
-/* TITLE */
 .game-container h1 {
   font-size: 2.5rem;
   margin-bottom: 2rem;
   text-shadow: 0 0 10px #00ffe0;
 }
 
-/* IMAGE */
 #characterImage {
   border: 2px solid #00ffe0;
   border-radius: 1rem;
@@ -82,7 +75,6 @@ body {
   max-width: 100%;
 }
 
-/* INPUT */
 #guess-input {
   width: 80%;
   padding: 1rem 1.5rem;
@@ -103,7 +95,6 @@ body {
   color: #00ffe0aa;
 }
 
-/* BUTTON GROUP */
 .button-group {
   display: flex;
   gap: 1rem;
@@ -112,7 +103,6 @@ body {
   justify-content: center;
 }
 
-/* SHARED BUTTON STYLES */
 .btn {
   padding: 1rem 2rem;
   font-size: 1.2rem;
@@ -123,7 +113,6 @@ body {
   transition: all 0.3s ease;
 }
 
-/* PRIMARY GLOWING BUTTON */
 .neon {
   background-color: #00ffe0;
   color: #000;
@@ -138,7 +127,6 @@ body {
   transform: translateY(-2px);
 }
 
-/* OUTLINE GLOWING BUTTON */
 .neon-outline {
   background-color: transparent;
   color: #00ffe0;
@@ -152,14 +140,12 @@ body {
   transform: translateY(-2px);
 }
 
-/* RESULT TEXT */
 #result {
   font-size: 1.4rem;
   font-weight: bold;
   text-shadow: 0 0 10px #00ffe0;
 }
 
-/* === Correct Answer Animation === */
 .correct {
   animation: correctGlow 1s ease forwards;
 }
@@ -179,7 +165,6 @@ body {
   }
 }
 
-/* === Wrong Answer Shake Animation === */
 .wrong {
   animation: shake 0.5s ease;
   color: #ff4d4d;
