@@ -1,11 +1,13 @@
 <?php include_once 'inc/head.php' ?>
-<body style="background: #262a2b">
+<body>
   <div class="items">
-    <a href="/menu" class="back-button">Back To Menu</a>
-    <form class="form-wrapper" method="POST">
-      <input type="text" name="search-character" id="search" placeholder="Search Character...">
-      <input type="submit" value="Search" id="submit">
-    </form>
+    <div class="top-bar">
+      <a href="/menu" class="back-button">Back To Menu</a>
+      <form class="form-wrapper" method="POST">
+        <input type="text" name="search-character" id="search" placeholder="Search Character...">
+        <input type="submit" value="Search" id="submit">
+      </form>
+    </div>
     <ul class="tilesWrap">
       <?php foreach($data as $item):
         if(strlen($item['text']) < 150)

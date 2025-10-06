@@ -5,7 +5,7 @@ namespace App;
 trait Pagination 
 {
   private int $start = 0;
-  private int $rows_per_page = 5;
+  private int $rows_per_page = 8;
 
   public function pages()
   {
