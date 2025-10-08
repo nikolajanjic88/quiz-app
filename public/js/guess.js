@@ -5,8 +5,8 @@ let currentCharacter = {};
 
 function play() 
 {
-    document.getElementById('guess-input').value = ''; // ✅ Clear input
-    document.getElementById('result').innerText = ''; // Optional: clear result
+    document.getElementById('guess-input').value = '';
+    document.getElementById('result').innerText = '';
     result.className = '';
 
     if (lore.length === 0) 
