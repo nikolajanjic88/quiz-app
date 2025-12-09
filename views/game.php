@@ -38,6 +38,10 @@
           <p class="choice-text" data-number="4"></p>
         </div>
       </div>
+      <div id="timer-container" style="width: 100%; height: 10px; background-color: #ccc; margin-bottom: 5px;">
+        <div id="timer-bar" style="width: 100%; height: 100%; background-color: #4caf50;"></div>
+      </div>
+      <p id="timer" style="font-size:18px; margin-bottom:10px;">Time: 10s</p>
     </div>
 
     <div style="display: none;" id="container-end" class="container-end">
