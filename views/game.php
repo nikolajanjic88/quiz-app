@@ -38,7 +38,10 @@
           <p class="choice-text" data-number="4"></p>
         </div>
       </div>
-      <button id="fiftyBtn" class="btn">50:50</button>
+      <div class="joker-buttons">
+        <button id="fiftyBtn" class="btn">50:50</button>
+        <button id="extraTimeBtn" class="btn">+10 seconds</button>
+      </div>
       <div id="timer-container" style="width: 100%; height: 10px; background-color: #ccc; margin-bottom: 5px;">
         <div id="timer-bar" style="width: 100%; height: 100%; background-color: #4caf50;"></div>
       </div>
@@ -48,7 +51,7 @@
     <div style="display: none;" id="container-end" class="container-end">
       <div id="end" class="flex-center">
         <div class="img-silmarilion">
-          <img src="images/silmarilion.jpg" alt="">
+          <img src="images/silmarilion2.jpg" alt="">
         </div>
         <h1 id="finalScore"></h1>
         <form method="POST">

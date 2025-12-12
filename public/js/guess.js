@@ -3,6 +3,9 @@ const apiUrl = '/silmarilion-quiz-app-lore/get';
 let lore = []
 let currentCharacter = {};
 
+const soundCorrect = new Audio('sounds/correct.mp3');
+const soundWrong = new Audio('sounds/wrong.mp3');
+
 function play() 
 {
     document.getElementById('guess-input').value = '';
@@ -45,6 +48,7 @@ function checkGuess()
     {
         result.textContent = 'Please enter a guess.';
         result.className = 'wrong';
+        soundWrong.play();
         return;
     }
 
@@ -52,9 +56,11 @@ function checkGuess()
     {
         result.textContent = 'Correct! Well done!';
         result.className = 'correct';
+        soundCorrect.play();
     } else {
         result.textContent = 'Try again!';
         result.className = 'wrong';
+        soundWrong.play();
     }
 }
 

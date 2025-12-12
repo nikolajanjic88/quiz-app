@@ -179,8 +179,12 @@ body {
   text-shadow: 0 0 20px #00ffe0;
 }
 
+.img-silmarilion {
+  object-fit: cover;
+}
+
 .img-silmarilion img {
-  width: 500px;
+  width: 100%;
   max-width: 100%;
   border-radius: 1rem;
   box-shadow: 0 0 25px rgba(0, 255, 255, 0.4);
@@ -212,9 +216,16 @@ body {
   transform: translateY(-2px);
 }
 
-#fiftyBtn {
-  width: 20%;
-  margin-bottom: 30px;
+.joker-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.joker-buttons button {
+  width: 200px;
+  height: 70px;
 }
 
 .hidden {

@@ -11,18 +11,36 @@ const containerEnd = document.getElementById('container-end');
 const timerDisplay = document.getElementById('timer');
 const timerBar = document.getElementById('timer-bar');
 
+const soundCorrect = new Audio('sounds/correct.mp3');
+const soundWrong = new Audio('sounds/wrong.mp3');
+const perfectScoreSound = new Audio('sounds/endgame.mp3');
+const goodScoreSound = new Audio('sounds/endgame2.mp3');
+const badScoreSound = new Audio('sounds/endgame3.mp3');
+perfectScoreSound.loop = true;
+goodScoreSound.loop = true;
+badScoreSound.loop = true;
+
 let currentQuestion = {};
 let acceptingAnswers = false;
 let score = 0;
 let questionCounter = 0;
 let availableQuestions = [];
-let timer;
 
 let questions = [];
 let usedFifty = false;
+let extraTimeUsed = false;
+
+const CORRECT_BONUS = 10;
+const MAX_QUESTIONS = 10;
+const TIME_LIMIT = 10;
+
+let timeLeft = TIME_LIMIT;
+let timerDuration = TIME_LIMIT;
+let timerInterval;
 
 const apiUrl = '/silmarilion-quiz-app-questions/get';
 
+// Fetch
 fetch(apiUrl)
   .then(res => res.json())
   .then(loadedQuestions => {
@@ -43,10 +61,6 @@ fetch(apiUrl)
   })
   .catch(err => console.error(err));
 
-const CORRECT_BONUS = 10;
-const MAX_QUESTIONS = 10;
-const TIME_LIMIT = 10;
-
 startGame = () => {
   questionCounter = 0;
   score = 0;
@@ -56,40 +70,40 @@ startGame = () => {
   loader.classList.add('hidden');
 };
 
+// timer with +10 seconds
 startTimer = () => {
-  let timeLeft = TIME_LIMIT;
+  clearInterval(timerInterval);
+  timeLeft = TIME_LIMIT;
+  timerDuration = TIME_LIMIT;
   timerDisplay.innerText = `Time: ${timeLeft}s`;
-
-  clearInterval(timer);
-
-  timerBar.style.transition = 'none';
   timerBar.style.width = '100%';
   timerBar.style.backgroundColor = '#4caf50';
 
-  timerBar.offsetWidth;
+  const start = Date.now();
 
-  timerBar.style.transition = `width ${TIME_LIMIT}s linear`;
-  timerBar.style.width = '0%';
+  timerInterval = setInterval(() => {
+    const elapsed = (Date.now() - start) / 1000;
+    const remaining = Math.max(0, timerDuration - elapsed);
+    timeLeft = Math.ceil(remaining);
 
-  timer = setInterval(() => {
-    timeLeft--;
     timerDisplay.innerText = `Time: ${timeLeft}s`;
 
-    if (timeLeft <= 3) {
-      timerBar.style.backgroundColor = 'red';
-    }
+    const widthPercent = (remaining / timerDuration) * 100;
+    timerBar.style.width = `${widthPercent}%`;
 
-    if (timeLeft <= 0) {
-      clearInterval(timer);
+    if (timeLeft <= 3) timerBar.style.backgroundColor = 'red';
+
+    if (remaining <= 0) {
+      clearInterval(timerInterval);
       acceptingAnswers = false;
       getNewQuestion();
     }
-  }, 1000);
+  }, 50);
 };
 
 getNewQuestion = () => {
   if (availableQuestions.length === 0 || questionCounter >= MAX_QUESTIONS) {
-    clearInterval(timer);
+    clearInterval(timerInterval);
     gameContainer.style.display = 'none';
     containerEnd.style.display = 'block';
 
@@ -97,7 +111,19 @@ getNewQuestion = () => {
     const finalScore = document.getElementById('finalScore');
     const scoreInput = document.getElementById('finalScoreInput');
     scoreInput.value = score;
-    finalScore.innerText = `Your score - ${score}`;
+
+    if(score == CORRECT_BONUS * MAX_QUESTIONS) {
+      perfectScoreSound.play();
+      finalScore.innerHTML = `Perfect! <br>`;
+    } else if (score < CORRECT_BONUS * MAX_QUESTIONS && score > CORRECT_BONUS * MAX_QUESTIONS / 2) {
+      goodScoreSound.play();
+      finalScore.innerHTML = `Very good! <br>`;
+    } else {
+      badScoreSound.play();
+      finalScore.innerHTML = `Better luck next time! <br>`;
+    }
+
+    finalScore.innerHTML += `Your score - ${score}`;
 
     const data = { score: scoreInput.value };
 
@@ -110,9 +136,7 @@ getNewQuestion = () => {
         body: JSON.stringify(data)
       })
         .then(response => response.json())
-        .then(result => {
-          window.location.assign('/menu');
-        })
+        .then(result => window.location.assign('/menu'))
         .catch(error => console.error('Error:', error));
     });
     return;
@@ -136,51 +160,65 @@ getNewQuestion = () => {
   availableQuestions.splice(questionIndex, 1);
   acceptingAnswers = true;
 
-  clearInterval(timer);
   startTimer();
 };
 
+// 50:50 Joker
 function useFifty() {
   if (usedFifty) return;
-
   usedFifty = true;
 
-  const wrongChoices = choices.filter(
-    c => c.dataset.number != currentQuestion.answer
-  );
-
-  const toRemove = wrongChoices
-    .sort(() => Math.random() - 0.5)
-    .slice(0, 2);
-
+  const wrongChoices = choices.filter(c => c.dataset.number != currentQuestion.answer);
+  const toRemove = wrongChoices.sort(() => Math.random() - 0.5).slice(0, 2);
   toRemove.forEach(choice => {
     choice.innerText = "";
     choice.parentElement.classList.add("disabled");
     choice.style.pointerEvents = "none";
   });
 
-  const btn = document.getElementById("fiftyBtn");
-  btn.style.display = "none";
+  document.getElementById("fiftyBtn").style.display = "none";
 }
 
-const fiftyBtn = document.getElementById("fiftyBtn");
-fiftyBtn.addEventListener("click", useFifty);
+// +10 secounds Joker
+function useExtraTime() {
+  if (extraTimeUsed) return;
+  extraTimeUsed = true;
 
+  timeLeft += 10;
+  timerDuration += 10;
+
+  timerDisplay.innerText = `Time: ${timeLeft}s`;
+  document.getElementById("extraTimeBtn").style.display = "none";
+
+  timerBar.style.transition = 'none';
+  timerBar.style.backgroundColor = '#00ff00';
+  setTimeout(() => {
+    timerBar.style.transition = 'background-color 0.5s ease';
+    timerBar.style.backgroundColor = timeLeft <= 3 ? 'red' : '#4caf50';
+  }, 100);
+}
+
+document.getElementById("fiftyBtn").addEventListener("click", useFifty);
+document.getElementById("extraTimeBtn").addEventListener("click", useExtraTime);
+
+// Answers
 choices.forEach(choice => {
   choice.addEventListener("click", e => {
     if (!acceptingAnswers) return;
 
     acceptingAnswers = false;
-    clearInterval(timer);
+    clearInterval(timerInterval);
 
     const selectedChoice = e.target;
     const selectedAnswer = selectedChoice.dataset["number"];
 
-    const classToApply =
-      selectedAnswer == currentQuestion.answer ? "correct" : "incorrect";
+    const classToApply = selectedAnswer == currentQuestion.answer ? "correct" : "incorrect";
 
     if (classToApply === "correct") {
       incrementScore(CORRECT_BONUS);
+      soundCorrect.play();
+    } else {
+      soundWrong.play();
     }
 
     selectedChoice.parentElement.classList.add(classToApply);
@@ -191,6 +229,7 @@ choices.forEach(choice => {
     }, 700);
   });
 });
+
 
 incrementScore = num => {
   score += num;
