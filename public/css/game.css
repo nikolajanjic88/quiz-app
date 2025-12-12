@@ -212,6 +212,11 @@ body {
   transform: translateY(-2px);
 }
 
+#fiftyBtn {
+  width: 20%;
+  margin-bottom: 30px;
+}
+
 .hidden {
   display: none;
 }

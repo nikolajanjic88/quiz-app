@@ -38,6 +38,7 @@
           <p class="choice-text" data-number="4"></p>
         </div>
       </div>
+      <button id="fiftyBtn" class="btn">50:50</button>
       <div id="timer-container" style="width: 100%; height: 10px; background-color: #ccc; margin-bottom: 5px;">
         <div id="timer-bar" style="width: 100%; height: 100%; background-color: #4caf50;"></div>
       </div>

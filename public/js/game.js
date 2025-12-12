@@ -5,8 +5,8 @@ const scoreText = document.getElementById("score");
 const progressBarFull = document.getElementById("progressBarFull");
 const loader = document.getElementById('loader');
 const game = document.getElementById('game');
-const gameContainer = document.getElementById('game-container'); 
-const containerEnd = document.getElementById('container-end'); 
+const gameContainer = document.getElementById('game-container');
+const containerEnd = document.getElementById('container-end');
 
 const timerDisplay = document.getElementById('timer');
 const timerBar = document.getElementById('timer-bar');
@@ -19,7 +19,9 @@ let availableQuestions = [];
 let timer;
 
 let questions = [];
-const apiUrl = '/silmarilion-quiz-app-questions/get'; 
+let usedFifty = false;
+
+const apiUrl = '/silmarilion-quiz-app-questions/get';
 
 fetch(apiUrl)
   .then(res => res.json())
@@ -29,9 +31,11 @@ fetch(apiUrl)
       const answerChoices = [...loadedQuestion.incorrect_answers];
       formattedQuestion.answer = Math.floor(Math.random() * 4) + 1;
       answerChoices.splice(formattedQuestion.answer - 1, 0, loadedQuestion.correct_answer);
+
       answerChoices.forEach((choice, index) => {
         formattedQuestion['choice' + (index + 1)] = choice;
       });
+
       return formattedQuestion;
     });
 
@@ -108,7 +112,6 @@ getNewQuestion = () => {
         .then(response => response.json())
         .then(result => {
           window.location.assign('/menu');
-          console.log(result.message);
         })
         .catch(error => console.error('Error:', error));
     });
@@ -126,6 +129,8 @@ getNewQuestion = () => {
   choices.forEach(choice => {
     const number = choice.dataset["number"];
     choice.innerText = currentQuestion["choice" + number];
+    choice.style.pointerEvents = "auto";
+    choice.parentElement.classList.remove("disabled");
   });
 
   availableQuestions.splice(questionIndex, 1);
@@ -134,6 +139,32 @@ getNewQuestion = () => {
   clearInterval(timer);
   startTimer();
 };
+
+function useFifty() {
+  if (usedFifty) return;
+
+  usedFifty = true;
+
+  const wrongChoices = choices.filter(
+    c => c.dataset.number != currentQuestion.answer
+  );
+
+  const toRemove = wrongChoices
+    .sort(() => Math.random() - 0.5)
+    .slice(0, 2);
+
+  toRemove.forEach(choice => {
+    choice.innerText = "";
+    choice.parentElement.classList.add("disabled");
+    choice.style.pointerEvents = "none";
+  });
+
+  const btn = document.getElementById("fiftyBtn");
+  btn.style.display = "none";
+}
+
+const fiftyBtn = document.getElementById("fiftyBtn");
+fiftyBtn.addEventListener("click", useFifty);
 
 choices.forEach(choice => {
   choice.addEventListener("click", e => {
@@ -145,7 +176,8 @@ choices.forEach(choice => {
     const selectedChoice = e.target;
     const selectedAnswer = selectedChoice.dataset["number"];
 
-    const classToApply = selectedAnswer == currentQuestion.answer ? "correct" : "incorrect";
+    const classToApply =
+      selectedAnswer == currentQuestion.answer ? "correct" : "incorrect";
 
     if (classToApply === "correct") {
       incrementScore(CORRECT_BONUS);
