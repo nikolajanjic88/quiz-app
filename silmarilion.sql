@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Oct 05, 2025 at 04:03 PM
+-- Generation Time: Dec 15, 2025 at 02:35 PM
 -- Server version: 9.1.0
 -- PHP Version: 8.3.14
 
@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `lore` (
   `text` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `image` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `lore`
@@ -78,7 +78,7 @@ CREATE TABLE IF NOT EXISTS `questions` (
   `incorrect_answers` json NOT NULL,
   `correct_answer` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `questions`
@@ -98,7 +98,11 @@ INSERT INTO `questions` (`id`, `question`, `incorrect_answers`, `correct_answer`
 (17, 'Who saved Maedhros from Thangorodrim?', '[\"Fingolfin\", \"Maglor\", \"Feanor\"]', 'Fingon'),
 (18, 'Battle of Unnumbered Tears or?', '[\"Dagor Aglareb\", \"Dagor-nuin-Giliath\", \"Dagor Bragollach\"]', 'Nírnaeth Arnoediad'),
 (27, 'Who was the supreme being of Eä?', '[\"Fëanor \", \"Melkor\", \"Manwë\"]', 'Eru Ilúvatar'),
-(28, 'Who was the leader of the Ainur, one of the Aratar, King of the Valar, husband of Varda, brother of the Dark Lord Melkor, and King of Arda??', '[\"Aulë\", \"Mandos\", \"Eru Ilúvatar\"]', 'Manwë');
+(28, 'Who was the leader of the Ainur, one of the Aratar, King of the Valar, husband of Varda, brother of the Dark Lord Melkor, and King of Arda??', '[\"Aulë\", \"Mandos\", \"Eru Ilúvatar\"]', 'Manwë'),
+(46, 'Which of Morgoth&#39;s actions was most hated by Eru Iluvatar?', '[\"The destruction of the Two Trees of Valinor\", \"The theft of the Silmarils\", \"The corruption of some Maiar\"]', 'The creation of the Orcs'),
+(47, 'Which of these words was not a name for the Dwarves?', '[\"Khazad\", \"Gonnhirrm\", \"Naugrim\"]', 'Golodhrim'),
+(48, 'How many times was Huan permitted to speak in his lifetime?', '[\"He could speak whenever he wanted\", \"Never\", \"Once\"]', 'Three times'),
+(49, 'Who were Elrond&#39;s mother and father?', '[\"Luthien and Beren\", \"Galadriel and Celeborn\", \"Melian and Thingol\"]', 'Elwing and Earendil');
 
 -- --------------------------------------------------------
 
@@ -113,7 +117,7 @@ CREATE TABLE IF NOT EXISTS `scores` (
   `score` int NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_userID` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=73 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=77 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `scores`
@@ -128,7 +132,11 @@ INSERT INTO `scores` (`id`, `user_id`, `score`) VALUES
 (69, 22, 70),
 (70, 7, 90),
 (71, 7, 100),
-(72, 7, 90);
+(72, 7, 90),
+(73, 7, 100),
+(74, 7, 20),
+(75, 7, 100),
+(76, 7, 70);
 
 -- --------------------------------------------------------
 
@@ -145,7 +153,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `is_admin` tinyint NOT NULL DEFAULT '0',
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
@@ -158,7 +166,8 @@ INSERT INTO `users` (`id`, `username`, `email`, `password`, `is_admin`, `created
 (19, 'r2d2', 'r2d2@gmail.com', '$2y$10$/ibtXEd3v4UxU.6ntGuJS.FaV1MnwW5Ox8pqqUKqJz8h2miT2NflG', 0, '2025-01-09 20:37:39'),
 (20, 'Mr Wick', 'mrwick@gmail.com', '$2y$10$Vt2qy7YZpXycTGHJu5P3YOJOciy9xcrm38i6TO32AqgHCTiXIWaUy', 0, '2025-01-10 16:20:09'),
 (21, 'x', 'asd@gmail.com', '$2y$10$6RAXbeoZWFhNXPiKnGsSdekH58yEfFfVDVSFAtPxHM3mTfz/SmFbm', 0, '2025-01-13 14:07:30'),
-(22, 'test2', 'test2@test.com', '$2y$10$tPqWPnyot74yBlWTIPAlj..Vzm7h9Fdgz/ZTodNcjGbRUCz40aE6K', 0, '2025-01-13 14:15:52');
+(22, 'test2', 'test2@test.com', '$2y$10$tPqWPnyot74yBlWTIPAlj..Vzm7h9Fdgz/ZTodNcjGbRUCz40aE6K', 0, '2025-01-13 14:15:52'),
+(23, 'grrrrr', 'grrrr@gmail.com', '$2y$10$7AdZnA.9Q9WCH0MF4j0CWuX.YO/dJFjdXc3TuHcD50DNT1UNoxBqG', 0, '2025-10-08 12:29:33');
 
 --
 -- Constraints for dumped tables

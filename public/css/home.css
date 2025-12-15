@@ -87,8 +87,18 @@ body.body {
   }
 }
 
+@keyframes back {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 2000px 0;
+  }
+}
+
 /* Main container */
 .wrapper {
+  position: relative;
   width: 750px;
   background: rgba(255, 255, 255, 0.05);
   border: 1.5px solid rgba(255, 255, 255, 0.2);
@@ -298,6 +308,36 @@ h2, p, a {
 .register-link:focus {
   color: #00ccae;
   text-decoration: underline;
+}
+
+/* Sound button  */
+.sound-toggle {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  z-index: 10;
+
+  width: 4.5rem;
+  height: 4.5rem;
+  border-radius: 50%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 2rem;
+  border: 2px solid #00ffe0;
+  background: rgba(0, 0, 0, 0.6);
+  color: #00ffe0;
+
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 20px rgba(0,255,224,0.5);
+}
+
+.sound-toggle:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 35px rgba(0,255,224,0.8);
 }
 
 /* Responsive */

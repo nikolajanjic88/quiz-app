@@ -1,6 +1,9 @@
 <?php include_once 'inc/head.php' ?>
 <body class="body">
   <div class="wrapper">
+    <button id="soundToggle" class="sound-toggle">
+      🔊
+    </button>
     <div class="list">
       <?php if($_SESSION['user']['is_admin'] == 1): ?>
       <a href="/dashboard" class="links">
@@ -37,4 +40,8 @@
       </div>          
     </div> 
   </div>
+  <audio id="bgMusic" loop>
+    <source src="/sounds/background.mp3" type="audio/mpeg">
+  </audio>
+  <script src="/js/bg-music.js"></script>
 <?php include_once 'inc/footer.php' ?>
