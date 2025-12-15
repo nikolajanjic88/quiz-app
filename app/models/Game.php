@@ -21,6 +21,8 @@ class Game extends Model
     $data = [];
     
     while ($row = $stmt->find()) {
+        $row['question'] = html_entity_decode($row['question']);
+        $row['correct_answer'] = html_entity_decode($row['correct_answer']);
         $row['incorrect_answers'] = json_decode($row['incorrect_answers']);
         $data[] = $row;
     }
