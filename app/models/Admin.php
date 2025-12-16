@@ -90,32 +90,34 @@ class Admin extends Model
     return $recentQuestions;
   }
 
-  public function insert($question, $incorrect_answers, $correct_answer)
+  public function insert(array $data)
   {
-    $sql = "INSERT INTO $this->table (question, incorrect_answers, correct_answer)
-                                      VALUES (:question, :inccorect_answers, :correct_answer)";
-    $this->db->query($sql, [
-      'question' => $question,
-      'inccorect_answers' => $incorrect_answers,
-      'correct_answer' => $correct_answer
-    ]);
+      $sql = "INSERT INTO {$this->table} (question, incorrect_answers, correct_answer)
+              VALUES (:question, :incorrect_answers, :correct_answer)";
+
+      return $this->db->query($sql, [
+          'question' => $data['question'],
+          'incorrect_answers' => $data['incorrect_answers'],
+          'correct_answer' => $data['correct_answer']
+      ]);
   }
 
-  public function update($question, $incorrect_answers, $correct_answer, $id)
+  public function update(int $id, array $data)
   {
-    $sql = "UPDATE $this->table SET
-                          question = :question,
-                          incorrect_answers = :incorrect_answers,
-                          correct_answer = :correct_answer
-                          WHERE id = :id";
+      $sql = "UPDATE {$this->table} SET
+                  question = :question,
+                  incorrect_answers = :incorrect_answers,
+                  correct_answer = :correct_answer
+              WHERE id = :id";
 
-    $this->db->query($sql, [
-      'question' => $question,
-      'incorrect_answers' => $incorrect_answers,
-      'correct_answer' => $correct_answer,
-      'id' => $id
-    ]);
+      return $this->db->query($sql, [
+          'id' => $id,
+          'question' => $data['question'],
+          'incorrect_answers' => $data['incorrect_answers'],
+          'correct_answer' => $data['correct_answer'],
+      ]);
   }
+
 
   public function delete($id)
   {

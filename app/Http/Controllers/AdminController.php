@@ -61,30 +61,29 @@ class AdminController
 
   public function store()
   {
-    $this->admin();
-    $request = $this->request->getBody();
-    $question = $request['question'];
-    $incorrect_answers = json_encode($request['incorrect_answers']);
-    $correct_answer = $request['correct_answer'];
+      $this->admin();
 
-    if(!$this->adminModel->validate($request))
-    {
-      Session::flash('errors', $this->adminModel->errors());
-      Session::flash('old', [
-          'question' => $question,
-          'incorrect_answers' => $request['incorrect_answers'],
-          'correct_answer' => $correct_answer
-      ]);
-      
-      return view('admin/addQuestion', [
-        'errors' => Session::get('errors')
-      ]);
-    }
-    
-    $this->adminModel->insert($question, $incorrect_answers, $correct_answer);
-    Session::put('message', 'Question added successfully');
+      $request = $this->request->getBody();
 
-    return redirect('/all-questions');
+      if(!$this->adminModel->validate($request)) {
+          Session::flash('errors', $this->adminModel->errors());
+          Session::flash('old', $request);
+
+          return view('admin/addQuestion', [
+              'errors' => Session::get('errors')
+          ]);
+      }
+
+      $data = [
+          'question' => $request['question'],
+          'incorrect_answers' => json_encode($request['incorrect_answers']),
+          'correct_answer' => $request['correct_answer']
+      ];
+
+      $this->adminModel->insert($data);
+      Session::put('message', 'Question added successfully');
+
+      return redirect('/all-questions');
   }
 
   public function edit()
@@ -100,35 +99,42 @@ class AdminController
 
   public function update()
   {
-    $this->admin();
-    $request = $this->request->getBody();
-    $question = $request['question'];
-    $incorrect_answers = json_encode($request['incorrect_answers']);
-    $correct_answer = $request['correct_answer'];
+      $this->admin();
 
-    if(!$this->adminModel->validate($request))
-    {
-      Session::flash('errors', $this->adminModel->errors());
-      Session::flash('old', [
-          'question' => $question,
-          'incorrect_answers' => $request['incorrect_answers'],
-          'correct_answer' => $correct_answer
-      ]);
-      $question = $this->adminModel->find($_GET['id']);
-      $incorrect_answers = json_decode($question['incorrect_answers'], true);
+      $id = $_GET['id'] ?? 0;
 
-      return view('admin/editQuestion', [
-        'errors' => Session::get('errors'),
-        'question' => $question,
-        'incorrect_answers' => $incorrect_answers
-      ]);
-    }
+      if (!$id) {
+          return redirect('/all-questions');
+      }
 
-    $this->adminModel->update($question, $incorrect_answers, $correct_answer, $_GET['id']);
-    Session::put('message', 'Question updated successfully');
+      $request = $this->request->getBody();
 
-    return redirect('/all-questions');
+      if (!$this->adminModel->validate($request)) {
+          Session::flash('errors', $this->adminModel->errors());
+          Session::flash('old', $request);
+       
+          $question = $this->adminModel->find($id);
+         
+          return view('admin/editQuestion', [
+              'errors' => Session::get('errors'),
+              'question' => $question,
+              'incorrect_answers' => json_decode($question['incorrect_answers'], true)
+          ]);
+      }
+
+      $data = [
+          'question' => $request['question'],
+          'incorrect_answers' => json_encode($request['incorrect_answers']),
+          'correct_answer' => $request['correct_answer'],
+      ];
+
+      $this->adminModel->update($id, $data);
+
+      Session::put('message', 'Question updated successfully');
+
+      return redirect('/all-questions');
   }
+
 
   public function destroy()
   {

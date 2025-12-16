@@ -13,23 +13,23 @@
           <div class="form-group">
             <h2 class="heading">Update Question and Answers</h2> 
           </div>
-          <textarea name="question" placeholder="Question"><?= $question['question'] ?></textarea>
+          <textarea name="question" placeholder="Question"><?= old('question', $question['question']) ?></textarea>
           <?php if(isset($errors['question'])): ?>
               <p class="error"><?= $errors['question'] ?></p>
           <?php endif ?>
-          <textarea name="incorrect_answers[]" placeholder="Incorrect Answer"><?= $incorrect_answers[0] ?></textarea>
+          <textarea name="incorrect_answers[]" placeholder="Incorrect Answer"><?= old('incorrect_answers')[0] ?? $incorrect_answers[0] ?></textarea>
           <?php if(isset($errors['incorrect_answers'][0])): ?>
               <p class="error"><?= $errors['incorrect_answers'][0] ?></p>
           <?php endif ?>
-          <textarea name="incorrect_answers[]" placeholder="Incorrect Answer"><?= $incorrect_answers[1] ?></textarea>
+          <textarea name="incorrect_answers[]" placeholder="Incorrect Answer"><?= old('incorrect_answers')[1] ?? $incorrect_answers[1] ?></textarea>
           <?php if(isset($errors['incorrect_answers'][1])): ?>
               <p class="error"><?= $errors['incorrect_answers'][1] ?></p>
           <?php endif ?>
-          <textarea name="incorrect_answers[]" placeholder="Incorrect Answer"><?= $incorrect_answers[2] ?></textarea>
+          <textarea name="incorrect_answers[]" placeholder="Incorrect Answer"><?= old('incorrect_answers')[2] ?? $incorrect_answers[2] ?></textarea>
           <?php if(isset($errors['incorrect_answers'][2])): ?>
               <p class="error"><?= $errors['incorrect_answers'][2] ?></p>
           <?php endif ?>
-          <textarea name="correct_answer" placeholder="Correct Answer"><?= $question['correct_answer'] ?></textarea>
+          <textarea name="correct_answer" placeholder="Correct Answer"><?=  old('correct_answer', $question['correct_answer']) ?></textarea>
           <?php if(isset($errors['correct_answer'])): ?>
               <p class="error"><?= $errors['correct_answer'] ?></p>
           <?php endif ?>
