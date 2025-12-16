@@ -170,28 +170,39 @@ class AdminController
   public function storeLore()
   {
     $this->admin();
-    $request = $this->request->getBody();
-    $title = $request['title'];
-    $text = $request['text'];
-    $image = $_FILES['image'];
 
-    if(!$this->loreModel->validate($request) || !$this->loreModel->validateImage($image))
-    {
-      Session::flash('errors', $this->loreModel->errors());
-      Session::flash('old', [
-          'title' => $title,
-          'text' => $text,
-          'image' => $image
-      ]);
-      
-      return view('admin/addLore', [
-        'errors' => Session::get('errors')
-      ]);
+    $request = $this->request->getBody();
+    $image   = $_FILES['image'] ?? null;
+
+    if (!$this->loreModel->validate($request) || !$this->loreModel->validateImage($image)) {
+        Session::flash('errors', $this->loreModel->errors());
+        Session::flash('old', [
+            'title' => $request['title'],
+            'text'  => $request['text']
+        ]);
+
+        return view('admin/addLore', [
+            'errors' => Session::get('errors')
+        ]);
     }
 
-    $this->loreModel->insert($title, $text, $image);
-    Session::put('message', 'Lore added successfully');
+    $imagePath = null;
 
+    if ($image && $image['tmp_name']) {
+        $name = microtime(true) . '_' . basename($image['name']);
+        $path = BASE_PATH . '/public/images/lore/' . $name;
+
+        move_uploaded_file($image['tmp_name'], $path);
+        $imagePath = '/images/lore/' . $name;
+    }
+
+    $this->loreModel->insert([
+        'title' => $request['title'],
+        'text'  => $request['text'],
+        'image' => $imagePath
+    ]);
+
+    Session::put('message', 'Lore added successfully');
     return redirect('/all-lore');
   }
 
@@ -207,32 +218,37 @@ class AdminController
   
   public function updateLore()
   {
-    $this->admin();
-    $request = $this->request->getBody();
-    $title = $request['title'];
-    $text = $request['text'];
-  
-    if(!$this->loreModel->validate($request))
-    {
-      Session::flash('errors', $this->loreModel->errors());
-      Session::flash('old', [
-          'title' => $title,
-          'text' => $text
-      ]);
-      $lore = $this->loreModel->find($_GET['id']);
+      $this->admin();
 
-      return view('admin/editLore', [
-        'errors' => Session::get('errors'),
-        'lore' => $lore,
-        'title' => $title,
-        'text' => $text
-      ]);
-    }
-    
-    $this->loreModel->update($title, $text, $_GET['id']);
-    Session::put('message', 'Lore updated successfully');
+      $id = $_GET['id'] ?? 0;
+      if (!$id) {
+        return redirect('/all-lore');
+      } 
 
-    return redirect('/all-lore');
+      $request = $this->request->getBody();
+
+      if (!$this->loreModel->validate($request)) {
+          Session::flash('errors', $this->loreModel->errors());
+          Session::flash('old', [
+              'title' => $request['title'],
+              'text'  => $request['text']
+          ]);
+
+          $lore = $this->loreModel->find($id);
+
+          return view('admin/editLore', [
+              'errors' => Session::get('errors'),
+              'lore'   => $lore
+          ]);
+      }
+
+      $this->loreModel->update($id, [
+          'title' => $request['title'],
+          'text'  => $request['text']
+      ]);
+
+      Session::put('message', 'Lore updated successfully');
+      return redirect('/all-lore');
   }
 
   public function destroyLore()

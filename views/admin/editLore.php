@@ -17,11 +17,11 @@
           <div class="form-group">
             <h2 class="heading">Update Character's Lore</h2> 
           </div>
-          <input type="text" name="title" id="" value="<?= $title ?? $lore['title'] ?>">
+          <input type="text" name="title" id="" value="<?= old('title', $lore['title']) ?>">
            <?php if(isset($errors['title'])): ?>
             <p class="error"><?= $errors['title'] ?></p>
           <?php endif ?>
-          <textarea id="text" name="text"><?= $text ?? $lore['text'] ?></textarea>
+          <textarea id="text" name="text"><?= old('text', $lore['text']) ?></textarea>
           <?php if(isset($errors['text'])): ?>
             <p class="error"><?= $errors['text'] ?></p>
           <?php endif ?>

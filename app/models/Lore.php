@@ -61,35 +61,30 @@ class Lore extends Model
     return $recentLore;
   }
 
-  public function insert($title, $text, $image)
+  public function insert(array $data)
   {
-    $tmp = $image['tmp_name'];
-    $name = microtime(true) . $image['name'];
-    $path = BASE_PATH . "/public/images/lore/" . $name;
-  
-    move_uploaded_file($tmp, $path);
+      $sql = "INSERT INTO {$this->table} (title, text, image)
+              VALUES (:title, :text, :image)";
 
-    $sql = "INSERT INTO $this->table (title, text, image)
-                                      VALUES (:title, :text, :image)";
-    $this->db->query($sql, [
-      'title' => $title,
-      'text' => $text,
-      'image' => "/images/lore/" . $name
-    ]);
+      return $this->db->query($sql, [
+          'title' => $data['title'],
+          'text'  => $data['text'],
+          'image' => $data['image']
+      ]);
   }
 
-  public function update($title, $text, $id)
+  public function update(int $id, array $data)
   {
-    $sql = "UPDATE $this->table SET
-                          title = :title,
-                          text = :text
-                          WHERE id = :id";
+      $sql = "UPDATE {$this->table} SET
+                  title = :title,
+                  text = :text
+              WHERE id = :id";
 
-    $this->db->query($sql, [
-      'title' => $title,
-      'text' => $text,
-      'id' => $id
-    ]);
+      return $this->db->query($sql, [
+          'id'    => $id,
+          'title' => $data['title'],
+          'text'  => $data['text'],
+      ]);
   }
 
   public function delete($id)
