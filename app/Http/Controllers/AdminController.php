@@ -218,48 +218,66 @@ class AdminController
   
   public function updateLore()
   {
-      $this->admin();
+    $this->admin();
 
-      $id = $_GET['id'] ?? 0;
-      if (!$id) {
-        return redirect('/all-lore');
-      } 
-
-      $request = $this->request->getBody();
-
-      if (!$this->loreModel->validate($request)) {
-          Session::flash('errors', $this->loreModel->errors());
-          Session::flash('old', [
-              'title' => $request['title'],
-              'text'  => $request['text']
-          ]);
-
-          $lore = $this->loreModel->find($id);
-
-          return view('admin/editLore', [
-              'errors' => Session::get('errors'),
-              'lore'   => $lore
-          ]);
-      }
-
-      $this->loreModel->update($id, [
-          'title' => $request['title'],
-          'text'  => $request['text']
-      ]);
-
-      Session::put('message', 'Lore updated successfully');
+    $id = $_GET['id'] ?? 0;
+    if (!$id) {
       return redirect('/all-lore');
+    } 
+
+    $request = $this->request->getBody();
+
+    if (!$this->loreModel->validate($request)) {
+        Session::flash('errors', $this->loreModel->errors());
+        Session::flash('old', [
+            'title' => $request['title'],
+            'text'  => $request['text']
+        ]);
+
+        $lore = $this->loreModel->find($id);
+
+        return view('admin/editLore', [
+            'errors' => Session::get('errors'),
+            'lore'   => $lore
+        ]);
+    }
+
+    $this->loreModel->update($id, [
+        'title' => $request['title'],
+        'text'  => $request['text']
+    ]);
+
+    Session::put('message', 'Lore updated successfully');
+    return redirect('/all-lore');
   }
 
   public function destroyLore()
   {
     $this->admin();
-    $request = $this->request->getBody();
-    $id = $request['id'];
+
+    $id = $this->request->getBody()['id'];
+    if (!$id) {
+        Session::put('message', 'Invalid lore ID');
+        return redirect('/all-lore');
+    }
+
+    $lore = $this->loreModel->find($id);
+    if (!$lore) {
+        Session::put('message', 'Lore not found');
+        return redirect('/all-lore');
+    }
+
+    if (!empty($lore['image'])) {
+        $imagePath = BASE_PATH . '/public' . $lore['image'];
+        if (file_exists($imagePath)) {
+            unlink($imagePath);
+        }
+    }
 
     $this->loreModel->delete($id);
-    Session::put('message', 'Character deleted successfully');
 
+    Session::put('message', 'Lore deleted successfully');
     return redirect('/all-lore');
   }
+
 }
