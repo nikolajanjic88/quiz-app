@@ -1,4 +1,5 @@
 const question = document.getElementById("question");
+const choiceContainers = Array.from(document.getElementsByClassName("choice-container"));
 const choices = Array.from(document.getElementsByClassName("choice-text"));
 const progressText = document.getElementById("progressText");
 const scoreText = document.getElementById("score");
@@ -202,14 +203,14 @@ document.getElementById("fiftyBtn").addEventListener("click", useFifty);
 document.getElementById("extraTimeBtn").addEventListener("click", useExtraTime);
 
 // Answers
-choices.forEach(choice => {
-  choice.addEventListener("click", e => {
+choiceContainers.forEach(container => {
+  container.addEventListener("click", e => {
     if (!acceptingAnswers) return;
 
     acceptingAnswers = false;
     clearInterval(timerInterval);
 
-    const selectedChoice = e.target;
+    const selectedChoice = container.querySelector(".choice-text");
     const selectedAnswer = selectedChoice.dataset["number"];
 
     const classToApply = selectedAnswer == currentQuestion.answer ? "correct" : "incorrect";
@@ -221,15 +222,14 @@ choices.forEach(choice => {
       soundWrong.play();
     }
 
-    selectedChoice.parentElement.classList.add(classToApply);
+    container.classList.add(classToApply);
 
     setTimeout(() => {
-      selectedChoice.parentElement.classList.remove(classToApply);
+      container.classList.remove(classToApply);
       getNewQuestion();
     }, 700);
   });
 });
-
 
 incrementScore = num => {
   score += num;
