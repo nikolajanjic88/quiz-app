@@ -12,7 +12,7 @@
     </div>
     <div class="main">
       <div class="form-group">
-        <form action="" method="POST">
+        <form action="" method="POST" enctype="multipart/form-data">
           <input type="hidden" name="_method" value="PUT">
           <div class="form-group">
             <h2 class="heading">Update Character's Lore</h2> 
@@ -24,6 +24,10 @@
           <textarea id="text" name="text"><?= old('text', $lore['text']) ?></textarea>
           <?php if(isset($errors['text'])): ?>
             <p class="error"><?= $errors['text'] ?></p>
+          <?php endif ?>
+          <input type="file" name="image">
+          <?php if(isset($errors['image'])): ?>
+            <p class="error"><?= $errors['image'] ?></p>
           <?php endif ?>
           <button class="save-button">Update</button>
         </form> 

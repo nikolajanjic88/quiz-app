@@ -61,29 +61,29 @@ class AdminController
 
   public function store()
   {
-      $this->admin();
+    $this->admin();
 
-      $request = $this->request->getBody();
+    $request = $this->request->getBody();
 
-      if(!$this->adminModel->validate($request)) {
-          Session::flash('errors', $this->adminModel->errors());
-          Session::flash('old', $request);
+    if(!$this->adminModel->validate($request)) {
+        Session::flash('errors', $this->adminModel->errors());
+        Session::flash('old', $request);
 
-          return view('admin/addQuestion', [
-              'errors' => Session::get('errors')
-          ]);
-      }
+        return view('admin/addQuestion', [
+            'errors' => Session::get('errors')
+        ]);
+    }
 
-      $data = [
-          'question' => $request['question'],
-          'incorrect_answers' => json_encode($request['incorrect_answers']),
-          'correct_answer' => $request['correct_answer']
-      ];
+    $data = [
+        'question' => $request['question'],
+        'incorrect_answers' => json_encode($request['incorrect_answers']),
+        'correct_answer' => $request['correct_answer']
+    ];
 
-      $this->adminModel->insert($data);
-      Session::put('message', 'Question added successfully');
+    $this->adminModel->insert($data);
+    Session::put('message', 'Question added successfully');
 
-      return redirect('/all-questions');
+    return redirect('/all-questions');
   }
 
   public function edit()
@@ -99,42 +99,41 @@ class AdminController
 
   public function update()
   {
-      $this->admin();
+    $this->admin();
 
-      $id = $_GET['id'] ?? 0;
+    $id = $_GET['id'] ?? 0;
 
-      if (!$id) {
-          return redirect('/all-questions');
-      }
+    if (!$id) {
+        return redirect('/all-questions');
+    }
 
-      $request = $this->request->getBody();
+    $request = $this->request->getBody();
 
-      if (!$this->adminModel->validate($request)) {
-          Session::flash('errors', $this->adminModel->errors());
-          Session::flash('old', $request);
-       
-          $question = $this->adminModel->find($id);
-         
-          return view('admin/editQuestion', [
-              'errors' => Session::get('errors'),
-              'question' => $question,
-              'incorrect_answers' => json_decode($question['incorrect_answers'], true)
-          ]);
-      }
+    if (!$this->adminModel->validate($request)) {
+        Session::flash('errors', $this->adminModel->errors());
+        Session::flash('old', $request);
+      
+        $question = $this->adminModel->find($id);
+        
+        return view('admin/editQuestion', [
+            'errors' => Session::get('errors'),
+            'question' => $question,
+            'incorrect_answers' => json_decode($question['incorrect_answers'], true)
+        ]);
+    }
 
-      $data = [
-          'question' => $request['question'],
-          'incorrect_answers' => json_encode($request['incorrect_answers']),
-          'correct_answer' => $request['correct_answer'],
-      ];
+    $data = [
+        'question' => $request['question'],
+        'incorrect_answers' => json_encode($request['incorrect_answers']),
+        'correct_answer' => $request['correct_answer'],
+    ];
 
-      $this->adminModel->update($id, $data);
+    $this->adminModel->update($id, $data);
 
-      Session::put('message', 'Question updated successfully');
+    Session::put('message', 'Question updated successfully');
 
-      return redirect('/all-questions');
+    return redirect('/all-questions');
   }
-
 
   public function destroy()
   {
@@ -174,7 +173,7 @@ class AdminController
     $request = $this->request->getBody();
     $image   = $_FILES['image'] ?? null;
 
-    if (!$this->loreModel->validate($request) || !$this->loreModel->validateImage($image)) {
+    if (!$this->loreModel->validate($request) || !$this->loreModel->validateImage($image, true)) {
         Session::flash('errors', $this->loreModel->errors());
         Session::flash('old', [
             'title' => $request['title'],
@@ -222,29 +221,45 @@ class AdminController
 
     $id = $_GET['id'] ?? 0;
     if (!$id) {
-      return redirect('/all-lore');
-    } 
+        return redirect('/all-lore');
+    }
 
     $request = $this->request->getBody();
+    $image   = $_FILES['image'] ?? null;
 
-    if (!$this->loreModel->validate($request)) {
-        Session::flash('errors', $this->loreModel->errors());
-        Session::flash('old', [
-            'title' => $request['title'],
-            'text'  => $request['text']
-        ]);
+    $lore = $this->loreModel->find($id);
 
-        $lore = $this->loreModel->find($id);
+    if (!$this->loreModel->validate($request) || ($image && $image['tmp_name'] && !$this->loreModel->validateImage($image))) {
+      Session::flash('errors', $this->loreModel->errors());
+      Session::flash('old', $request);
 
-        return view('admin/editLore', [
-            'errors' => Session::get('errors'),
-            'lore'   => $lore
-        ]);
+      return view('admin/editLore', [
+          'lore' => $lore,
+          'errors' => Session::get('errors')
+      ]);
+    }
+
+    $imagePath = $lore['image'];
+
+    if ($image && $image['tmp_name']) {
+      if ($lore['image']) {
+        $oldPath = BASE_PATH . '/public' . $lore['image'];
+        if (file_exists($oldPath)) {
+          unlink($oldPath);
+        }
+      }
+
+      $name = microtime(true) . '_' . basename($image['name']);
+      $path = BASE_PATH . '/public/images/lore/' . $name;
+
+      move_uploaded_file($image['tmp_name'], $path);
+      $imagePath = '/images/lore/' . $name;
     }
 
     $this->loreModel->update($id, [
         'title' => $request['title'],
-        'text'  => $request['text']
+        'text'  => $request['text'],
+        'image' => $imagePath
     ]);
 
     Session::put('message', 'Lore updated successfully');

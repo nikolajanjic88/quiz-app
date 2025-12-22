@@ -168,7 +168,7 @@ function useFifty() {
   if (usedFifty) return;
   usedFifty = true;
 
-  const wrongChoices = choices.filter(c => c.dataset.number != currentQuestion.answer);
+const wrongChoices = choices.filter(c => c.dataset.number != currentQuestion.answer);
   const toRemove = wrongChoices.sort(() => Math.random() - 0.5).slice(0, 2);
   toRemove.forEach(choice => {
     choice.innerText = "";

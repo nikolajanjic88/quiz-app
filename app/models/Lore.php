@@ -77,13 +77,15 @@ class Lore extends Model
   {
       $sql = "UPDATE {$this->table} SET
                   title = :title,
-                  text = :text
+                  text = :text,
+                  image = :image
               WHERE id = :id";
 
       return $this->db->query($sql, [
           'id'    => $id,
           'title' => $data['title'],
           'text'  => $data['text'],
+          'image' => $data['image']
       ]);
   }
 
@@ -108,26 +110,40 @@ class Lore extends Model
     return empty($this->errors);    
   }
 
-  public function validateImage($image)
-  {      
-    if(empty($image['tmp_name'])) 
-    {
-      $this->errors['image'] = 'No File chosen';
-    }
-    else if(!is_image($image['tmp_name']))
-    {
-      $this->errors['image'] = 'Invalid format';
-    }
-    else if($image['size'] > 1000000) 
-    {
-      $this->errors['image'] = 'Must be 1MB or less';
-    }
-    else if(!validImageDimensions($image['tmp_name'], 1000, 1500))
-    {
-      $this->errors['image'] = 'Width must be less than 1000 pixels & height must be less than 1500 pixels';
+  public function validateImage($image, bool $required = false): bool
+  {
+    if ($image['error'] === UPLOAD_ERR_NO_FILE) {
+      if ($required) {
+        $this->errors['image'] = 'No file chosen';
+        return false;
+      }
+      return true;
     }
 
-    return empty($this->errors);
+    if ($image['error'] !== UPLOAD_ERR_OK) {
+      $this->errors['image'] = 'Upload failed';
+      return false;
+    }
+
+    $mime = mime_content_type($image['tmp_name']);
+    if (!in_array($mime, ['image/jpeg', 'image/png', 'image/webp'])) {
+      $this->errors['image'] = 'Invalid format';
+      return false;
+    }
+
+    if ($image['size'] > 1000000) {
+      $this->errors['image'] = 'Must be 1MB or less';
+      return false;
+    }
+
+    [$width, $height] = getimagesize($image['tmp_name']);
+    if ($width > 1000 || $height > 1500) {
+      $this->errors['image'] =
+          'Width must be ≤ 1000px & height ≤ 1500px';
+      return false;
+    }
+
+    return true;
   }
 
   public function error($field, $message)
