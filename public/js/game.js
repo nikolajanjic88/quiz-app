@@ -1,13 +1,14 @@
-const question = document.getElementById("question");
-const choiceContainers = Array.from(document.getElementsByClassName("choice-container"));
-const choices = Array.from(document.getElementsByClassName("choice-text"));
-const progressText = document.getElementById("progressText");
+const question = document.getElementById('question');
+const choiceContainers = Array.from(document.getElementsByClassName('choice-container'));
+const choices = Array.from(document.getElementsByClassName('choice-text'));
+const progressText = document.getElementById('progressText');
 const scoreText = document.getElementById("score");
-const progressBarFull = document.getElementById("progressBarFull");
+const progressBarFull = document.getElementById('progressBarFull');
 const loader = document.getElementById('loader');
 const game = document.getElementById('game');
 const gameContainer = document.getElementById('game-container');
 const containerEnd = document.getElementById('container-end');
+const endGameImage = document.getElementById('end-game-gif');
 
 const timerDisplay = document.getElementById('timer');
 const timerBar = document.getElementById('timer-bar');
@@ -115,12 +116,16 @@ getNewQuestion = () => {
 
     if(score == CORRECT_BONUS * MAX_QUESTIONS) {
       perfectScoreSound.play();
+      endGameImage.src = 'images/giphy.gif';
+      endGameImage.alt = 'Bravo';
       finalScore.innerHTML = `Perfect! <br>`;
     } else if (score < CORRECT_BONUS * MAX_QUESTIONS && score > CORRECT_BONUS * MAX_QUESTIONS / 2) {
       goodScoreSound.play();
       finalScore.innerHTML = `Very good! <br>`;
     } else {
       badScoreSound.play();
+      endGameImage.src = 'images/sad.gif';
+      endGameImage.alt = 'Tree of Valinor died';
       finalScore.innerHTML = `Better luck next time! <br>`;
     }
 
