@@ -18,15 +18,20 @@ class LoreController
   }
 
   public function index()
-  {
+{
     $this->user();
 
-    $data = $this->loreModel->all();
+    $page = (int) ($_GET['page'] ?? 1);
+    $search = $_POST['search-character'] ?? null;
+
+    $data = $this->loreModel->all($page, null, $search);
     $pages = $this->loreModel->pages();
-   
+
     return view('lore', [
-      'data' => $data,
-      'pages' => $pages
+        'data' => $data,
+        'pages' => $pages,
+        'currentPage' => $page,
+        'search' => $search
     ]);
   }
 
@@ -34,10 +39,15 @@ class LoreController
   {
     $this->user();
 
-    $data = $this->loreModel->find($_GET['id']);
-    
+    $id = isset($_GET['id']) ? (int) $_GET['id'] : null;
+    if (!$id) {
+        abort(404);
+    }
+
+    $data = $this->loreModel->find($id);
+
     return view('character', [
-      'data' => $data
+        'data' => $data
     ]);
   }
   

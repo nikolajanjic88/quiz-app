@@ -33,7 +33,7 @@ class AdminController
     $questionCount = $this->adminModel->getQuestionCount();
     $scoreCount = $this->scoreModel->getScoreCount();
     $recentQuestions = $this->adminModel->recentAddedQuestions();
-    $recentLore = $this->loreModel->recentAddedLore();
+    $recentLore = $this->loreModel->recent();
     $avgScore = $this->scoreModel->averageScore();
     
     return view('admin/dashboard', [
@@ -156,12 +156,17 @@ class AdminController
   {
     $this->admin();
 
+    $page = (int)($_GET['page'] ?? 1);
+    $search = $_POST['search-character'] ?? null;
+
+    $data = $this->loreModel->all($page, null, $search);
     $pages = $this->loreModel->pages();
-    $data = $this->loreModel->all();
-   
+
     return view('admin/lore', [
-      'data' => $data,
-      'pages' => $pages
+        'data' => $data,
+        'pages' => $pages,
+        'currentPage' => $page,
+        'search' => $search
     ]);
   }
 

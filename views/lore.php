@@ -4,7 +4,11 @@
     <div class="top-bar">
       <a href="/menu" class="back-button">Back To Menu</a>
       <form class="form-wrapper" method="POST">
-        <input type="text" name="search-character" id="search" placeholder="Search Character...">
+        <input type="text" 
+               name="search-character" 
+               id="search" 
+               placeholder="Search Character..." 
+               value="<?= $_POST['search-character'] ?? '' ?>">
         <input type="submit" value="Search" id="submit">
       </form>
     </div>

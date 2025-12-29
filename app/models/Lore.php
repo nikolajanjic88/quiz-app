@@ -14,88 +14,80 @@ class Lore extends Model
   private string $title = 'title';
   private string $text = 'text';
 
-  public function all()
-  { 
-    if(isset($_GET['page']))
-    {
-      $page = $_GET['page'] - 1;
-      $this->start = $page * $this->rows_per_page;
+  public function all(int $page = 1, ?int $rowsPerPage = null, ?string $search = null): array
+  {
+    $rowsPerPage = $rowsPerPage ?? $this->rows_per_page;
+    $start = ($page - 1) * $rowsPerPage;
+
+    if ($search !== null && trim($search) !== '') {
+        $sql = "SELECT * FROM {$this->table}
+                WHERE title LIKE CONCAT('%', ?, '%')
+                ORDER BY id DESC";
+        $data = $this->db->query($sql, [$search])->get();
+    } else {
+        $sql = "SELECT * FROM {$this->table}
+                ORDER BY id DESC
+                LIMIT $start, $rowsPerPage";
+        $data = $this->db->query($sql)->get();
     }
-
-    if($_SERVER['REQUEST_METHOD'] === 'POST' && trim($_POST['search-character']) != '')
-    {
-      $sql = "SELECT * FROM $this->table 
-              WHERE title LIKE CONCAT('%',?,'%') 
-              ORDER BY id DESC";
-
-      $data = $this->db->query($sql, [$_POST['search-character']])->get();
-    }
-    else
-    {
-      $sql = "SELECT * FROM $this->table 
-      ORDER BY id DESC LIMIT $this->start, $this->rows_per_page"; 
-
-      $data = $this->db->query($sql)->get();
-    }
-
     return $data;
   }
 
-  public function find($id)
+
+  public function find(int $id)
   {
-    $sql = "SELECT * FROM $this->table 
+    $sql = "SELECT * FROM {$this->table} 
                      WHERE id = ?"; 
 
-    $data = $this->db->query($sql, [$id])->findOrFail();
-
-    return $data;
+    return $this->db->query($sql, [$id])->findOrFail();
   }
 
-  public function recentAddedLore()
+  public function recent(int $limit = 5): array
   {
-    $sql = "SELECT title FROM $this->table 
-            ORDER BY id DESC LIMIT 5";
-    $res = $this->db->query($sql);
-    $recentLore = $res->get();
+    $limit = max(1, min(20, (int)$limit));
 
-    return $recentLore;
+    $sql = "SELECT title FROM {$this->table}
+            ORDER BY id DESC
+            LIMIT $limit";
+
+    return $this->db->query($sql)->get();
   }
 
   public function insert(array $data)
   {
-      $sql = "INSERT INTO {$this->table} (title, text, image)
-              VALUES (:title, :text, :image)";
+    $sql = "INSERT INTO {$this->table} (title, text, image)
+            VALUES (:title, :text, :image)";
 
-      return $this->db->query($sql, [
-          'title' => $data['title'],
-          'text'  => $data['text'],
-          'image' => $data['image']
-      ]);
+    return $this->db->query($sql, [
+        'title' => $data['title'],
+        'text'  => $data['text'],
+        'image' => $data['image']
+    ]);
   }
 
   public function update(int $id, array $data)
   {
-      $sql = "UPDATE {$this->table} SET
-                  title = :title,
-                  text = :text,
-                  image = :image
-              WHERE id = :id";
+    $sql = "UPDATE {$this->table} SET
+                title = :title,
+                text = :text,
+                image = :image
+            WHERE id = :id";
 
-      return $this->db->query($sql, [
-          'id'    => $id,
-          'title' => $data['title'],
-          'text'  => $data['text'],
-          'image' => $data['image']
-      ]);
+    return $this->db->query($sql, [
+        'id'    => $id,
+        'title' => $data['title'],
+        'text'  => $data['text'],
+        'image' => $data['image']
+    ]);
   }
 
-  public function delete($id)
+  public function delete(int $id)
   {
-    $sql = "DELETE FROM $this->table WHERE id = ?";
-    $this->db->query($sql, [$id]);
+    $sql = "DELETE FROM {$this->table} WHERE id = ?";
+    return $this->db->query($sql, [$id]);
   }
 
-  public function validate($data) 
+  public function validate(array $data) 
   {
     if(trim($data[$this->title]) === '') 
     {
@@ -151,7 +143,7 @@ class Lore extends Model
     $this->errors[$field] = $message;
   }
 
-  public function errors()
+  public function errors(): array
   {
     return $this->errors;
   }
