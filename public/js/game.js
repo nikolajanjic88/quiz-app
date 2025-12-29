@@ -177,7 +177,7 @@ function endGame() {
 
       setTimeout(() => {
         window.location.assign('/menu');
-      }, 500);
+      }, 1500);
     })
     .catch(err => {
       console.error(err);
