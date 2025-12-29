@@ -42,20 +42,19 @@ let timerInterval;
 
 const apiUrl = '/silmarilion-quiz-app-questions/get';
 
-// Fetch
+// Fetch questions
 fetch(apiUrl)
   .then(res => res.json())
   .then(loadedQuestions => {
-    questions = loadedQuestions.map(loadedQuestion => {
-      const formattedQuestion = { question: loadedQuestion.question };
-      const answerChoices = [...loadedQuestion.incorrect_answers];
+    questions = loadedQuestions.map(q => {
+      const formattedQuestion = { question: q.question };
+      const answerChoices = [...q.incorrect_answers];
       formattedQuestion.answer = Math.floor(Math.random() * 4) + 1;
-      answerChoices.splice(formattedQuestion.answer - 1, 0, loadedQuestion.correct_answer);
+      answerChoices.splice(formattedQuestion.answer - 1, 0, q.correct_answer);
 
       answerChoices.forEach((choice, index) => {
         formattedQuestion['choice' + (index + 1)] = choice;
       });
-
       return formattedQuestion;
     });
 
@@ -63,17 +62,17 @@ fetch(apiUrl)
   })
   .catch(err => console.error(err));
 
-startGame = () => {
+function startGame() {
   questionCounter = 0;
   score = 0;
   availableQuestions = [...questions];
-  getNewQuestion();
   game.classList.remove('hidden');
   loader.classList.add('hidden');
-};
+  getNewQuestion();
+}
 
-// timer with +10 seconds
-startTimer = () => {
+// Timer
+function startTimer() {
   clearInterval(timerInterval);
   timeLeft = TIME_LIMIT;
   timerDuration = TIME_LIMIT;
@@ -87,12 +86,10 @@ startTimer = () => {
     const elapsed = (Date.now() - start) / 1000;
     const remaining = Math.max(0, timerDuration - elapsed);
     timeLeft = Math.ceil(remaining);
-
     timerDisplay.innerText = `Time: ${timeLeft}s`;
 
     const widthPercent = (remaining / timerDuration) * 100;
     timerBar.style.width = `${widthPercent}%`;
-
     if (timeLeft <= 3) timerBar.style.backgroundColor = 'red';
 
     if (remaining <= 0) {
@@ -101,50 +98,12 @@ startTimer = () => {
       getNewQuestion();
     }
   }, 50);
-};
+}
 
-getNewQuestion = () => {
+// Get new question
+function getNewQuestion() {
   if (availableQuestions.length === 0 || questionCounter >= MAX_QUESTIONS) {
-    clearInterval(timerInterval);
-    gameContainer.style.display = 'none';
-    containerEnd.style.display = 'block';
-
-    const saveScoreBtn = document.getElementById('saveScoreBtn');
-    const finalScore = document.getElementById('finalScore');
-    const scoreInput = document.getElementById('finalScoreInput');
-    scoreInput.value = score;
-
-    if(score == CORRECT_BONUS * MAX_QUESTIONS) {
-      perfectScoreSound.play();
-      endGameImage.src = 'images/giphy.gif';
-      endGameImage.alt = 'Bravo';
-      finalScore.innerHTML = `Perfect! <br>`;
-    } else if (score < CORRECT_BONUS * MAX_QUESTIONS && score > CORRECT_BONUS * MAX_QUESTIONS / 2) {
-      goodScoreSound.play();
-      finalScore.innerHTML = `Very good! <br>`;
-    } else {
-      badScoreSound.play();
-      endGameImage.src = 'images/sad.gif';
-      endGameImage.alt = 'Tree of Valinor died';
-      finalScore.innerHTML = `Better luck next time! <br>`;
-    }
-
-    finalScore.innerHTML += `Your score - ${score}`;
-
-    const data = { score: scoreInput.value };
-
-    saveScoreBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-
-      fetch(apiUrl, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
-      })
-        .then(response => response.json())
-        .then(result => window.location.assign('/menu'))
-        .catch(error => console.error('Error:', error));
-    });
+    endGame();
     return;
   }
 
@@ -167,14 +126,75 @@ getNewQuestion = () => {
   acceptingAnswers = true;
 
   startTimer();
-};
+}
 
-// 50:50 Joker
+// End game
+function endGame() {
+  clearInterval(timerInterval);
+  gameContainer.style.display = 'none';
+  containerEnd.style.display = 'block';
+
+  const saveScoreBtn = document.getElementById('saveScoreBtn');
+  const finalScore = document.getElementById('finalScore');
+  const scoreInput = document.getElementById('finalScoreInput');
+  scoreInput.value = score;
+
+  // Set final message & image
+  if(score === CORRECT_BONUS * MAX_QUESTIONS) {
+    perfectScoreSound.play();
+    endGameImage.src = 'images/giphy.gif';
+    endGameImage.alt = 'Bravo';
+    finalScore.innerHTML = `Perfect! <br>`;
+  } else if (score > (CORRECT_BONUS * MAX_QUESTIONS) / 2) {
+    goodScoreSound.play();
+    finalScore.innerHTML = `Very good! <br>`;
+  } else {
+    badScoreSound.play();
+    endGameImage.src = 'images/sad.gif';
+    endGameImage.alt = 'Tree of Valinor died';
+    finalScore.innerHTML = `Better luck next time! <br>`;
+  }
+
+  finalScore.innerHTML += `Your score - ${score}`;
+
+  // Attach Save listener **once**
+  saveScoreBtn.onclick = e => {
+    e.preventDefault();
+
+    saveScoreBtn.disabled = true;
+
+    const data = { score };
+
+    fetch(apiUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    })
+    .then(res => res.json())
+    .then(result => {
+      alertify.set('notifier','position', 'top-center');
+      alertify.success(result.message);
+
+      setTimeout(() => {
+        window.location.assign('/menu');
+      }, 500);
+    })
+    .catch(err => {
+      console.error(err);
+      alertify.set('notifier','position', 'top-center');
+      alertify.error('Failed to save score');
+    
+      saveScoreBtn.disabled = false;
+    });
+  };
+}
+
+// Jokers
 function useFifty() {
   if (usedFifty) return;
   usedFifty = true;
 
-const wrongChoices = choices.filter(c => c.dataset.number != currentQuestion.answer);
+  const wrongChoices = choices.filter(c => c.dataset.number != currentQuestion.answer);
   const toRemove = wrongChoices.sort(() => Math.random() - 0.5).slice(0, 2);
   toRemove.forEach(choice => {
     choice.innerText = "";
@@ -185,7 +205,6 @@ const wrongChoices = choices.filter(c => c.dataset.number != currentQuestion.ans
   document.getElementById("fiftyBtn").style.display = "none";
 }
 
-// +10 secounds Joker
 function useExtraTime() {
   if (extraTimeUsed) return;
   extraTimeUsed = true;
@@ -207,7 +226,7 @@ function useExtraTime() {
 document.getElementById("fiftyBtn").addEventListener("click", useFifty);
 document.getElementById("extraTimeBtn").addEventListener("click", useExtraTime);
 
-// Answers
+// Answer selection
 choiceContainers.forEach(container => {
   container.addEventListener("click", e => {
     if (!acceptingAnswers) return;
@@ -236,7 +255,7 @@ choiceContainers.forEach(container => {
   });
 });
 
-incrementScore = num => {
+function incrementScore(num) {
   score += num;
   scoreText.innerText = score;
-};
+}

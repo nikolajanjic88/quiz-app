@@ -7,6 +7,7 @@ use App\Request;
 use App\Session;
 use App\Models\Lore;
 use App\Models\Admin;
+use App\Models\Score;
 
 class AdminController 
 {
@@ -14,12 +15,14 @@ class AdminController
 
   private Admin $adminModel;
   private Lore $loreModel;
+  private Score $scoreModel;
   private Request $request;
 
   public function __construct()
   {
     $this->adminModel = new Admin();
     $this->loreModel = new Lore();
+    $this->scoreModel = new Score();
     $this->request = new Request();
   }
   
@@ -28,16 +31,18 @@ class AdminController
     $this->admin();
     $userCount = $this->adminModel->getUserCount();
     $questionCount = $this->adminModel->getQuestionCount();
-    $scoreCount = $this->adminModel->getScoreCount();
+    $scoreCount = $this->scoreModel->getScoreCount();
     $recentQuestions = $this->adminModel->recentAddedQuestions();
     $recentLore = $this->loreModel->recentAddedLore();
-
+    $avgScore = $this->scoreModel->averageScore();
+    
     return view('admin/dashboard', [
       'userCount' => $userCount,
       'questionCount' => $questionCount,
       'scoreCount' => $scoreCount,
       'recentQuestions' => $recentQuestions,
-      'recentLore' => $recentLore
+      'recentLore' => $recentLore,
+      'avgScore' => $avgScore
     ]);
   }
 

@@ -9,62 +9,51 @@ class Game extends Model
 {
   private string $table = 'questions';
   private string $scoresTable = 'scores';
-
   private string $loreTable = 'lore';
 
-  public function getQuestions()
+  public function getQuestions(): array
   {
-    $sql = "SELECT question, incorrect_answers, correct_answer FROM $this->table";
-
+    $sql = "SELECT question, incorrect_answers, correct_answer FROM {$this->table}";
     $stmt = $this->db->query($sql);
 
-    $data = [];
-    
+    $questions = [];
+
     while ($row = $stmt->find()) {
-        $row['question'] = html_entity_decode($row['question']);
-        $row['correct_answer'] = html_entity_decode($row['correct_answer']);
-        $row['incorrect_answers'] = json_decode($row['incorrect_answers']);
-        $data[] = $row;
+        $questions[] = $this->formatQuestion($row);
     }
 
-    header('Content-Type: application/json');
-
-    echo json_encode($data);
+    return $questions;
   }
 
-  public function getLore()
+  private function formatQuestion(array $row): array
   {
-    $sql = "SELECT title, image FROM $this->loreTable";
+    return [
+        'question' => html_entity_decode($row['question']),
+        'correct_answer' => html_entity_decode($row['correct_answer']),
+        'incorrect_answers' => json_decode($row['incorrect_answers'], true)
+    ];
+  }
 
+  public function getLore(): array
+  {
+    $sql = "SELECT title, image FROM {$this->loreTable}";
     $stmt = $this->db->query($sql);
 
-    $data = [];
-    
+    $lore = [];
     while ($row = $stmt->find()) {
-        $data[] = $row;
+        $lore[] = $row;
     }
 
-    header('Content-Type: application/json');
-
-    echo json_encode($data);
+    return $lore;
   }
 
-  public function saveResult()
+  public function saveResult(int $userId, int $score): bool
   {
-    $input = json_decode(file_get_contents('php://input'), true);
-    $score = $input['score'];
+    $sql = "INSERT INTO {$this->scoresTable} (user_id, score) VALUES (:user_id, :score)";
 
-    $sql = "INSERT INTO $this->scoresTable (score, user_id) VALUES (:score, :user_id)";
-
-    $res = $this->db->query($sql, ['score' => $score, 'user_id' => Session::get('user')['id']]);
-
-    if($res) 
-    {
-      echo json_encode(['message' => 'Score inserted successfully']);
-    } 
-    else 
-    {
-      echo json_encode(['message' => 'Failed to insert score']);
-    }
+    return (bool) $this->db->query($sql, [
+        'user_id' => $userId,
+        'score'   => $score
+    ]);
   }
 }

@@ -11,17 +11,6 @@ class GameController
 {
   use Guard;
 
-  public function highscores()
-  {
-    $this->user();
-    $scores = new Score();
-    $scores = $scores->getScores();
-
-    return view('highscores', [
-      'scores' => $scores
-    ]);
-  }
-
   public function game()
   {
     $this->user();
@@ -34,26 +23,63 @@ class GameController
     return view('guess');
   }
 
-  public function save()
+  public function highscores()
   {
     $this->user();
-    $game = new Game();
-    Session::put('message', 'Saved successfully');
 
-    return $game->saveResult();
+    $scoreModel = new Score();
+    $scores = $scoreModel->getScores();
+
+    return view('highscores', [
+        'scores' => $scores
+    ]);
   }
 
   public function questions()
-  {  
-    $questions = new Game();
-    
-    return $questions->getQuestions();
+  {
+    $this->user();
+
+    $game = new Game();
+    return $this->json($game->getQuestions());
   }
 
   public function lore()
-  {  
-    $lore = new Game();
-    
-    return $lore->getLore();
+  {
+    $this->user();
+
+    $game = new Game();
+    return $this->json($game->getLore());
+  }
+
+  public function save()
+  {
+    $this->user();
+
+    $input = json_decode(file_get_contents('php://input'), true);
+
+    $score = filter_var($input['score'] ?? null, FILTER_VALIDATE_INT);
+
+    if ($score === false || $score < 0) {
+        return $this->json(['message' => 'Invalid score'], 400);
+    }
+
+    $user = Session::get('user');
+    $game = new Game();
+
+    if ($game->saveResult($user['id'], $score)) {
+        return $this->json(['message' => 'Score saved successfully']);
+    }
+
+    return $this->json(['message' => 'Failed to save score'], 500);
+  }
+
+  private function json(array $data, int $status = 200): void
+  {
+    http_response_code($status);
+    header('Content-Type: application/json');
+    echo json_encode($data);
+    exit;
   }
 }
+
+

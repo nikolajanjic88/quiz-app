@@ -36,7 +36,13 @@
             <h2 class="topic-heading"><?= $scoreCount ?></h2>
             <h2 class="topic">Number of Saved Gamescores</h2>
           </div>
-        </div>             
+        </div>  
+        <div class="box box1">
+          <div class="text">
+            <h2 class="topic-heading"><?= $avgScore ?></h2>
+            <h2 class="topic">Average Score</h2>
+          </div>
+        </div>           
       </div>
       <div class="report-container">
         <div class="report-header">

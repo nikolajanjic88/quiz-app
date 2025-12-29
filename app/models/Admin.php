@@ -15,7 +15,6 @@ class Admin extends Model
   private string $incorrect_answers = 'incorrect_answers';
   private string $table = 'questions';
   private string $usersTable = 'users';
-  private string $scoresTable = 'scores';
 
   public function all()
   {
@@ -71,15 +70,6 @@ class Admin extends Model
     return $questionCount['total'];
   }
 
-  public function getScoreCount()
-  {
-    $sql = "SELECT count(*) as total FROM $this->scoresTable";
-    $res = $this->db->query($sql);
-    $scoreCount = $res->find();
-
-    return $scoreCount['total'];
-  }
-
   public function recentAddedQuestions()
   {
     $sql = "SELECT question FROM $this->table 
@@ -92,30 +82,30 @@ class Admin extends Model
 
   public function insert(array $data)
   {
-      $sql = "INSERT INTO {$this->table} (question, incorrect_answers, correct_answer)
-              VALUES (:question, :incorrect_answers, :correct_answer)";
+    $sql = "INSERT INTO {$this->table} (question, incorrect_answers, correct_answer)
+            VALUES (:question, :incorrect_answers, :correct_answer)";
 
-      return $this->db->query($sql, [
-          'question' => $data['question'],
-          'incorrect_answers' => $data['incorrect_answers'],
-          'correct_answer' => $data['correct_answer']
-      ]);
+    return $this->db->query($sql, [
+        'question' => $data['question'],
+        'incorrect_answers' => $data['incorrect_answers'],
+        'correct_answer' => $data['correct_answer']
+    ]);
   }
 
   public function update(int $id, array $data)
   {
-      $sql = "UPDATE {$this->table} SET
-                  question = :question,
-                  incorrect_answers = :incorrect_answers,
-                  correct_answer = :correct_answer
-              WHERE id = :id";
+    $sql = "UPDATE {$this->table} SET
+                question = :question,
+                incorrect_answers = :incorrect_answers,
+                correct_answer = :correct_answer
+            WHERE id = :id";
 
-      return $this->db->query($sql, [
-          'id' => $id,
-          'question' => $data['question'],
-          'incorrect_answers' => $data['incorrect_answers'],
-          'correct_answer' => $data['correct_answer'],
-      ]);
+    return $this->db->query($sql, [
+        'id' => $id,
+        'question' => $data['question'],
+        'incorrect_answers' => $data['incorrect_answers'],
+        'correct_answer' => $data['correct_answer'],
+    ]);
   }
 
 
