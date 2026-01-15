@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Dec 15, 2025 at 02:35 PM
+-- Generation Time: Jan 15, 2026 at 04:09 PM
 -- Server version: 9.1.0
 -- PHP Version: 8.3.14
 
@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `lore` (
   `text` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `image` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `lore`
@@ -58,12 +58,13 @@ INSERT INTO `lore` (`id`, `title`, `text`, `image`) VALUES
 (38, 'Nerdanel', 'Nerdanel (Quenya), also known as Nerdanel the Wise, was the daughter of the Ñoldorin smith Mahtan and the wife of the infamous Fëanor, eldest son of King Finwë. &#13;&#10;After marrying Fëanor, Nerdanel bore him seven sons: Maedhros, Maglor, Celegorm, Caranthir, Curufin, Amrod and Amras.&#13;&#10;&#13;&#10;&#13;&#10;', '/images/lore/1742332947.5442Nerdanel_person_S_Morello.webp'),
 (39, 'Caranthir', 'Caranthir, also known as Caranthir the Dark,[4] was an Elf, the fourth son of Fëanor and the harshest and the quickest to anger of his seven brothers. As with his brothers, Caranthir was bound by an oath to recover his father&#39;s Silmarils, which had been stolen by the Dark Lord Morgoth in Aman. This oath took the seven brothers to Middle-earth during the First Age, where they established realms in exile, waged war against armies of Morgoth, fought their own Elvish kind on occasion, and eventually brought ruin upon themselves.&#13;&#10;', '/images/lore/1742333004.6031Caranthir_S_Morello.webp'),
 (40, 'Dior', 'Dior, also known as Dior Eluchîl, was the son of Beren Erchamion of the House of Bëor and the princess Lúthien Tinúviel, daughter of King Thingol and Melian. He later became the second (and last) King of Doriath as the only heir of Thingol, and thereby the High King of the Sindar also. Dior was called the Fair and was the first Half-elf in Middle-earth&#39;s history,[3] for his father was of the race of Men, and his mother inherited Elven blood.', '/images/lore/1742333761.8319dior.webp'),
-(41, 'Luthien ', 'Lúthien, also known as Tinúviel, was the immortal princess of Doriath, wife of Beren Erchamion, and most beautiful of all the Children of Ilúvatar to ever live. Her love of the mortal man Beren, for whom she was prepared to risk everything, including her life, was legendary and lamented forever in song and story. She and Beren braved Morgoth&#39;s horrors, eventually winning a Silmaril from his crown and the approval of their marriage by King Thingol. Though their actions later resulted in both their deaths, their deeds won them the pity of the Vala Mandos and a second life in Middle-earth.[2] Her romance with Beren was one of the great stories of the Elder Days that were told for many ages after she lived, and it was said her bloodline will never perish. She was known as the most &#39;magic&#39; dancer, with Ivárë and Tinfang coming in second.', '/images/lore/1742333847.7884luthien.webp'),
+(41, 'Luthien', 'Lúthien, also known as Tinúviel, was the immortal princess of Doriath, wife of Beren Erchamion, and most beautiful of all the Children of Ilúvatar to ever live. Her love of the mortal man Beren, for whom she was prepared to risk everything, including her life, was legendary and lamented forever in song and story. She and Beren braved Morgoth&#39;s horrors, eventually winning a Silmaril from his crown and the approval of their marriage by King Thingol. Though their actions later resulted in both their deaths, their deeds won them the pity of the Vala Mandos and a second life in Middle-earth.[2] Her romance with Beren was one of the great stories of the Elder Days that were told for many ages after she lived, and it was said her bloodline will never perish. She was known as the most &#39;magic&#39; dancer, with Ivárë and Tinfang coming in second.', '/images/lore/1742333847.7884luthien.webp'),
 (42, 'Beren', 'Beren, also called Beren Erchamion, was a man of the First House of the Edain, and a hero whose romance with the Elf-maiden Lúthien was one of the great stories of the Elder Days told for many ages after.&#13;&#10;&#13;&#10;With Lúthien he fathered Dior Eluchîl, whose grandsons would be Elros Tar-Minyatur and Elrond Half-elven.', '/images/lore/1742385278.3621beren.webp'),
 (43, 'Tulkas', 'Tulkas (Quenya: &#34;Strong&#34; or &#34;Steadfast&#34;) was an Ainu; a Vala responsible for participating in war and the last of them to descend into Arda, coming to the aid of the others when he heard of their war with Melkor. He was also called Tulukastāz or Astaldo. Having heard of his fellow Valar\'s struggle against Melkor, Tulkas was the last of the Valar to descend upon Arda, tipping the scales of battle against Melkor. Melkor fled before him, and the Spring of Arda began.', '/images/lore/1743021116.4113Tulkas_the_Warrior.webp'),
 (44, 'Aule', 'Aulë (Quenya; IPA: [ˈaʊle] - &#34;Invention&#34;) was an Ainu, one of the Aratar and the Vala responsible for fashioning and crafting the substances of which Arda, the world, was composed. He was also called Mahal (Khuzdûl: &#34;Maker&#34;), Oli (Sindarin: &#34;Dream&#34;), and Návatar, and delighted in the nature of substances and in works of skill, but was not concerned with possession or mastery. Besides the shaping of Arda, Aulë&#39;s greatest works were the Two Lamps of the Valar, the vessels of the Sun and Moon, and the Dwarves. He also created Angainor, the chain of Melkor.', '/images/lore/1743021200.8611aule.webp'),
 (45, 'Sauron', 'Sauron (Quenya; [ˈsaʊron] or [ˈθaʊron]), the eponymous Lord of the Rings, was the greatest fallen Maia, maker of the One Ring, renowned disciple of Aulë, and chief agent of Morgoth in the Elder Days. After Morgoth&#39;s ousting by the Valar, Sauron became the second Dark Lord and sought to conquer Middle-earth as his former master had.&#13;&#10;&#13;&#10;At the end of the Second Age, Sauron caused the Downfall of Númenor, but was subsequently defeated during the War of the Last Alliance of Elves and Men united under Gil-galad and Elendil. In the final battle, Isildur managed to cut the One Ring from his hand, destroying his corporeal form and robbing him of much of his power. After centuries of lying dormant and rebuilding his strength, Sauron returned to power late in the Third Age and again strove to dominate Middle-earth. Ultimately he was vanquished when the One Ring was cast into Mount Doom, unmaking it and breaking his power forever.', '/images/lore/1743040769.743Sauron-2.webp'),
-(47, 'Ulmo', 'Ulmo (Quenya: &#34;Pourer&#34; or &#34;Rainer&#34;), also known as Ulubôz or Ullubôz, was an Ainu, one of the Aratar, and the Vala responsible for the control over the oceans of Arda. A lover of water, Ulmo was one of the Arda&#39;s chief architects and was always in a close friendship with Manwë. He always distrusted Melkor, and the Dark Lord feared the Sea almost as much as he feared Varda because the sea cannot be tamed. Ulmo had no dwelling in Valinor or any permanent dwelling on land, as he preferred the deeps of the seas and the rivers. His palace, on the bottom of Vaiya, was called Ulmonan.', '/images/lore/1743040981.4463ulmo.webp');
+(47, 'Ulmo', 'Ulmo (Quenya: &#34;Pourer&#34; or &#34;Rainer&#34;), also known as Ulubôz or Ullubôz, was an Ainu, one of the Aratar, and the Vala responsible for the control over the oceans of Arda. A lover of water, Ulmo was one of the Arda&#39;s chief architects and was always in a close friendship with Manwë. He always distrusted Melkor, and the Dark Lord feared the Sea almost as much as he feared Varda because the sea cannot be tamed. Ulmo had no dwelling in Valinor or any permanent dwelling on land, as he preferred the deeps of the seas and the rivers. His palace, on the bottom of Vaiya, was called Ulmonan.', '/images/lore/1743040981.4463ulmo.webp'),
+(70, 'Finrod', 'Finrod, known fully as Finrod Felagund, was a Ñoldor Elf who was born in Aman. He was King of Nargothrond and the eldest son of Finarfin and Eärwen, and the brother of Galadriel, Angrod and Aegnor.[2] Finrod was one of the noblest Elves of the House of Finarfin and a friend of Men. His nobility, death saving Beren, and opposition to the Oath of Fëanor allowed for his return to life in Valinor, making him the first Elf to be reincarnated in the Undying Lands before the end of the First Age', '/images/lore/1768397941.73_Finrod.webp');
 
 -- --------------------------------------------------------
 
@@ -78,7 +79,7 @@ CREATE TABLE IF NOT EXISTS `questions` (
   `incorrect_answers` json NOT NULL,
   `correct_answer` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `questions`
@@ -107,6 +108,39 @@ INSERT INTO `questions` (`id`, `question`, `incorrect_answers`, `correct_answer`
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `quotes`
+--
+
+DROP TABLE IF EXISTS `quotes`;
+CREATE TABLE IF NOT EXISTS `quotes` (
+  `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
+  `text` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `audio` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `lore_id` int UNSIGNED NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_loreID` (`lore_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `quotes`
+--
+
+INSERT INTO `quotes` (`id`, `text`, `audio`, `lore_id`) VALUES
+(1, 'Let any who withhold the Silmarils beware, for my wrath will pursue them beyond death', 'quotes/quote_feanor.mp3', 1),
+(2, 'Come forth and face me, for I do not hide behind fear or cunning', 'quotes/quote_tulkas.mp3', 43),
+(3, 'All that lives in Arda bears my shadow, whether it knows it or not', 'quotes/quote_morgoth.mp3', 5),
+(4, 'Even the mightiest power must sleep when the music commands it', 'quotes/quote_luthien.mp3', 41),
+(5, 'I will go to Angband and challenge Morgoth himself', 'quotes/quote_fingolfin.mp3', 2),
+(6, 'In the music of the waters my voice is heard', 'quotes/quote_ulmo.mp3', 47),
+(7, 'All that you love shall fall under my dominion', 'quotes/quote_sauron.mp3', 45),
+(10, 'Friendship is worth more than any crown', 'quotes/quote_finrod.mp3', 70),
+(11, 'No friend shall be abandoned while I still draw breath', 'quotes/quote_fingon.mp3', 3),
+(12, 'Gondolin shall stand, hidden and unbroken', 'quotes/qoute_turgon.mp3', 4),
+(13, 'My songs are filled with sorrow and regret', 'quotes/quote_maglor.mp3', 11);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `scores`
 --
 
@@ -117,7 +151,7 @@ CREATE TABLE IF NOT EXISTS `scores` (
   `score` int NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_userID` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=77 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=103 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `scores`
@@ -136,7 +170,26 @@ INSERT INTO `scores` (`id`, `user_id`, `score`) VALUES
 (73, 7, 100),
 (74, 7, 20),
 (75, 7, 100),
-(76, 7, 70);
+(76, 7, 70),
+(77, 7, 60),
+(78, 7, 50),
+(79, 7, 30),
+(80, 7, 10),
+(83, 7, 20),
+(84, 7, 30),
+(85, 7, 100),
+(86, 7, 30),
+(87, 7, 20),
+(89, 7, 50),
+(90, 7, 50),
+(91, 7, 50),
+(92, 7, 50),
+(97, 7, 60),
+(98, 7, 80),
+(99, 7, 40),
+(100, 7, 20),
+(101, 7, 100),
+(102, 7, 30);
 
 -- --------------------------------------------------------
 
@@ -172,6 +225,12 @@ INSERT INTO `users` (`id`, `username`, `email`, `password`, `is_admin`, `created
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `quotes`
+--
+ALTER TABLE `quotes`
+  ADD CONSTRAINT `fk_loreID` FOREIGN KEY (`lore_id`) REFERENCES `lore` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT;
 
 --
 -- Constraints for table `scores`
