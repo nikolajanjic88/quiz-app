@@ -36,15 +36,10 @@ class Game extends Model
 
   public function getLore(): array
   {
-    $sql = "SELECT title, image FROM {$this->loreTable}";
-    $stmt = $this->db->query($sql);
+    $sql = "SELECT title AS lore_title, image FROM {$this->loreTable} ORDER BY RAND() LIMIT 1";
+    $data = $this->db->query($sql)->findOrFail();
 
-    $lore = [];
-    while ($row = $stmt->find()) {
-        $lore[] = $row;
-    }
-
-    return $lore;
+    return $data;
   }
 
   public function saveResult(int $userId, int $score): bool

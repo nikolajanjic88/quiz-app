@@ -1,8 +1,9 @@
 <?php
 
 use App\App;
-use App\Http\Controllers\AdminController;
 use App\Router;
+use App\Http\Controllers\QuoteController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoreController;
@@ -16,6 +17,9 @@ Router::get('/menu', [new HomeController(), 'menu']);
 Router::get('/lore', [new LoreController(), 'index']);
 Router::post('/lore', [new LoreController(), 'index']);
 Router::get('/lore/character', [new LoreController(), 'show']);
+
+Router::get('/guessquote', [new QuoteController(), 'index']);
+Router::get('/silmarilion-quiz-app-qoute/get', [new QuoteController(), 'random']);
 
 Router::get('/highscores', [new GameController(), 'highscores']);
 Router::get('/game', [new GameController(), 'game']);

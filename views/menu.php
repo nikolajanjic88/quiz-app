@@ -19,7 +19,12 @@
       </a>
       <a href="/guessgame" class="links">
         <section>
-          Guess the Character
+          Guess by Image
+        </section>
+      </a>
+      <a href="/guessquote" class="links">
+        <section>
+          Guess by Quote
         </section>
       </a>
       <a href="/lore" class="links">

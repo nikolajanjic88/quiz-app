@@ -18,7 +18,7 @@ class LoreController
   }
 
   public function index()
-{
+  {
     $this->user();
 
     $page = (int) ($_GET['page'] ?? 1);
@@ -39,7 +39,7 @@ class LoreController
   {
     $this->user();
 
-    $id = isset($_GET['id']) ? (int) $_GET['id'] : null;
+    $id = (int) $_GET['id'] ?? null;
     if (!$id) {
         abort(404);
     }
