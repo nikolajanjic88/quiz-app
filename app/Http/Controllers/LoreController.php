@@ -50,5 +50,20 @@ class LoreController
         'data' => $data
     ]);
   }
-  
+
+  public function search()
+  {
+      $q = $_GET['q'] ?? '';
+
+      if (strlen($q) < 2) {
+          echo json_encode([]);
+          return;
+      }
+
+      $characters = $this->loreModel->searchByName($q);
+
+      header('Content-Type: application/json');
+      echo json_encode($characters);
+  }
+
 }

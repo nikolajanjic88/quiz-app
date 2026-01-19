@@ -17,6 +17,7 @@ Router::get('/menu', [new HomeController(), 'menu']);
 Router::get('/lore', [new LoreController(), 'index']);
 Router::post('/lore', [new LoreController(), 'index']);
 Router::get('/lore/character', [new LoreController(), 'show']);
+Router::get('/characters/search', [new LoreController(), 'search']);
 
 Router::get('/guessquote', [new QuoteController(), 'index']);
 Router::get('/silmarilion-quiz-app-qoute/get', [new QuoteController(), 'random']);

@@ -1,6 +1,7 @@
 const result = document.getElementById('result');
 const input = document.getElementById('guess-input');
 const guessQuote = document.getElementById('guess-quote');
+const suggestions = document.getElementById('suggestions');
 
 let currentQuote = {};
 let audio = new Audio();
@@ -42,5 +43,39 @@ function checkGuess() {
         soundWrong.play();
     }
 }
+
+input.addEventListener('keyup', async () => {
+    const query = input.value.trim();
+
+    if (query.length < 2) {
+        suggestions.innerHTML = '';
+        suggestions.style.display = 'none';
+        return;
+    }
+
+    const response = await fetch(`/characters/search?q=${encodeURIComponent(query)}`);
+    const data = await response.json();
+
+    if (!data.length) {
+        suggestions.innerHTML = '';
+        suggestions.style.display = 'none';
+        return;
+    }
+
+    suggestions.innerHTML = '';
+    suggestions.style.display = 'block';
+
+    data.forEach(character => {
+        const li = document.createElement('li');
+        li.textContent = character.title;
+
+        li.addEventListener('click', () => {
+            input.value = character.title;
+            suggestions.style.display = 'none';
+    });
+
+    suggestions.appendChild(li);
+    });
+});
 
 play();

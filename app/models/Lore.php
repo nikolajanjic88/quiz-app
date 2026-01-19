@@ -148,4 +148,16 @@ class Lore extends Model
     return $this->errors;
   }
 
+  public function searchByName(string $query): array
+  {
+      $sql = "SELECT title FROM {$this->table} 
+              WHERE title LIKE :q 
+              ORDER BY title 
+              LIMIT 10";
+
+      return $this->db->query($sql, [
+          'q' => '%' . $query . '%'
+      ])->get();
+  }
+
 }
