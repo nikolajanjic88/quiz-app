@@ -36,6 +36,13 @@
         <h3>Add New Lore</h3>
       </div>
     </a>
+    <a href="/add-quote" style="text-decoration: none;">
+      <div class="nav-option <?= urlIs('/add-quote') ? 'option1' : '' ?>">
+        <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183323/10.png"
+              class="nav-img">
+        <h3>Add New Quote</h3>
+      </div>
+    </a>
     <form action="/logout" method="POST">
       <input type="hidden" name="_method" value="DELETE">
       <button>

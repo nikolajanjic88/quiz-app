@@ -33,7 +33,6 @@ class Lore extends Model
     return $data;
   }
 
-
   public function find(int $id)
   {
     $sql = "SELECT * FROM {$this->table} 
@@ -158,6 +157,12 @@ class Lore extends Model
       return $this->db->query($sql, [
           'q' => '%' . $query . '%'
       ])->get();
+  }
+
+  public function forSelect(): array
+  {
+      $sql = "SELECT id, title FROM {$this->table} ORDER BY title ASC";
+      return $this->db->query($sql)->get();
   }
 
 }

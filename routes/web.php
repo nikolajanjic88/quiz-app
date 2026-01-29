@@ -21,6 +21,8 @@ Router::get('/characters/search', [new LoreController(), 'search']);
 
 Router::get('/guessquote', [new QuoteController(), 'index']);
 Router::get('/silmarilion-quiz-app-qoute/get', [new QuoteController(), 'random']);
+Router::get('/add-quote', [new QuoteController(), 'create']);
+Router::post('/add-quote', [new QuoteController(), 'store']);
 
 Router::get('/highscores', [new GameController(), 'highscores']);
 Router::get('/game', [new GameController(), 'game']);
