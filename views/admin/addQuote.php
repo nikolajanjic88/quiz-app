@@ -12,7 +12,7 @@
                     <div class="form-group">
                         <h2 class="heading">Add New Quote</h2> 
                     </div>
-                    <textarea name="text" placeholder="Audio Text"></textarea>
+                    <textarea name="text" placeholder="Audio Text"><?= old('text') ?? '' ?></textarea>
                     <?php if(isset($errors['text'])): ?>
                         <p class="error"><?= $errors['text'] ?></p>
                     <?php endif ?>

@@ -2,12 +2,27 @@
 namespace App\Models;
 
 use App\Model;
+use App\Pagination;
 
 class Quote extends Model
 {
+    use Pagination;
     private string $table = 'quotes';
     private array $errors = [];
     private string $text = 'text';
+
+    public function all(int $page = 1, ?int $rowsPerPage = null): array 
+    {
+        $rowsPerPage = $rowsPerPage ?? $this->rows_per_page;
+        $start = ($page - 1) * $rowsPerPage;
+
+        $sql = "SELECT q.id, q.text as quote, audio, l.title FROM {$this->table} q JOIN lore l ON q.lore_id = l.id ORDER BY q.id DESC
+                LIMIT $start, $rowsPerPage";
+
+        $data = $this->db->query($sql)->get();
+
+        return $data;
+    }
 
     public function getRandomQuote(): array
     {
@@ -53,6 +68,18 @@ class Quote extends Model
         }
 
         return $path;
+    }
+
+    public function find(int $id): ?array
+    {
+        $sql = "SELECT * FROM {$this->table} WHERE id = :id";
+        return $this->db->query($sql, ['id' => $id])->find();
+    }
+
+    public function delete(int $id)
+    {
+        $sql = "DELETE FROM {$this->table} WHERE id = :id";
+        return $this->db->query($sql, ['id' => $id]);
     }
 
     public function validate(array $data) 

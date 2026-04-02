@@ -23,6 +23,7 @@ Router::get('/guessquote', [new QuoteController(), 'index']);
 Router::get('/silmarilion-quiz-app-qoute/get', [new QuoteController(), 'random']);
 Router::get('/add-quote', [new QuoteController(), 'create']);
 Router::post('/add-quote', [new QuoteController(), 'store']);
+Router::delete('/quote', [new QuoteController(), 'destroy']);
 
 Router::get('/highscores', [new GameController(), 'highscores']);
 Router::get('/game', [new GameController(), 'game']);
@@ -52,3 +53,4 @@ Router::post('/add-lore', [new AdminController(), 'storeLore']);
 Router::get('/edit-character', [new AdminController(), 'editLore']);
 Router::put('/edit-character', [new AdminController(), 'updateLore']);
 Router::delete('/lore/character', [new AdminController(), 'destroyLore']);
+Router::get('/all-quotes', [new AdminController(), 'allQuotes']);

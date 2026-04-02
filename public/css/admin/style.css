@@ -164,9 +164,7 @@ header {
   min-height: 91vh;
   width: 250px;
   background-color: var(--background-color2);
-  position: absolute;
-  top: 0px;
-  left: 00;
+  position: relative;
   box-shadow: 1px 1px 10px rgba(198, 189, 248, 0.825);
   display: flex;
   flex-direction: column;
@@ -591,4 +589,137 @@ input {
 .pagination li a:hover,
 .pagination li.active a {
   background: rgba(74, 119, 242, 0.2);
+}
+
+/* GRID - 2 u redu */
+.quotes-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 25px;
+  padding: 20px;
+  align-items: stretch;
+}
+
+/* CARD */
+.quote-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  background: linear-gradient(135deg, #4b49ac, #2f2c79);
+  color: #fff;
+  border-radius: 18px;
+  padding: 20px;
+  min-height: 180px;
+
+  position: relative;
+  overflow: hidden;
+
+  box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+  transition: all 0.3s ease;
+}
+
+/* GLOW EFEKAT */
+.quote-item::before {
+  content: "";
+  position: absolute;
+  width: 150%;
+  height: 150%;
+  background: radial-gradient(circle, rgba(255,255,255,0.15), transparent 70%);
+  top: -50%;
+  left: -50%;
+  opacity: 0;
+  transition: 0.4s;
+}
+
+.quote-item:hover::before {
+  opacity: 1;
+}
+
+/* HOVER CARD */
+.quote-item:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.35);
+}
+
+/* TEXT */
+.quote-body {
+  flex: 1;
+}
+
+.quote-line {
+  font-size: 16px;
+  font-style: italic;
+  line-height: 1.6;
+}
+
+.quote-name {
+  display: block;
+  margin-top: 12px;
+  font-size: 14px;
+  opacity: 0.85;
+}
+
+/* FOOTER - dugme dole desno */
+.quote-footer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* DELETE BUTTON */
+.btn-delete {
+  background: rgba(255, 77, 77, 0.15);
+  border: 1px solid rgba(255, 77, 77, 0.5);
+  color: #ff4d4d;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 16px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: all 0.25s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+/* HOVER BUTTON */
+.btn-delete:hover {
+  background: #ff4d4d;
+  color: #fff;
+  transform: scale(1.15);
+  box-shadow: 0 0 10px rgba(255, 77, 77, 0.7),
+              0 0 20px rgba(255, 77, 77, 0.4);
+}
+
+/* WAVE EFEKAT */
+.btn-delete::after {
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 100%;
+  background: rgba(255,255,255,0.3);
+  top: 0;
+  left: 0;
+  transition: 0.3s;
+}
+
+.btn-delete:hover::after {
+  width: 100%;
+}
+
+/* CLICK */
+.btn-delete:active {
+  transform: scale(0.95);
+  box-shadow: 0 0 5px rgba(255, 77, 77, 0.5);
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .quotes-grid {
+    grid-template-columns: 1fr;
+  }
 }

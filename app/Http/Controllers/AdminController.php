@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Guard;
+use App\Models\Quote;
 use App\Request;
 use App\Session;
 use App\Models\Lore;
@@ -16,6 +17,7 @@ class AdminController
   private Admin $adminModel;
   private Lore $loreModel;
   private Score $scoreModel;
+  private Quote $quoteModel;
   private Request $request;
 
   public function __construct()
@@ -23,6 +25,7 @@ class AdminController
     $this->adminModel = new Admin();
     $this->loreModel = new Lore();
     $this->scoreModel = new Score();
+    $this->quoteModel = new Quote();
     $this->request = new Request();
   }
   
@@ -303,6 +306,21 @@ class AdminController
 
     Session::put('message', 'Lore deleted successfully');
     return redirect('/all-lore');
+  }
+
+  public function allQuotes()
+  {
+    $this->admin();
+
+    $page = (int) ($_GET['page'] ?? 1);
+    $pages = $this->quoteModel->pages();
+    $quotes = $this->quoteModel->all($page, null);
+    
+    return view('admin/quotes', [
+      'quotes' => $quotes,
+      'pages' => $pages,
+      'currentPage' => $page,
+    ]);
   }
 
 }

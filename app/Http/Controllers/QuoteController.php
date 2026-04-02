@@ -69,7 +69,36 @@ class QuoteController
         ]);
 
         Session::put('message', 'Quote added successfully');
-        return redirect('/add-quote');
+        return redirect('/all-quotes');
+    }
+
+    public function destroy()
+    {
+        $this->admin();
+
+        $id = $this->request->getBody()['id'];
+        if (!$id) {
+            Session::put('message', 'Invalid quote ID');
+            return redirect('/all-quotes');
+        }
+
+        $quote = $this->quoteModel->find($id);
+        if (!$quote) {
+            Session::put('message', 'Quote not found');
+            return redirect('/all-quotes');
+        }
+
+        if (!empty($quote['audio'])) {
+            $audioPath = BASE_PATH . '/public/' . $quote['audio'];
+            if (file_exists($audioPath)) {
+                unlink($audioPath);
+            }
+        }
+
+        $this->quoteModel->delete($id);
+
+        Session::put('message', 'Quote deleted successfully');
+        return redirect('/all-quotes');
     }
 
 }
