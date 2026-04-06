@@ -11,11 +11,11 @@ class Score extends Model
 
   public function getScores(): array
   {
-    $sql = "SELECT score, username 
+    $sql = "SELECT score, time, username 
             FROM $this->table 
             JOIN $this->joinTable 
             ON {$this->table}.user_id = {$this->joinTable}.id
-            ORDER BY score DESC 
+            ORDER BY score DESC, time ASC 
             LIMIT 10";
 
     $res = $this->db->query($sql);

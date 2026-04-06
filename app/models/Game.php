@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Model;
-use App\Session;
 
 class Game extends Model
 {
@@ -42,13 +41,14 @@ class Game extends Model
     return $data;
   }
 
-  public function saveResult(int $userId, int $score): bool
+  public function saveResult(int $userId, int $score, int $time): bool
   {
-    $sql = "INSERT INTO {$this->scoresTable} (user_id, score) VALUES (:user_id, :score)";
+    $sql = "INSERT INTO {$this->scoresTable} (user_id, score, time) VALUES (:user_id, :score, :time)";
 
     return (bool) $this->db->query($sql, [
         'user_id' => $userId,
-        'score'   => $score
+        'score'   => $score,
+        'time'    => $time
     ]);
   }
 }

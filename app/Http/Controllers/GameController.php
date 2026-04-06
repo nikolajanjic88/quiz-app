@@ -31,7 +31,7 @@ class GameController
     $scores = $scoreModel->getScores();
 
     return view('highscores', [
-        'scores' => $scores
+        'scores' => $scores,
     ]);
   }
 
@@ -58,7 +58,8 @@ class GameController
     $input = json_decode(file_get_contents('php://input'), true);
 
     $score = filter_var($input['score'] ?? null, FILTER_VALIDATE_INT);
-
+    $time = filter_var($input['time'] ?? null, FILTER_VALIDATE_INT);
+    
     if ($score === false || $score < 0) {
         return $this->json(['message' => 'Invalid score'], 400);
     }
@@ -66,7 +67,7 @@ class GameController
     $user = Session::get('user');
     $game = new Game();
 
-    if ($game->saveResult($user['id'], $score)) {
+    if ($game->saveResult($user['id'], $score, $time)) {
         return $this->json(['message' => 'Score saved successfully']);
     }
 

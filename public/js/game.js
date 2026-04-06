@@ -40,6 +40,9 @@ let timeLeft = TIME_LIMIT;
 let timerDuration = TIME_LIMIT;
 let timerInterval;
 
+let gameStartTime;
+let gameEndTime;
+
 const apiUrl = '/silmarilion-quiz-app-questions/get';
 
 // Fetch questions
@@ -63,6 +66,7 @@ fetch(apiUrl)
   .catch(err => console.error(err));
 
 function startGame() {
+  gameStartTime = Date.now();
   questionCounter = 0;
   score = 0;
   availableQuestions = [...questions];
@@ -130,6 +134,9 @@ function getNewQuestion() {
 
 // End game
 function endGame() {
+  gameEndTime = Date.now();
+  const totalTimeSeconds = Math.floor((gameEndTime - gameStartTime) / 1000);
+
   clearInterval(timerInterval);
   gameContainer.style.display = 'none';
   containerEnd.style.display = 'block';
@@ -137,7 +144,9 @@ function endGame() {
   const saveScoreBtn = document.getElementById('saveScoreBtn');
   const finalScore = document.getElementById('finalScore');
   const scoreInput = document.getElementById('finalScoreInput');
+  const timeInput = document.getElementById('finalTimeInput');
   scoreInput.value = score;
+  timeInput.value = totalTimeSeconds;
 
   // Set final message & image
   if(score === CORRECT_BONUS * MAX_QUESTIONS) {
@@ -155,7 +164,7 @@ function endGame() {
     finalScore.innerHTML = `Better luck next time! <br>`;
   }
 
-  finalScore.innerHTML += `Your score - ${score}`;
+  finalScore.innerHTML += `Your score - ${score} - Time - ${totalTimeSeconds}s`;
 
   // Attach Save listener **once**
   saveScoreBtn.onclick = e => {
@@ -163,7 +172,10 @@ function endGame() {
 
     saveScoreBtn.disabled = true;
 
-    const data = { score };
+    const data = { 
+      score,
+      time: totalTimeSeconds
+    };
 
     fetch(apiUrl, {
       method: 'POST',

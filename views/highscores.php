@@ -9,15 +9,18 @@
 <body class="body">
   <div class="container">
     <div class="score-header">
-      <h1>Top Results</h1>
-      <a href="/menu">Go Back</a>
-    </div>    
-    <ol class="alternating-colors">
+      <h1>Leaderboard</h1>
+      <a href="/menu">Back to Menu</a>
+    </div>
+
+    <ol class="leaderboard">
       <?php foreach($scores as $score): ?>
-      <li>
-        <strong><?= $score['username'] ?> - <?= $score['score'] ?> points</strong>
-      </li>
-      <?php endforeach ?>
+        <li>
+          <span class="username"><?= htmlspecialchars($score['username']) ?></span>
+          <span class="score"><?= $score['score'] ?> pts</span>
+          <span class="time"><?= $score['time'] ?> s</span>
+        </li>
+      <?php endforeach; ?>
     </ol>
   </div>
 </body>

@@ -56,6 +56,7 @@
       <h1 id="finalScore"></h1>
       <form method="POST">
         <input type="hidden" id="finalScoreInput" name="score">
+        <input type="hidden" id="finalTimeInput" name="time">
         <button type="submit" class="btn" id="saveScoreBtn">
           Save
         </button>
