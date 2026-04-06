@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jan 15, 2026 at 04:09 PM
+-- Generation Time: Apr 06, 2026 at 01:27 PM
 -- Server version: 9.1.0
 -- PHP Version: 8.3.14
 
@@ -119,7 +119,7 @@ CREATE TABLE IF NOT EXISTS `quotes` (
   `lore_id` int UNSIGNED NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_loreID` (`lore_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `quotes`
@@ -136,7 +136,8 @@ INSERT INTO `quotes` (`id`, `text`, `audio`, `lore_id`) VALUES
 (10, 'Friendship is worth more than any crown', 'quotes/quote_finrod.mp3', 70),
 (11, 'No friend shall be abandoned while I still draw breath', 'quotes/quote_fingon.mp3', 3),
 (12, 'Gondolin shall stand, hidden and unbroken', 'quotes/qoute_turgon.mp3', 4),
-(13, 'My songs are filled with sorrow and regret', 'quotes/quote_maglor.mp3', 11);
+(13, 'My songs are filled with sorrow and regret', 'quotes/quote_maglor.mp3', 11),
+(18, 'What is wrought by the hands of the Noldor belongs only to those strong enough to keep it', 'quotes/quote_697b5086ea334.mp3', 36);
 
 -- --------------------------------------------------------
 
@@ -149,47 +150,22 @@ CREATE TABLE IF NOT EXISTS `scores` (
   `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
   `user_id` int UNSIGNED NOT NULL,
   `score` int NOT NULL,
+  `time` int NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_userID` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=103 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=105 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `scores`
 --
 
-INSERT INTO `scores` (`id`, `user_id`, `score`) VALUES
-(25, 6, 40),
-(43, 6, 20),
-(63, 7, 100),
-(67, 6, 30),
-(68, 6, 60),
-(69, 22, 70),
-(70, 7, 90),
-(71, 7, 100),
-(72, 7, 90),
-(73, 7, 100),
-(74, 7, 20),
-(75, 7, 100),
-(76, 7, 70),
-(77, 7, 60),
-(78, 7, 50),
-(79, 7, 30),
-(80, 7, 10),
-(83, 7, 20),
-(84, 7, 30),
-(85, 7, 100),
-(86, 7, 30),
-(87, 7, 20),
-(89, 7, 50),
-(90, 7, 50),
-(91, 7, 50),
-(92, 7, 50),
-(97, 7, 60),
-(98, 7, 80),
-(99, 7, 40),
-(100, 7, 20),
-(101, 7, 100),
-(102, 7, 30);
+INSERT INTO `scores` (`id`, `user_id`, `score`, `time`) VALUES
+(25, 6, 40, 22),
+(43, 6, 20, 55),
+(67, 6, 30, 40),
+(70, 7, 90, 20),
+(72, 7, 90, 25),
+(104, 7, 10, 11);
 
 -- --------------------------------------------------------
 
