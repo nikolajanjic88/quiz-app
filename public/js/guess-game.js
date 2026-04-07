@@ -2,6 +2,9 @@ const result = document.getElementById('result');
 const input = document.getElementById('guess-input');
 const guessQuote = document.getElementById('guess-quote');
 const suggestions = document.getElementById('suggestions');
+const hintBtn = document.getElementById('hintBtn');
+
+let hintUsed = false;
 
 let currentQuote = {};
 let audio = new Audio();
@@ -10,6 +13,8 @@ const soundCorrect = new Audio('/sounds/correct.mp3');
 const soundWrong = new Audio('/sounds/wrong.mp3');
 
 function play() {
+    hintUsed = false;
+    hintBtn.disabled = false;
     result.textContent = '';
     result.className = '';
     input.value = '';
@@ -78,4 +83,37 @@ input.addEventListener('keyup', async () => {
     });
 });
 
+function giveHint() {
+    if (hintUsed) return;
+
+    hintUsed = true;
+
+    const answer = currentQuote.lore_title;
+    const revealCount = Math.ceil(answer.length * 0.3);
+
+    let indices = [];
+
+    while (indices.length < revealCount) {
+        let rand = Math.floor(Math.random() * answer.length);
+
+        if (!indices.includes(rand) && answer[rand] !== ' ') {
+            indices.push(rand);
+        }
+    }
+
+    let hint = answer
+        .split('')
+        .map((char, index) => {
+            if (char === ' ') return ' ';
+            return indices.includes(index) ? char : '_';
+        })
+        .join('');
+
+    result.textContent = `Hint: ${hint}`;
+    result.className = '';
+
+    hintBtn.disabled = true;
+}
+
+hintBtn.addEventListener('click', giveHint);
 play();
