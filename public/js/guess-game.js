@@ -3,6 +3,10 @@ const input = document.getElementById('guess-input');
 const guessQuote = document.getElementById('guess-quote');
 const suggestions = document.getElementById('suggestions');
 const hintBtn = document.getElementById('hintBtn');
+const guessBtn = document.querySelector('.btn.neon');
+
+let attempts = 0;
+const maxAttempts = 3;
 
 let hintUsed = false;
 
@@ -13,8 +17,11 @@ const soundCorrect = new Audio('/sounds/correct.mp3');
 const soundWrong = new Audio('/sounds/wrong.mp3');
 
 function play() {
+    attempts = 0;
     hintUsed = false;
+    input.disabled = false;
     hintBtn.disabled = false;
+    guessBtn.disabled = false;
     result.textContent = '';
     result.className = '';
     input.value = '';
@@ -29,21 +36,39 @@ function play() {
 }
 
 function checkGuess() {
-    const guess = input.value;
-    
-    if(!guess) {
+    const guess = input.value.trim();
+
+    if (!guess) {
         result.textContent = 'Enter a name';
         result.className = 'wrong';
         soundWrong.play();
         return;
     }
 
-    if(guess.toLowerCase().trim() === currentQuote.lore_title.toLowerCase().trim()) {
+    attempts++;
+
+    if (guess.toLowerCase() === currentQuote.lore_title.toLowerCase()) {
+        hintBtn.disabled = true;
+        guessBtn.disabled = true;
         result.textContent = 'Correct!';
         result.className = 'correct';
         soundCorrect.play();
+        return;
+    }
+
+    // if not correct
+    if (attempts >= maxAttempts) {
+        input.disabled = true;
+        hintBtn.disabled = true;
+        guessBtn.disabled = true;
+        result.textContent = `No attempts left! Answer: ${currentQuote.lore_title}`;
+        result.className = 'wrong';
+        soundWrong.play();
+
+        // disable input i dugme
+        input.disabled = true;
     } else {
-        result.textContent = 'Wrong!';
+        result.textContent = `Wrong! (${attempts}/${maxAttempts})`;
         result.className = 'wrong';
         soundWrong.play();
     }

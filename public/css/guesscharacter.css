@@ -125,6 +125,12 @@ h1 {
   margin: 1.5rem 0;
 }
 
+button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
 .btn {
   padding: 0.8rem 1.5rem;
   border-radius: 2rem;
@@ -149,6 +155,12 @@ h1 {
   background: transparent;
 }
 
+.neon-outline:hover {
+  background: rgba(0, 255, 224, 0.1);
+  box-shadow: 0 0 10px #00ffe0, 0 0 20px #00ffe0, 0 0 40px #00ffe0;
+  transform: translateY(-2px) scale(1.03);
+}
+
 .neon-hint {
   border: 2px solid #ff00ff;
   color: #ff00ff;
@@ -157,11 +169,6 @@ h1 {
 
 .neon-hint:hover {
   box-shadow: 0 0 15px #ff00ff;
-}
-
-.neon-hint:disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
 }
 
 .result-box {
