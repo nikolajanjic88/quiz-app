@@ -1,4 +1,5 @@
 <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/alertify.min.js"></script>
+<script src="js/toggle-theme.js"></script>
   <script>
     <?php if(isset($_SESSION['message'])): ?>
       alertify.set('notifier','position', 'top-right');

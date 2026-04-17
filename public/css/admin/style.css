@@ -29,6 +29,22 @@
   text-decoration: none;
 }
 
+body.dark {
+  --background-color1: #1e1e2f;
+  --background-color2: #252538;
+  --background-color3: #2f2f45;
+  --background-color4: #1a1a2e;
+
+  --primary-color: #8f8cff;
+  --secondary-color: #5a54ff;
+
+  --Border-color: #5a54ff;
+  --one-use-color: #3a3a8a;
+  --two-use-color: #4a4acb;
+
+  --dark: #12121a;
+}
+
 body {
   background-color: var(--background-color4);
   max-width: 100%;
@@ -37,15 +53,31 @@ body {
 
 header {
   height: 70px;
-  width: 100vw;
+  width: 100%;
   padding: 0 30px;
   background-color: var(--background-color1);
   position: fixed;
   z-index: 100;
-  box-shadow: 1px 1px 15px rgba(161, 182, 253, 0.825);
   display: flex;
-  justify-content: space-evenly;
   align-items: center;
+  justify-content: space-between;
+  box-shadow: 1px 1px 15px rgba(161, 182, 253, 0.4);
+  backdrop-filter: blur(8px);
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+body,
+.nav,
+.report-container,
+.box,
+.quote-item,
+header {
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
 .logo {
@@ -581,17 +613,21 @@ input {
 }
 .pagination li a {
   position: relative;
-  padding: 20px 25px;
+  padding: 12px 18px;
   text-decoration: none;
   color: #0c007d;
   font-weight: 500;
+  border-radius: 8px;
+  transition: all 0.25s ease;
 }
+
 .pagination li a:hover,
 .pagination li.active a {
   background: rgba(74, 119, 242, 0.2);
+  color: #4b49ac;
+  box-shadow: 0 0 8px rgba(74, 119, 242, 0.4);
 }
 
-/* GRID - 2 u redu */
 .quotes-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -711,15 +747,91 @@ input {
   width: 100%;
 }
 
-/* CLICK */
 .btn-delete:active {
   transform: scale(0.95);
   box-shadow: 0 0 5px rgba(255, 77, 77, 0.5);
 }
 
-/* RESPONSIVE */
-@media (max-width: 768px) {
-  .quotes-grid {
-    grid-template-columns: 1fr;
-  }
+.theme-btn {
+  margin-left: 20px;
+  padding: 8px 14px;
+  border-radius: 20px;
+  border: 2px solid var(--primary-color);
+  background: transparent;
+  color: var(--primary-color);
+  cursor: pointer;
+  font-size: 16px;
+  transition: 0.3s;
+}
+
+.theme-btn:hover {
+  background: var(--primary-color);
+  color: #fff;
+  box-shadow: 0 0 10px var(--primary-color);
+}
+
+/* ===== DARK MODE FIXES ===== */
+
+body.dark {
+  color: #fff;
+}
+
+body.dark .nav {
+  background-color: var(--background-color2);
+}
+
+body.dark .nav-option:hover {
+  background-color: var(--background-color3);
+}
+
+body.dark .report-container {
+  background-color: var(--background-color2);
+  box-shadow: 3px 3px 10px rgba(0,0,0,0.5);
+}
+
+body.dark .main-container {
+  background: var(--background-color4);
+}
+
+body.dark .searchbar input {
+  background-color: var(--background-color3);
+  color: #fff;
+}
+
+body.dark .searchbar input::placeholder {
+  color: #aaa;
+}
+
+body.dark .pagination {
+  background: rgba(255,255,255,0.05);
+}
+
+body.dark .quote-item {
+  background: linear-gradient(135deg, #2f2c79, #1a1a3d);
+}
+
+body.dark .question-box {
+  background: #2f2f45;
+}
+
+body.dark textarea,
+body.dark input {
+  background: #2f2f45;
+  color: #fff;
+  border: 1px solid #444;
+}
+
+body.dark .save-button {
+  background-color: var(--secondary-color);
+}
+
+body.dark .pagination li a {
+  color: #aaa;
+}
+
+body.dark .pagination li a:hover,
+body.dark .pagination li.active a {
+  color: #00ffe0;
+  background: rgba(0, 255, 224, 0.15);
+  box-shadow: 0 0 10px #00ffe0;
 }
