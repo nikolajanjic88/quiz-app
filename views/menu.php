@@ -27,6 +27,11 @@
           Guess by Quote
         </section>
       </a>
+      <a href="/map-quiz" class="links">
+        <section>
+          Find the Location
+        </section>
+      </a>
       <a href="/lore" class="links">
         <section>
           Lore

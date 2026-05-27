@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Apr 08, 2026 at 12:01 PM
+-- Generation Time: May 27, 2026 at 11:08 AM
 -- Server version: 9.1.0
 -- PHP Version: 8.3.14
 
@@ -20,6 +20,38 @@ SET time_zone = "+00:00";
 --
 -- Database: `silmarilion`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `locations`
+--
+
+DROP TABLE IF EXISTS `locations`;
+CREATE TABLE IF NOT EXISTS `locations` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `slug` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `slug` (`slug`)
+) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `locations`
+--
+
+INSERT INTO `locations` (`id`, `name`, `slug`, `created_at`) VALUES
+(3, 'Thangorodrim', 'thangorodrim', '2026-05-04 12:43:52'),
+(4, 'March of Maedhros', 'march_of_maedhros', '2026-05-04 12:43:52'),
+(5, 'Doriath', 'doriath', '2026-05-04 12:43:52'),
+(6, 'Nargothrond', 'nargothrond', '2026-05-04 12:43:52'),
+(7, 'Hithlum', 'hithlum', '2026-05-04 12:43:52'),
+(8, 'Falas', 'falas', '2026-05-04 12:43:52'),
+(9, 'Ossiriand', 'ossiriand', '2026-05-04 12:43:52'),
+(10, 'Gondolin', 'gondolin', '2026-05-04 12:43:52'),
+(11, 'Brethil', 'brethil', '2026-05-04 12:43:52'),
+(12, 'Dor-lómin', 'dor_lomin', '2026-05-04 12:43:52');
 
 -- --------------------------------------------------------
 
@@ -153,7 +185,7 @@ CREATE TABLE IF NOT EXISTS `scores` (
   `time` int NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_userID` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=105 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=107 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `scores`
@@ -165,7 +197,9 @@ INSERT INTO `scores` (`id`, `user_id`, `score`, `time`) VALUES
 (67, 6, 30, 40),
 (70, 7, 90, 20),
 (72, 7, 90, 25),
-(104, 7, 10, 11);
+(104, 7, 10, 11),
+(105, 7, 100, 40),
+(106, 7, 100, 38);
 
 -- --------------------------------------------------------
 

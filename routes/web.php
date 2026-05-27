@@ -1,6 +1,7 @@
 <?php
 
 use App\App;
+use App\Http\Controllers\MapQuizController;
 use App\Router;
 use App\Http\Controllers\QuoteController;
 use App\Http\Controllers\AdminController;
@@ -54,3 +55,6 @@ Router::get('/edit-character', [new AdminController(), 'editLore']);
 Router::put('/edit-character', [new AdminController(), 'updateLore']);
 Router::delete('/lore/character', [new AdminController(), 'destroyLore']);
 Router::get('/all-quotes', [new AdminController(), 'allQuotes']);
+
+Router::get('/map-quiz', [new MapQuizController(), 'index']);
+Router::get('/api/map-quiz/questions', [new MapQuizController(), 'questions']);
