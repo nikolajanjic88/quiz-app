@@ -5,6 +5,9 @@ let score = 0;
 let questions = [];
 let currentIndex = 0;
 
+let timer = null;
+let timeLeft = 10;
+
 const mapa = document.getElementById("mapa");
 
 const soundCorrect = new Audio('sounds/correct.mp3');
@@ -39,6 +42,8 @@ mapa.addEventListener("load", function () {
     svgDoc.querySelectorAll(".zone").forEach(zone => {
 
         zone.addEventListener("click", function () {
+            stopTimer();
+
             const clickedId = this.id;
             const correctZone = svgDoc.getElementById(current);
 
@@ -114,6 +119,8 @@ function loadQuestion() {
 
     document.getElementById("progress").innerText =
         (currentIndex + 1) + "/" + questions.length;
+
+    startTimer();
 }
 
 
@@ -121,6 +128,7 @@ function loadQuestion() {
 // END GAME
 // =========================
 function endGame() {
+    stopTimer();
     disableZones(true);
 
     document.getElementById("question").style.display = "none";
@@ -193,4 +201,56 @@ function showGameUI() {
     document.getElementById("question").style.display = "block";
     document.querySelector(".info").style.display = "flex";
     document.getElementById("map").style.display = "block";
+}
+
+// =========================
+// TIMER
+// =========================
+function startTimer() {
+    clearInterval(timer);
+
+    timeLeft = 10;
+    updateTimer();
+
+    timer = setInterval(() => {
+        timeLeft--;
+        updateTimer();
+
+        if (timeLeft <= 0) {
+            clearInterval(timer);
+            timeUp();
+        }
+    }, 1000);
+}
+
+
+function updateTimer() {
+    document.getElementById("timer").innerText = timeLeft;
+}
+
+
+function stopTimer() {
+    clearInterval(timer);
+}
+
+
+function timeUp() {
+    disableZones(true);
+    soundWrong.play();
+
+    const correctZone = svgDoc.getElementById(current);
+
+    if (correctZone) {
+        correctZone.classList.add("answer");
+    }
+
+    setTimeout(() => {
+        resetMap();
+
+        currentIndex++;
+
+        loadQuestion();
+
+        disableZones(false);
+    }, 900);
 }

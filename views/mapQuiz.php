@@ -8,6 +8,7 @@
         <div class="info">
             <p>Score: <span id="score">0</span></p>
             <p>Question: <span id="progress">0/0</span></p>
+            <span>Time: <span id="timer">10</span>s</span>
         </div>
 
         <div id="map">

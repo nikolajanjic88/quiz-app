@@ -85,12 +85,6 @@ body {
   transition: width 0.3s ease;
 }
 
-#question {
-  font-size: 1.5rem;
-  margin-bottom: 2rem;
-  text-shadow: 0 0 10px #00ffe0;
-}
-
 .choice-container {
   display: flex;
   align-items: center;
@@ -293,7 +287,8 @@ body {
 /* top info panel */
 #question {
     font-size: 26px;
-    margin: 0;
+    margin-bottom: 2rem;
+    text-shadow: 0 0 10px #00ffe0;
     text-align: center;
     color: #ffffff;
 }
