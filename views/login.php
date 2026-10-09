@@ -1,32 +1,101 @@
-<?php include_once 'inc/head.php' ?>
-<body class="body">
-  <div class="wrapper">
-    <div class="form-box login">
-      <h2>Login</h2>
-      <form action="/login" method="POST">
-        <div class="input-box">
-          <span class="icon">
-            <ion-icon name="mail"></ion-icon>
-          </span>
-          <input type="email" name="email" placeholder="Email" value="<?= old('email') ?>">
-          <?php if(isset($errors['email'])): ?>
-            <p class="error"><?= $errors['email'] ?></p>
-          <?php endif ?>
-        </div>
-        <div class="input-box">
-          <span class="icon">
-            <ion-icon name="lock-closed"></ion-icon>
-          </span>
-          <input type="password" name="password" placeholder="Password">
-          <?php if(isset($errors['password'])): ?>
-            <p class="error"><?= $errors['password'] ?></p>
-          <?php endif ?>
-        </div>
-        <button id="btnSuccess" class="formbtn">Login</button>
-        <div class="login-register">
-          <p><a href="/register" class="register-link">Not a member? Register here</a></a></p>
-        </div>
-      </form>
-    </div>
-  </div>
-<?php include_once 'inc/footer.php' ?>
+<?php include_once 'inc/head.php'; ?>
+
+<body class="login-page">
+
+    <main class="login-wrapper">
+
+        <a href="/menu" class="login-home" aria-label="Back to menu">
+            <span>←</span> Back to Menu
+        </a>
+
+        <section class="login-card">
+
+            <header class="login-header">
+                <div class="login-emblem" aria-hidden="true">✦</div>
+
+                <p class="login-eyebrow">The World of Tolkien</p>
+
+                <h1>Welcome <span>Back</span></h1>
+
+                <p class="login-subtitle">
+                    Your journey through Middle-earth awaits.
+                </p>
+
+                <div class="login-divider">
+                    <span>✧</span>
+                </div>
+            </header>
+
+            <form action="/login" method="POST" class="login-form">
+
+                <div class="input-box">
+                    <label for="email">Email Address</label>
+
+                    <div class="input-field">
+                        <span class="field-icon" aria-hidden="true">✉</span>
+
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="Enter your email"
+                            value="<?= htmlspecialchars((string) old('email', ''), ENT_QUOTES, 'UTF-8') ?>"
+                            autocomplete="email"
+                            required
+                        >
+                    </div>
+
+                    <?php if (isset($errors['email'])): ?>
+                        <p class="error">
+                            <?= htmlspecialchars((string) $errors['email'], ENT_QUOTES, 'UTF-8') ?>
+                        </p>
+                    <?php endif; ?>
+                </div>
+
+                <div class="input-box">
+                    <label for="password">Password</label>
+
+                    <div class="input-field">
+                        <span class="field-icon" aria-hidden="true">⚿</span>
+
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="Enter your password"
+                            autocomplete="current-password"
+                            required
+                        >
+                    </div>
+
+                    <?php if (isset($errors['password'])): ?>
+                        <p class="error">
+                            <?= htmlspecialchars((string) $errors['password'], ENT_QUOTES, 'UTF-8') ?>
+                        </p>
+                    <?php endif; ?>
+                </div>
+
+                <button type="submit" id="btnSuccess" class="formbtn">
+                    <span>Enter the Realm</span>
+                    <span class="button-arrow" aria-hidden="true">→</span>
+                </button>
+
+                <div class="login-register">
+                    <p>New to these lands?</p>
+                    <a href="/register" class="register-link">
+                        Create an account
+                    </a>
+                </div>
+
+            </form>
+
+            <footer class="login-footer">
+                ✦ &nbsp; One account. A thousand legends. &nbsp; ✦
+            </footer>
+
+        </section>
+
+    </main>
+
+    <?php include_once 'inc/footer.php'; ?>
+</body>

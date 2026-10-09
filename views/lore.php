@@ -30,9 +30,9 @@
         }      
       ?>
         <li>
-          <h3 style="color:rgb(166, 191, 233)"><?= $item['title'] ?></h3>
+          <h3><?= htmlspecialchars($item['title'], ENT_QUOTES, 'UTF-8') ?></h3>
           <p>
-            <?= $desc ?>
+            <?= htmlspecialchars($desc, ENT_QUOTES, 'UTF-8') ?>
           </p>
           <a href="/lore/character?id=<?= $item['id'] ?>">Read more</a>
         </li>
