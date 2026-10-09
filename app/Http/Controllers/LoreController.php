@@ -37,20 +37,25 @@ class LoreController
 
   public function show()
   {
-    $this->user();
+      $this->user();
 
-    $id = (int) $_GET['id'] ?? null;
-    if (!$id) {
-        abort(404);
-    }
+      $id = (int) ($_GET['id'] ?? 0);
 
-    $data = $this->loreModel->find($id);
+      if (!$id) {
+          abort(404);
+      }
 
-    return view('character', [
-        'data' => $data
-    ]);
+      $data = $this->loreModel->find($id);
+
+      if (!$data) {
+          abort(404);
+      }
+
+      return view('character', [
+          'data' => $data
+      ]);
   }
-
+  
   public function search()
   {
       $q = $_GET['q'] ?? '';

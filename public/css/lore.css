@@ -31,7 +31,7 @@ body {
       rgba(5, 8, 15, 0.66),
       rgba(5, 8, 15, 0.88)
     ),
-    url('../images/background2.jpg') center / cover fixed no-repeat;
+    url('../images/background3.jpg') center / cover fixed no-repeat;
   color: var(--text);
   font-family: 'Crimson Text', Georgia, serif;
   font-size: 18px;

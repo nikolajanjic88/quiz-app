@@ -1,35 +1,82 @@
 <?php include_once 'inc/guesshead.php'; ?>
 
-<body>
-    <div class="game-container">
-        <a href="/menu" class="back-button" onclick="goBack()">← Back to Menu</a>
-        <h1>Guess the Character</h1>
+<body class="guess-game-body">
 
-        <!-- Character Image -->
-        <img id="characterImage" src="" alt="Character Image" />
- 
-        <!-- Input & Autocomplete -->
-        <div class="autocomplete-wrapper">
-            <input
-                type="text"
-                id="guess-input"
-                placeholder="Enter character name"
-                autocomplete="off"
-            >
-            <ul id="suggestions" class="autocomplete-list"></ul>
+    <main class="guess-game-page">
+        <div class="guess-game-container">
+
+            <a href="/menu" class="back-button">
+                ← Back to Menu
+            </a>
+
+            <header class="guess-game-header">
+                <p class="game-eyebrow">Middle-earth Challenge</p>
+                <h1>Guess the Character</h1>
+                <p class="game-description">
+                    Study the image and identify the character from Tolkien's world.
+                </p>
+            </header>
+
+            <section class="guess-game-content">
+
+                <div class="character-image-wrapper">
+                    <img
+                        id="characterImage"
+                        src=""
+                        alt="Mystery character"
+                    >
+                </div>
+
+                <div class="autocomplete-wrapper">
+                    <input
+                        type="text"
+                        id="guess-input"
+                        placeholder="Enter character name..."
+                        autocomplete="off"
+                    >
+
+                    <ul
+                        id="suggestions"
+                        class="autocomplete-list"
+                    ></ul>
+                </div>
+
+                <div class="button-group">
+                    <button
+                        type="button"
+                        id="guessBtn"
+                        class="guess-btn guess-btn-primary"
+                        onclick="checkGuess()"
+                    >
+                        Guess
+                    </button>
+
+                    <button
+                        type="button"
+                        class="guess-btn guess-btn-secondary"
+                        onclick="play()"
+                    >
+                        Next Character
+                    </button>
+
+                    <button
+                        type="button"
+                        id="hintBtn"
+                        class="guess-btn guess-btn-hint"
+                    >
+                        Hint
+                    </button>
+                </div>
+
+                <p id="result" class="result-box" aria-live="polite"></p>
+
+            </section>
         </div>
+    </main>
 
-        <!-- Buttons -->
-        <div class="button-group">
-            <button onclick="checkGuess()" class="btn neon">Guess</button>
-            <button onclick="play()" class="btn neon-outline">Play Next</button>
-            <button id="hintBtn" class="btn neon-hint">Hint</button>
-        </div>
+    <script src="js/config-image.js"></script>
+    <script src="js/guess-game.js"></script>
 
-        <!-- Result -->
-        <p id="result"></p>
-    </div>
+    <?php include_once 'inc/footer.php'; ?>
 
-<script src="js/config-image.js"></script>
-<script src="js/guess-game.js"></script>
-<?php include_once 'inc/footer.php' ?>
+</body>

@@ -3,7 +3,7 @@ const input = document.getElementById('guess-input');
 const guessQuote = document.getElementById('guess-quote');
 const suggestions = document.getElementById('suggestions');
 const hintBtn = document.getElementById('hintBtn');
-const guessBtn = document.querySelector('.btn.neon');
+const guessBtn = document.querySelector('.guess-btn-primary');
 
 let attempts = 0;
 const maxAttempts = 3;
