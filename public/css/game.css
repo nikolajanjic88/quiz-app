@@ -485,6 +485,297 @@
     background: transparent;
 }
 
+
+/* =========================
+   MAP QUIZ - TOLKIEN THEME
+========================= */
+
+.map-game-body {
+    color: #eee8dc;
+    font-family: 'Crimson Text', serif;
+    background:
+        linear-gradient(
+            rgba(7, 10, 9, 0.84),
+            rgba(7, 10, 9, 0.94)
+        ),
+        url('/images/background1.jpg') center / cover fixed no-repeat;
+}
+
+.map-game-page {
+    min-height: 100vh;
+    padding: 35px 20px;
+}
+
+.map-game-container {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.map-back-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    color: #aaa18f;
+    font-size: 17px;
+    text-decoration: none;
+    transition: color 0.25s ease;
+}
+
+.map-back-button:hover {
+    color: #ead39b;
+}
+
+.map-game-header {
+    margin: 25px 0 30px;
+    text-align: center;
+}
+
+.map-eyebrow,
+.question-label {
+    color: #c5a45e;
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+.map-game-header h1 {
+    margin: 10px 0;
+    font-family: 'Cinzel', serif;
+    font-size: clamp(32px, 5vw, 48px);
+    font-weight: 600;
+}
+
+.map-game-header h1 span {
+    color: #ead39b;
+}
+
+.map-subtitle {
+    max-width: 650px;
+    margin: 14px auto;
+    color: #aaa18f;
+    font-size: 19px;
+    line-height: 1.6;
+}
+
+.map-divider {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-top: 22px;
+    color: #c5a45e;
+}
+
+.map-divider span {
+    width: 75px;
+    height: 1px;
+    background: rgba(197, 164, 94, 0.3);
+}
+
+.map-game-card {
+    padding: 25px;
+    background: rgba(14, 16, 14, 0.95);
+    border: 1px solid rgba(197, 164, 94, 0.3);
+    border-radius: 5px;
+    box-shadow: 0 18px 55px rgba(0, 0, 0, 0.38);
+}
+
+.map-question-panel {
+    padding: 20px;
+    text-align: center;
+    background: rgba(197, 164, 94, 0.055);
+    border: 1px solid rgba(197, 164, 94, 0.16);
+}
+
+.map-question-panel h2 {
+    margin: 10px 0 0;
+    font-family: 'Cinzel', serif;
+    font-size: clamp(20px, 3vw, 28px);
+    font-weight: 500;
+    line-height: 1.5;
+}
+
+.map-game-info {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    border: 1px solid rgba(197, 164, 94, 0.3);
+}
+
+.map-info-item {
+    padding: 15px 10px;
+    text-align: center;
+}
+
+.map-info-item + .map-info-item {
+    border-left: 1px solid rgba(197, 164, 94, 0.3);
+}
+
+.map-info-label {
+    color: #aaa18f;
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.map-info-item p {
+    margin: 7px 0 0;
+    color: #ead39b;
+    font-family: 'Cinzel', serif;
+    font-size: 25px;
+}
+
+.map-info-item small {
+    font-size: 12px;
+}
+
+.map-instructions {
+    margin: 22px 0 15px;
+    color: #aaa18f;
+    font-size: 17px;
+    text-align: center;
+}
+
+.map-instructions span {
+    color: #c5a45e;
+}
+
+.map-canvas {
+    background: #f1ead8;
+    border: 1px solid rgba(197, 164, 94, 0.6);
+    border-radius: 8px;
+    padding: 16px;
+    overflow: auto;
+    box-shadow:
+        inset 0 0 20px rgba(70, 55, 30, 0.12),
+        0 8px 24px rgba(0, 0, 0, 0.25);
+}
+
+#mapa {
+    display: block;
+    width: 100%;
+    max-width: 1200px;
+    height: 800px;
+    margin: 0 auto;
+    background: #f1ead8;
+    border: none;
+}
+
+.map-end-screen {
+    padding: 35px 20px;
+    margin-top: 20px;
+    text-align: center;
+    background: rgba(7, 10, 9, 0.98);
+    border: 1px solid rgba(197, 164, 94, 0.3);
+}
+
+.map-end-screen h2 {
+    color: #ead39b;
+    font-family: 'Cinzel', serif;
+}
+
+.final-score {
+    color: #eee8dc;
+    font-size: 22px;
+}
+
+.end-buttons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 25px;
+}
+
+.map-button {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 48px;
+    padding: 13px 22px;
+    border: 1px solid #c5a45e;
+    border-radius: 3px;
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: 0.25s ease;
+}
+
+.map-button-primary {
+    color: #17140e;
+    background: #c5a45e;
+}
+
+.map-button-primary:hover {
+    background: #ead39b;
+}
+
+.map-button-secondary {
+    color: #ead39b;
+    background: transparent;
+}
+
+.map-button-secondary:hover {
+    color: #17140e;
+    background: #c5a45e;
+}
+
+.map-game-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin-top: 25px;
+    color: #918979;
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+}
+
+.map-game-footer span {
+    color: #c5a45e;
+}
+
+@media (max-width: 650px) {
+    .map-game-page {
+        padding: 22px 12px;
+    }
+
+    .map-game-card {
+        padding: 12px;
+    }
+
+    .map-subtitle {
+        font-size: 17px;
+    }
+
+    .map-info-item {
+        padding: 12px 5px;
+    }
+
+    .map-info-label {
+        font-size: 8px;
+        letter-spacing: 0.7px;
+    }
+
+    .map-info-item p {
+        font-size: 21px;
+    }
+
+    .end-buttons {
+        flex-direction: column;
+    }
+
+    .map-button {
+        width: 100%;
+    }
+}
+
 @media (max-width: 600px) {
     .quiz-page {
         padding: 25px 14px 40px;

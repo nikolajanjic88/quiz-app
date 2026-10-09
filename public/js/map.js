@@ -84,19 +84,42 @@ mapa.addEventListener("load", function () {
 // =========================
 // START GAME
 // =========================
+
 function startGame() {
+    stopTimer();
+
+    // Disable map until questions are loaded
+    disableZones(true);
+
     fetch('/api/map-quiz/questions')
-        .then(res => res.json())
+        .then(res => {
+            if (!res.ok) {
+                throw new Error(`HTTP error: ${res.status}`);
+            }
+
+            return res.json();
+        })
         .then(data => {
+            if (!Array.isArray(data) || data.length === 0) {
+                throw new Error('No questions received from the server.');
+            }
 
             questions = data;
             currentIndex = 0;
             score = 0;
 
             updateScore();
-
             showGameUI();
             loadQuestion();
+
+            // Enable the map only after the first question is ready
+            disableZones(false);
+        })
+        .catch(error => {
+            console.error('Error loading map quiz:', error);
+
+            document.getElementById("question").innerText =
+                "Questions could not be loaded. Please refresh the page.";
         });
 }
 
@@ -132,7 +155,7 @@ function endGame() {
     disableZones(true);
 
     document.getElementById("question").style.display = "none";
-    document.querySelector(".info").style.display = "none";
+    document.querySelector(".map-game-info").style.display = "none";
     document.getElementById("map").style.display = "none";
 
     const endScreen = document.getElementById("endScreen");
@@ -199,7 +222,7 @@ function disableZones(state) {
 // =========================
 function showGameUI() {
     document.getElementById("question").style.display = "block";
-    document.querySelector(".info").style.display = "flex";
+    document.querySelector(".map-game-info").style.display = "flex";
     document.getElementById("map").style.display = "block";
 }
 
