@@ -35,7 +35,7 @@
                 </div>
 
                 <span class="legend-count">
-                    <?= count($scores) ?>
+                    Top <?= count($scores) ?>
                     <?= count($scores) === 1 ? 'PLAYER' : 'PLAYERS' ?>
                 </span>
             </div>

@@ -41,30 +41,6 @@
     margin: auto;
 }
 
-.login-home {
-    display: inline-flex;
-    align-items: center;
-    gap: 9px;
-    margin-bottom: 18px;
-
-    color: var(--login-muted);
-    font-family: 'Cinzel', serif;
-    font-size: 11px;
-    letter-spacing: 1px;
-    text-decoration: none;
-    text-transform: uppercase;
-
-    transition: color 0.2s ease;
-}
-
-.login-home:hover {
-    color: var(--login-gold-light);
-}
-
-.login-home span {
-    font-size: 18px;
-}
-
 .login-card {
     position: relative;
     padding: 38px 36px 24px;

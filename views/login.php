@@ -4,10 +4,6 @@
 
     <main class="login-wrapper">
 
-        <a href="/menu" class="login-home" aria-label="Back to menu">
-            <span>←</span> Back to Menu
-        </a>
-
         <section class="login-card">
 
             <header class="login-header">

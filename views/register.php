@@ -4,10 +4,6 @@
 
     <main class="login-wrapper">
 
-        <a href="/login" class="login-home">
-            <span>←</span> Back to Login
-        </a>
-
         <section class="login-card register-card">
 
             <header class="login-header">
