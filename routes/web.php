@@ -1,14 +1,15 @@
 <?php
 
 use App\App;
-use App\Http\Controllers\MapQuizController;
-use App\Router;
-use App\Http\Controllers\QuoteController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoreController;
+use App\Http\Controllers\MapQuizController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\QuoteController;
 use App\Http\Controllers\UserController;
+use App\Router;
 
 $app = new App();
 
@@ -58,3 +59,5 @@ Router::get('/all-quotes', [new AdminController(), 'allQuotes']);
 
 Router::get('/map-quiz', [new MapQuizController(), 'index']);
 Router::get('/api/map-quiz/questions', [new MapQuizController(), 'questions']);
+
+Router::get('/profile', [new ProfileController(), 'index']);

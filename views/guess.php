@@ -53,19 +53,20 @@
 
                     <button
                         type="button"
+                        id="hintBtn"
+                        class="guess-btn guess-btn-hint"
+                    >
+                        Hint
+                    </button>
+
+                    <button
+                        type="button"
                         class="guess-btn guess-btn-secondary"
                         onclick="play()"
                     >
                         Next Character
                     </button>
 
-                    <button
-                        type="button"
-                        id="hintBtn"
-                        class="guess-btn guess-btn-hint"
-                    >
-                        Hint
-                    </button>
                 </div>
 
                 <p id="result" class="result-box" aria-live="polite"></p>

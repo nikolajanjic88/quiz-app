@@ -96,6 +96,16 @@
                 </span>
                 <span class="card-arrow">↗</span>
             </a>
+  
+            <a href="/profile" class="menu-card">
+                <span class="card-number">07</span>
+                <span class="card-icon">♙</span>
+                <span class="card-title">My Profile</span>
+                <span class="card-description">
+                    View your journey and achievements
+                </span>
+                <span class="card-arrow">↗</span>
+            </a>
 
         </nav>
 
