@@ -61,3 +61,4 @@ Router::get('/map-quiz', [new MapQuizController(), 'index']);
 Router::get('/api/map-quiz/questions', [new MapQuizController(), 'questions']);
 
 Router::get('/profile', [new ProfileController(), 'index']);
+Router::put('/profile', [new ProfileController(), 'update']);

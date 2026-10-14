@@ -13,10 +13,12 @@ class Profile extends Model
     {
         $sql = "SELECT id, username, email, created_at
                 FROM {$this->table}
-                WHERE id = {$userId}
+                WHERE id = :id
                 LIMIT 1";
 
-        return $this->db->query($sql)->find();
+        return $this->db->query($sql, [
+            'id' => $userId
+        ])->find();
     }
 
     public function getStats(int $userId)
@@ -26,19 +28,72 @@ class Profile extends Model
                     COALESCE(SUM(score), 0) AS total_score,
                     COALESCE(MAX(score), 0) AS best_score
                 FROM {$this->scoresTable}
-                WHERE user_id = {$userId}";
+                WHERE user_id = :user_id";
 
-        return $this->db->query($sql)->find();
+        return $this->db->query($sql, [
+            'user_id' => $userId
+        ])->find();
     }
 
     public function getRecentScores(int $userId): array
     {
         $sql = "SELECT id, score, time
                 FROM {$this->scoresTable}
-                WHERE user_id = {$userId}
+                WHERE user_id = :user_id
                 ORDER BY id DESC
                 LIMIT 10";
 
-        return $this->db->query($sql)->get();
+        return $this->db->query($sql, [
+            'user_id' => $userId
+        ])->get();
+    }
+
+    public function usernameExists(string $username, int $userId): bool
+    {
+        $sql = "SELECT id
+                FROM {$this->table}
+                WHERE username = :username
+                AND id != :id
+                LIMIT 1";
+
+        $result = $this->db->query($sql, [
+            'username' => $username,
+            'id' => $userId
+        ])->find();
+
+        return (bool) $result;
+    }
+
+    public function emailExists(string $email, int $userId): bool
+    {
+        $sql = "SELECT id
+                FROM {$this->table}
+                WHERE email = :email
+                AND id != :id
+                LIMIT 1";
+
+        $result = $this->db->query($sql, [
+            'email' => $email,
+            'id' => $userId
+        ])->find();
+
+        return (bool) $result;
+    }
+
+    public function updateProfile(
+        int $userId,
+        string $username,
+        string $email
+    ): void {
+        $sql = "UPDATE {$this->table}
+                SET username = :username,
+                    email = :email
+                WHERE id = :id";
+
+        $this->db->query($sql, [
+            'username' => $username,
+            'email' => $email,
+            'id' => $userId
+        ]);
     }
 }
