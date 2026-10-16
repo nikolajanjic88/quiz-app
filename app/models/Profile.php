@@ -96,4 +96,31 @@ class Profile extends Model
             'id' => $userId
         ]);
     }
+
+    public function getPassword(int $userId): ?string
+    {
+        $sql = "SELECT password
+                FROM {$this->table}
+                WHERE id = :id
+                LIMIT 1";
+
+        $result = $this->db->query($sql, [
+            'id' => $userId
+        ])->find();
+
+        return $result['password'] ?? null;
+    }
+
+    public function updatePassword(int $userId, string $passwordHash): void
+    {
+        $sql = "UPDATE {$this->table}
+                SET password = :password
+                WHERE id = :id";
+
+        $this->db->query($sql, [
+            'password' => $passwordHash,
+            'id' => $userId
+        ]);
+    }
+
 }

@@ -62,3 +62,4 @@ Router::get('/api/map-quiz/questions', [new MapQuizController(), 'questions']);
 
 Router::get('/profile', [new ProfileController(), 'index']);
 Router::put('/profile', [new ProfileController(), 'update']);
+Router::put('/profile/password', [new ProfileController(), 'changePassword']);
