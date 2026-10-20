@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: May 27, 2026 at 11:08 AM
+-- Generation Time: Oct 20, 2026 at 10:03 PM
 -- Server version: 9.1.0
 -- PHP Version: 8.3.14
 
@@ -20,6 +20,34 @@ SET time_zone = "+00:00";
 --
 -- Database: `silmarilion`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `achievements`
+--
+
+DROP TABLE IF EXISTS `achievements`;
+CREATE TABLE IF NOT EXISTS `achievements` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `code` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `name` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `description` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `icon` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `requirement` int NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `code` (`code`)
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `achievements`
+--
+
+INSERT INTO `achievements` (`id`, `code`, `name`, `description`, `icon`, `requirement`) VALUES
+(1, 'first_steps', 'First Steps', 'Complete your first quiz.', 'footprints', 1),
+(2, 'lore_keeper', 'Lore Keeper', 'Complete 10 quizzes.', 'book-open', 10),
+(3, 'master_of_arda', 'Master of Arda', 'Achieve a score of at least 90%.', 'crown', 90),
+(4, 'perfect_round', 'Perfect Round', 'Achieve a perfect score.', 'star', 100);
 
 -- --------------------------------------------------------
 
@@ -66,7 +94,7 @@ CREATE TABLE IF NOT EXISTS `lore` (
   `text` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `image` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=72 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `lore`
@@ -78,7 +106,7 @@ INSERT INTO `lore` (`id`, `title`, `text`, `image`) VALUES
 (3, 'Fingon', 'Fingon the \"Valiant\" was a Ñoldorin Elf, the eldest son of Fingolfin, and older brother of Turgon, Aredhel, and Argon.[2]\r\n\r\nHe was High King of the Ñoldor in Middle-earth during the First Age after the death of his father. He was instrumental in healing the rift between the Sons of Fëanor and the followers of his father after their desertion of them in Araman.', '/images/lore/fingon.webp'),
 (4, 'Turgon', 'Turgon was a Ñoldor Elf of Gondolin, second son of Fingolfin, brother of Fingon, Aredhel, Argon, and father of Idril. In Middle-earth, Turgon was the King of Gondolin and the High King of the Ñoldor. For centuries of the late First Age, Turgon remained successfully hidden from Morgoth until a betrayal by Maeglin, one of his subjects, caused its downfall.', '/images/lore/turgon.webp'),
 (5, 'Morgoth', 'Melkor (Quenya: \"He who arises in might\"), commonly known as Morgoth (Sindarin: \"Black Foe of the World\"),[1] was the rebel Vala, the first Dark Lord, and the primordial source of evil in Eä in the Elder Days. He coveted Arda and all that it contained, but when he was rejected in his lordship by his fellow Ainur, he sought instead to destroy, corrupt or pervert all that which they would create or steward. Defying the will of his creator, Ilúvatar, and sowing discord among the Ainur, Melkor would be at the root of virtually all the misfortunes which befell Eä and those who dwelt within it.', '/images/lore/morgoth.webp'),
-(6, 'Manwe', 'Manwë (Quenya: &#34;Blessed One&#34;) was the leader of the Ainur, one of the Aratar, King of the Valar, husband of Varda, brother of the Dark Lord Melkor, and King of Arda. He was also known as Súlimo, Mânawenûz, or Valahiru, and lived atop Mount Taniquetil in Valinor, the highest mountain of the world. The winds and airs were his servants.&#13;&#10;&#13;&#10;He was the greatest in power, of all the Valar, as Melkor was far more powerful, but was not included amongst the Valar due to rebelling against the will of Eru Ilúvatar. It is said that he was the only Vala who took council from Eru from time to time.', '/images/lore/manwe.webp'),
+(6, 'Manwe', 'Manwë was the leader of the Ainur, one of the Aratar, King of the Valar, husband of Varda, brother of the Dark Lord Melkor, and King of Arda. He was also known as Súlimo, Mânawenûz, or Valahiru, and lived atop Mount Taniquetil in Valinor, the highest mountain of the world. The winds and airs were his servants.&#13;&#10;&#13;&#10;He was the greatest in power, of all the Valar, as Melkor was far more powerful, but was not included amongst the Valar due to rebelling against the will of Eru Ilúvatar. It is said that he was the only Vala who took council from Eru from time to time.', '/images/lore/manwe.webp'),
 (7, 'Ungoliant', 'Ungoliant (Sindarin; IPA: [uŋˈɡoljant]) was a spirit who took on the form of a monstrous Spider. She was initially an ally of Melkor in Aman, and for a short time in Middle-earth as well. She was a distant mother of Shelob, and the oldest and first giant spider of Arda. She was the destroyer of the Two Trees of Valinor.', '/images/lore/ungoliant.webp'),
 (8, 'Eru Iluvatar', 'Eru Ilúvatar was the supreme being of Eä. He was the single creator of existence, all-knowing and all-powerful, and the only entity with the power to create souls. Though the Ainur attempted to shape and govern Eä according to Eru&#39;s general will (which they understood imperfectly), he never allowed those who exist within the world to do as they will, and only rarely was known to intervene in the affairs of Eä.&#13;&#10;&#13;&#10;Eru was central to parts of The Silmarillion, but was not mentioned by name in Tolkien&#39;s most famous works, The Hobbit and The Lord of the Rings, although he was alluded to as &#34;the One&#34; in a part of Appendix A speaking of the downfall of Númenor, and in &#34;Cirion and Eorl and the Friendship of Gondor and Rohan&#34; in Unfinished Tales as &#34;the One who is above all thrones for ever&#34;.', '/images/lore/eru.webp'),
 (9, 'Finwe', 'Finwë was the first King of the Ñoldor who led his people on the journey from Middle-earth to Valinor in the blessed realm of Aman. He was a great friend of Elu Thingol, the King of Doriath. He was the father of Fëanor, Fingolfin, Finarfin, Írimë, and Findis. As founder of the House of Finwë, he and his first and second wives were the sires of the three noble houses of Fëanor, Fingolfin, and Finarfin, who afterwards ruled great realms in Middle-earth and succeeded him in Aman. His bloodline also mixed its way into the race of Men.', '/images/lore/finwe.webp'),
@@ -92,10 +120,10 @@ INSERT INTO `lore` (`id`, `title`, `text`, `image`) VALUES
 (40, 'Dior', 'Dior, also known as Dior Eluchîl, was the son of Beren Erchamion of the House of Bëor and the princess Lúthien Tinúviel, daughter of King Thingol and Melian. He later became the second (and last) King of Doriath as the only heir of Thingol, and thereby the High King of the Sindar also. Dior was called the Fair and was the first Half-elf in Middle-earth&#39;s history,[3] for his father was of the race of Men, and his mother inherited Elven blood.', '/images/lore/1742333761.8319dior.webp'),
 (41, 'Luthien', 'Lúthien, also known as Tinúviel, was the immortal princess of Doriath, wife of Beren Erchamion, and most beautiful of all the Children of Ilúvatar to ever live. Her love of the mortal man Beren, for whom she was prepared to risk everything, including her life, was legendary and lamented forever in song and story. She and Beren braved Morgoth&#39;s horrors, eventually winning a Silmaril from his crown and the approval of their marriage by King Thingol. Though their actions later resulted in both their deaths, their deeds won them the pity of the Vala Mandos and a second life in Middle-earth.[2] Her romance with Beren was one of the great stories of the Elder Days that were told for many ages after she lived, and it was said her bloodline will never perish. She was known as the most &#39;magic&#39; dancer, with Ivárë and Tinfang coming in second.', '/images/lore/1742333847.7884luthien.webp'),
 (42, 'Beren', 'Beren, also called Beren Erchamion, was a man of the First House of the Edain, and a hero whose romance with the Elf-maiden Lúthien was one of the great stories of the Elder Days told for many ages after.&#13;&#10;&#13;&#10;With Lúthien he fathered Dior Eluchîl, whose grandsons would be Elros Tar-Minyatur and Elrond Half-elven.', '/images/lore/1742385278.3621beren.webp'),
-(43, 'Tulkas', 'Tulkas (Quenya: &#34;Strong&#34; or &#34;Steadfast&#34;) was an Ainu; a Vala responsible for participating in war and the last of them to descend into Arda, coming to the aid of the others when he heard of their war with Melkor. He was also called Tulukastāz or Astaldo. Having heard of his fellow Valar\'s struggle against Melkor, Tulkas was the last of the Valar to descend upon Arda, tipping the scales of battle against Melkor. Melkor fled before him, and the Spring of Arda began.', '/images/lore/1743021116.4113Tulkas_the_Warrior.webp'),
+(43, 'Tulkas', 'Tulkas was an Ainu; a Vala responsible for participating in war and the last of them to descend into Arda, coming to the aid of the others when he heard of their war with Melkor. He was also called Tulukastāz or Astaldo. Having heard of his fellow Valar\'s struggle against Melkor, Tulkas was the last of the Valar to descend upon Arda, tipping the scales of battle against Melkor. Melkor fled before him, and the Spring of Arda began.', '/images/lore/1743021116.4113Tulkas_the_Warrior.webp'),
 (44, 'Aule', 'Aulë (Quenya; IPA: [ˈaʊle] - &#34;Invention&#34;) was an Ainu, one of the Aratar and the Vala responsible for fashioning and crafting the substances of which Arda, the world, was composed. He was also called Mahal (Khuzdûl: &#34;Maker&#34;), Oli (Sindarin: &#34;Dream&#34;), and Návatar, and delighted in the nature of substances and in works of skill, but was not concerned with possession or mastery. Besides the shaping of Arda, Aulë&#39;s greatest works were the Two Lamps of the Valar, the vessels of the Sun and Moon, and the Dwarves. He also created Angainor, the chain of Melkor.', '/images/lore/1743021200.8611aule.webp'),
 (45, 'Sauron', 'Sauron (Quenya; [ˈsaʊron] or [ˈθaʊron]), the eponymous Lord of the Rings, was the greatest fallen Maia, maker of the One Ring, renowned disciple of Aulë, and chief agent of Morgoth in the Elder Days. After Morgoth&#39;s ousting by the Valar, Sauron became the second Dark Lord and sought to conquer Middle-earth as his former master had.&#13;&#10;&#13;&#10;At the end of the Second Age, Sauron caused the Downfall of Númenor, but was subsequently defeated during the War of the Last Alliance of Elves and Men united under Gil-galad and Elendil. In the final battle, Isildur managed to cut the One Ring from his hand, destroying his corporeal form and robbing him of much of his power. After centuries of lying dormant and rebuilding his strength, Sauron returned to power late in the Third Age and again strove to dominate Middle-earth. Ultimately he was vanquished when the One Ring was cast into Mount Doom, unmaking it and breaking his power forever.', '/images/lore/1743040769.743Sauron-2.webp'),
-(47, 'Ulmo', 'Ulmo (Quenya: &#34;Pourer&#34; or &#34;Rainer&#34;), also known as Ulubôz or Ullubôz, was an Ainu, one of the Aratar, and the Vala responsible for the control over the oceans of Arda. A lover of water, Ulmo was one of the Arda&#39;s chief architects and was always in a close friendship with Manwë. He always distrusted Melkor, and the Dark Lord feared the Sea almost as much as he feared Varda because the sea cannot be tamed. Ulmo had no dwelling in Valinor or any permanent dwelling on land, as he preferred the deeps of the seas and the rivers. His palace, on the bottom of Vaiya, was called Ulmonan.', '/images/lore/1743040981.4463ulmo.webp'),
+(47, 'Ulmo', 'Ulmo, also known as Ulubôz or Ullubôz, was an Ainu, one of the Aratar, and the Vala responsible for the control over the oceans of Arda. A lover of water, Ulmo was one of the Arda&#39;s chief architects and was always in a close friendship with Manwë. He always distrusted Melkor, and the Dark Lord feared the Sea almost as much as he feared Varda because the sea cannot be tamed. Ulmo had no dwelling in Valinor or any permanent dwelling on land, as he preferred the deeps of the seas and the rivers. His palace, on the bottom of Vaiya, was called Ulmonan.', '/images/lore/1743040981.4463ulmo.webp'),
 (70, 'Finrod', 'Finrod, known fully as Finrod Felagund, was a Ñoldor Elf who was born in Aman. He was King of Nargothrond and the eldest son of Finarfin and Eärwen, and the brother of Galadriel, Angrod and Aegnor.[2] Finrod was one of the noblest Elves of the House of Finarfin and a friend of Men. His nobility, death saving Beren, and opposition to the Oath of Fëanor allowed for his return to life in Valinor, making him the first Elf to be reincarnated in the Undying Lands before the end of the First Age', '/images/lore/1768397941.73_Finrod.webp');
 
 -- --------------------------------------------------------
@@ -185,21 +213,15 @@ CREATE TABLE IF NOT EXISTS `scores` (
   `time` int NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_userID` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=107 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=114 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `scores`
 --
 
 INSERT INTO `scores` (`id`, `user_id`, `score`, `time`) VALUES
-(25, 6, 40, 22),
-(43, 6, 20, 55),
 (67, 6, 30, 40),
-(70, 7, 90, 20),
-(72, 7, 90, 25),
-(104, 7, 10, 11),
-(105, 7, 100, 40),
-(106, 7, 100, 38);
+(113, 7, 100, 41);
 
 -- --------------------------------------------------------
 
@@ -224,13 +246,39 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 INSERT INTO `users` (`id`, `username`, `email`, `password`, `is_admin`, `created_at`) VALUES
 (6, 'diablo', 'diablo@gmail.com', '$2y$10$meOf7SqMR/HN.E.oF8h1x.jVK4FOhyfePIRRhVR0lBk.tRVhAyFE.', 0, '2023-10-04 13:53:49'),
-(7, 'nikola', 'nikola@gmail.com', '$2y$10$In4vTCne44riyhdkVtk.2.G72oDGNter/8uhGUUJH6h2LQ0IPfI7y', 1, '2023-10-04 14:09:42'),
+(7, 'nikola', 'nikola@gmail.com', '$2y$10$r9AXgSuswh81ev7VaZj0Xu73Ilgb9awCcpZ0hMDP7bj9G5mne0UFC', 1, '2023-10-04 14:09:42'),
 (18, 'test', 'test@test.com', '$argon2i$v=19$m=65536,t=4,p=1$VnM0UlBPRW1UWXpwWUhMdg$B+CdWAT1Hw04eojrlotV3xR3GBcaOzwYhFUUoge5ELI', 0, '2024-12-31 17:27:54'),
 (19, 'r2d2', 'r2d2@gmail.com', '$2y$10$/ibtXEd3v4UxU.6ntGuJS.FaV1MnwW5Ox8pqqUKqJz8h2miT2NflG', 0, '2025-01-09 20:37:39'),
 (20, 'Mr Wick', 'mrwick@gmail.com', '$2y$10$Vt2qy7YZpXycTGHJu5P3YOJOciy9xcrm38i6TO32AqgHCTiXIWaUy', 0, '2025-01-10 16:20:09'),
 (21, 'x', 'asd@gmail.com', '$2y$10$6RAXbeoZWFhNXPiKnGsSdekH58yEfFfVDVSFAtPxHM3mTfz/SmFbm', 0, '2025-01-13 14:07:30'),
 (22, 'test2', 'test2@test.com', '$2y$10$tPqWPnyot74yBlWTIPAlj..Vzm7h9Fdgz/ZTodNcjGbRUCz40aE6K', 0, '2025-01-13 14:15:52'),
 (23, 'grrrrr', 'grrrr@gmail.com', '$2y$10$7AdZnA.9Q9WCH0MF4j0CWuX.YO/dJFjdXc3TuHcD50DNT1UNoxBqG', 0, '2025-10-08 12:29:33');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_achievements`
+--
+
+DROP TABLE IF EXISTS `user_achievements`;
+CREATE TABLE IF NOT EXISTS `user_achievements` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `user_id` int NOT NULL,
+  `achievement_id` int NOT NULL,
+  `unlocked_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unique_user_achievement` (`user_id`,`achievement_id`),
+  KEY `achievement_id` (`achievement_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `user_achievements`
+--
+
+INSERT INTO `user_achievements` (`id`, `user_id`, `achievement_id`, `unlocked_at`) VALUES
+(1, 7, 1, '2026-10-20 21:53:41'),
+(2, 7, 3, '2026-10-20 21:53:41'),
+(3, 7, 4, '2026-10-20 21:53:41');
 
 --
 -- Constraints for dumped tables
