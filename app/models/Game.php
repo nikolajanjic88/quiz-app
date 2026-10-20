@@ -51,4 +51,17 @@ class Game extends Model
         'time'    => $time
     ]);
   }
+
+  public function getCompletedQuizCount(int $userId): int
+  {
+      $sql = "SELECT COUNT(*) AS total
+              FROM {$this->scoresTable}
+              WHERE user_id = :user_id";
+
+      $result = $this->db->query($sql, [
+          'user_id' => $userId
+      ])->find();
+
+      return (int) ($result['total'] ?? 0);
+  }
 }

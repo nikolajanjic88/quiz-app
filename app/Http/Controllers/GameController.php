@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Guard;
-use App\Session;
+use App\Models\Achievement;
 use App\Models\Game;
 use App\Models\Score;
+use App\Session;
 
 class GameController
 {
@@ -53,25 +54,77 @@ class GameController
 
   public function save()
   {
-    $this->user();
+      $this->user();
 
-    $input = json_decode(file_get_contents('php://input'), true);
+      $input = json_decode(file_get_contents('php://input'), true);
 
-    $score = filter_var($input['score'] ?? null, FILTER_VALIDATE_INT);
-    $time = filter_var($input['time'] ?? null, FILTER_VALIDATE_INT);
-    
-    if ($score === false || $score < 0) {
-        return $this->json(['message' => 'Invalid score'], 400);
-    }
+      $score = filter_var(
+          $input['score'] ?? null,
+          FILTER_VALIDATE_INT
+      );
 
-    $user = Session::get('user');
-    $game = new Game();
+      $time = filter_var(
+          $input['time'] ?? null,
+          FILTER_VALIDATE_INT
+      );
 
-    if ($game->saveResult($user['id'], $score, $time)) {
-        return $this->json(['message' => 'Score saved successfully']);
-    }
+      if ($score === false || $score < 0 || $score > 100) {
+          return $this->json([
+              'message' => 'Invalid score'
+          ], 400);
+      }
 
-    return $this->json(['message' => 'Failed to save score'], 500);
+      if ($time === false || $time < 0) {
+          return $this->json([
+              'message' => 'Invalid time'
+          ], 400);
+      }
+
+      $user = Session::get('user');
+      $userId = (int) ($user['id'] ?? 0);
+
+      if ($userId <= 0) {
+          return $this->json([
+              'message' => 'User not found'
+          ], 401);
+      }
+
+      $game = new Game();
+
+      if (!$game->saveResult($userId, $score, $time)) {
+          return $this->json([
+              'message' => 'Failed to save score'
+          ], 500);
+      }
+
+      $achievement = new Achievement();
+
+      // Count the user's completed quizzes.
+      $completedQuizzes = $game->getCompletedQuizCount($userId);
+
+      // Unlock the first achievement.
+      if ($completedQuizzes >= 1) {
+          $achievement->unlockByCode($userId, 'first_steps');
+      }
+
+      // Unlock the achievement for completing 10 quizzes.
+      if ($completedQuizzes >= 10) {
+          $achievement->unlockByCode($userId, 'lore_keeper');
+      }
+
+      // Unlock achievements based on the latest quiz score.
+      if ($score >= 90) {
+          $achievement->unlockByCode($userId, 'master_of_arda');
+      }
+
+      if ($score === 100) {
+          $achievement->unlockByCode($userId, 'perfect_round');
+      }
+
+      return $this->json([
+          'message' => 'Score saved successfully',
+          'completedQuizzes' => $completedQuizzes
+      ]);
   }
 
   private function json(array $data, int $status = 200): void

@@ -1,6 +1,7 @@
 <?php
 
 use App\App;
+use App\Http\Controllers\AchievementController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\HomeController;
@@ -63,3 +64,5 @@ Router::get('/api/map-quiz/questions', [new MapQuizController(), 'questions']);
 Router::get('/profile', [new ProfileController(), 'index']);
 Router::put('/profile', [new ProfileController(), 'update']);
 Router::put('/profile/password', [new ProfileController(), 'changePassword']);
+
+Router::get('/achievements', [new AchievementController(), 'index']);

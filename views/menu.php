@@ -102,7 +102,17 @@
                 <span class="card-icon">♙</span>
                 <span class="card-title">My Profile</span>
                 <span class="card-description">
-                    View your journey and achievements
+                    View your journey
+                </span>
+                <span class="card-arrow">↗</span>
+            </a>
+ 
+            <a href="/achievements" class="menu-card">
+                <span class="card-number">08</span>
+                <span class="card-icon">🏆</span>
+                <span class="card-title">Achievements</span>
+                <span class="card-description">
+                    Unlock milestones on your journey through Arda
                 </span>
                 <span class="card-arrow">↗</span>
             </a>
