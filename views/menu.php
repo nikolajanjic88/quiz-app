@@ -139,4 +139,3 @@
     <script src="/js/bg-music.js"></script>
 
     <?php include_once 'inc/footer.php'; ?>
-</body>
