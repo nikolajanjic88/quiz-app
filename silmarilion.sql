@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Oct 20, 2026 at 10:03 PM
+-- Generation Time: Oct 22, 2026 at 01:11 PM
 -- Server version: 9.1.0
 -- PHP Version: 8.3.14
 
@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `achievements` (
   `requirement` int NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
   UNIQUE KEY `code` (`code`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `achievements`
@@ -47,7 +47,8 @@ INSERT INTO `achievements` (`id`, `code`, `name`, `description`, `icon`, `requir
 (1, 'first_steps', 'First Steps', 'Complete your first quiz.', 'footprints', 1),
 (2, 'lore_keeper', 'Lore Keeper', 'Complete 10 quizzes.', 'book-open', 10),
 (3, 'master_of_arda', 'Master of Arda', 'Achieve a score of at least 90%.', 'crown', 90),
-(4, 'perfect_round', 'Perfect Round', 'Achieve a perfect score.', 'star', 100);
+(4, 'perfect_round', 'Perfect Round', 'Achieve a perfect score.', 'star', 100),
+(5, 'speed_demon', 'Speed Demon', 'Achieve a perfect score in 30 seconds or less.', 'bolt', 30);
 
 -- --------------------------------------------------------
 
@@ -213,7 +214,7 @@ CREATE TABLE IF NOT EXISTS `scores` (
   `time` int NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_userID` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=114 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=117 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `scores`
@@ -221,7 +222,9 @@ CREATE TABLE IF NOT EXISTS `scores` (
 
 INSERT INTO `scores` (`id`, `user_id`, `score`, `time`) VALUES
 (67, 6, 30, 40),
-(113, 7, 100, 41);
+(113, 7, 100, 41),
+(114, 7, 100, 40),
+(116, 7, 100, 32);
 
 -- --------------------------------------------------------
 

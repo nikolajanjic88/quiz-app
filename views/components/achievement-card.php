@@ -31,6 +31,7 @@ $isUnlocked = (bool) $achievement['unlocked'];
             'crown'      => 'fa-solid fa-crown',
             'book-open'  => 'fa-solid fa-book-open',
             'footprints' => 'fa-solid fa-shoe-prints',
+            'bolt'       => 'fa-solid fa-bolt',
         ];
 
         $iconClass = $iconMap[$iconName] ?? 'fa-solid fa-star';

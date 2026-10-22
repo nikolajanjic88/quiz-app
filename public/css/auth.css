@@ -25,7 +25,7 @@
             rgba(5, 8, 14, 0.70),
             rgba(5, 8, 14, 0.92)
         ),
-        url('/images/background2.jpg') center / cover fixed no-repeat;
+        url('/images/background1.jpg') center / cover fixed no-repeat;
 }
 
 .login-page *,
